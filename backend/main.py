@@ -6,7 +6,7 @@ import json
 from flask_mail import Mail, Message
 
 #my database connection
-local_server = True
+# local_server = True
 app = Flask(__name__)
 app.secret_key = "divyaraj"
 
@@ -28,4 +28,9 @@ app.secret_key = "divyaraj"
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("base.html")
+
+
+
+
+app.run(debug=True)
