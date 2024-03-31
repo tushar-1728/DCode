@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block form %}
+
+<main id="main">
+
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex flex-column align-items-center">
+      <div class="subscribe">
+        <form action="/codeforces" method="post" role="form">
+          <div class="subscribe-form">
+            <input type="text" name="userhandle" placeholder="CF Handle" value="{{ userhandle }}" required><input type="submit" value="🔍">
+          </div>
+        </form>
+        <h4> {{userhandle}} ({{rank}}) Rating: {{rating}} (Max: {{max_rating}})  </h4>
+      </div>
+
+      <div class="table-container">
+        <div class="table-head">
+          <div class="table-cell">Index</div>
+          <div class="table-cell">Problem</div>
+          <div class="table-cell">Rating</div>
+          <div class="table-cell">Status</div>
+        </div>
+        <div class="table-body">
+          <!--
+          <div class="table-cell">Index</div>
+          <div class="table-cell">Problem</div>
+          <div class="table-cell">Rating</div>
+          <div class="table-cell">Status</div>
+          -->
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+</main>
+
+
+{% endblock form %}

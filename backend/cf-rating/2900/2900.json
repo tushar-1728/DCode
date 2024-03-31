@@ -1,0 +1,221 @@
+{
+    "contestId": 1928,
+    "index": "F",
+    "name": "Digital Patterns",
+    "type": "PROGRAMMING",
+    "points": 2750.0,
+    "rating": 2900,
+    "tags": [
+        "combinatorics",
+        "data structures",
+        "implementation",
+        "math"
+    ]
+}
+{
+    "contestId": 1860,
+    "index": "F",
+    "name": "Evaluate RBS",
+    "type": "PROGRAMMING",
+    "rating": 2900,
+    "tags": [
+        "data structures",
+        "geometry",
+        "implementation",
+        "math",
+        "sortings"
+    ]
+}
+{
+    "contestId": 1847,
+    "index": "E",
+    "name": "Triangle Platinum?",
+    "type": "PROGRAMMING",
+    "points": 2750.0,
+    "rating": 2900,
+    "tags": [
+        "brute force",
+        "combinatorics",
+        "implementation",
+        "interactive",
+        "math",
+        "probabilities"
+    ]
+}
+{
+    "contestId": 1687,
+    "index": "D",
+    "name": "Cute number",
+    "type": "PROGRAMMING",
+    "points": 1500.0,
+    "rating": 2900,
+    "tags": [
+        "binary search",
+        "brute force",
+        "data structures",
+        "dsu",
+        "implementation",
+        "math"
+    ]
+}
+{
+    "contestId": 1646,
+    "index": "F",
+    "name": "Playing Around the Table",
+    "type": "PROGRAMMING",
+    "points": 3000.0,
+    "rating": 2900,
+    "tags": [
+        "constructive algorithms",
+        "greedy",
+        "implementation"
+    ]
+}
+{
+    "contestId": 1494,
+    "index": "F",
+    "name": "Delete The Edges",
+    "type": "PROGRAMMING",
+    "rating": 2900,
+    "tags": [
+        "brute force",
+        "constructive algorithms",
+        "dfs and similar",
+        "graphs",
+        "implementation"
+    ]
+}
+{
+    "contestId": 1361,
+    "index": "D",
+    "name": "Johnny and James",
+    "type": "PROGRAMMING",
+    "points": 2500.0,
+    "rating": 2900,
+    "tags": [
+        "greedy",
+        "implementation",
+        "math",
+        "trees"
+    ]
+}
+{
+    "contestId": 815,
+    "index": "E",
+    "name": "Karen and Neighborhood",
+    "type": "PROGRAMMING",
+    "points": 2250.0,
+    "rating": 2900,
+    "tags": [
+        "binary search",
+        "constructive algorithms",
+        "implementation"
+    ]
+}
+{
+    "contestId": 704,
+    "index": "C",
+    "name": "Black Widow",
+    "type": "PROGRAMMING",
+    "points": 1250.0,
+    "rating": 2900,
+    "tags": [
+        "dp",
+        "graphs",
+        "implementation",
+        "math"
+    ]
+}
+{
+    "contestId": 679,
+    "index": "D",
+    "name": "Bear and Chase",
+    "type": "PROGRAMMING",
+    "points": 2000.0,
+    "rating": 2900,
+    "tags": [
+        "brute force",
+        "dfs and similar",
+        "graphs",
+        "implementation",
+        "math",
+        "probabilities"
+    ]
+}
+{
+    "contestId": 403,
+    "index": "E",
+    "name": "Two Rooted Trees",
+    "type": "PROGRAMMING",
+    "points": 2000.0,
+    "rating": 2900,
+    "tags": [
+        "data structures",
+        "implementation",
+        "trees"
+    ]
+}
+{
+    "contestId": 331,
+    "index": "E1",
+    "name": "Deja Vu",
+    "type": "PROGRAMMING",
+    "points": 50.0,
+    "rating": 2900,
+    "tags": [
+        "constructive algorithms",
+        "graphs",
+        "implementation"
+    ]
+}
+{
+    "contestId": 238,
+    "index": "D",
+    "name": "Tape Programming",
+    "type": "PROGRAMMING",
+    "points": 2000.0,
+    "rating": 2900,
+    "tags": [
+        "data structures",
+        "implementation"
+    ]
+}
+{
+    "contestId": 145,
+    "index": "D",
+    "name": "Lucky Pair",
+    "type": "PROGRAMMING",
+    "points": 2500.0,
+    "rating": 2900,
+    "tags": [
+        "combinatorics",
+        "data structures",
+        "implementation"
+    ]
+}
+{
+    "contestId": 117,
+    "index": "E",
+    "name": "Tree or not Tree",
+    "type": "PROGRAMMING",
+    "points": 2500.0,
+    "rating": 2900,
+    "tags": [
+        "data structures",
+        "divide and conquer",
+        "implementation",
+        "trees"
+    ]
+}
+{
+    "contestId": 65,
+    "index": "E",
+    "name": "Harry Potter and Moving Staircases",
+    "type": "PROGRAMMING",
+    "points": 2500.0,
+    "rating": 2900,
+    "tags": [
+        "dfs and similar",
+        "implementation"
+    ]
+}
