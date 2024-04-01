@@ -89,6 +89,25 @@ h6 {
   opacity: 1;
 }
 
+/* For WebKit browsers like Chrome and Safari */
+::-webkit-scrollbar {
+  width: 12px; /* Set scrollbar width */
+  background-color: transparent; /* Set scrollbar background to transparent */
+}
+::-webkit-scrollbar-thumb {
+  background-color: #3fbbc0; /* Set thumb color */
+  /* border-radius: 6px; Round the thumb */
+}
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Set track color */
+}
+
+/* For Firefox */
+html {
+  scrollbar-color: #3fbbc0 transparent; /* Set thumb and track color */
+  /* scrollbar-width: thin; Set scrollbar width */
+}
+
 /*--------------------------------------------------------------
 # Top Bar
 --------------------------------------------------------------*/
@@ -132,7 +151,7 @@ h6 {
 #header h2 {
   color: #eee;
   margin-bottom: 40px;
-  font-size: 22px;
+  font-size: 3rem;
 }
 
 #header .countdown {
@@ -557,7 +576,7 @@ section {
 .section-title h2 {
   font-size: 32px;
   font-weight: bold;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   margin-bottom: 20px;
   padding-bottom: 20px;
   position: relative;

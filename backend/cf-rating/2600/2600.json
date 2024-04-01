@@ -1,4 +1,6 @@
 {
+    "problems": [
+{
     "contestId": 1919,
     "index": "E",
     "name": "Counting Prefixes",
@@ -12,7 +14,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 1896,
     "index": "F",
@@ -26,7 +28,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 1848,
     "index": "E",
@@ -40,7 +42,7 @@
         "math",
         "number theory"
     ]
-}
+},
 {
     "contestId": 1805,
     "index": "F1",
@@ -55,7 +57,7 @@
         "math",
         "sortings"
     ]
-}
+},
 {
     "contestId": 1793,
     "index": "F",
@@ -69,7 +71,7 @@
         "divide and conquer",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1569,
     "index": "E",
@@ -83,7 +85,7 @@
         "implementation",
         "meet-in-the-middle"
     ]
-}
+},
 {
     "contestId": 1566,
     "index": "F",
@@ -98,7 +100,7 @@
         "implementation",
         "sortings"
     ]
-}
+},
 {
     "contestId": 1505,
     "index": "G",
@@ -109,7 +111,7 @@
         "*special",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1439,
     "index": "C",
@@ -124,7 +126,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1416,
     "index": "D",
@@ -139,7 +141,7 @@
         "implementation",
         "trees"
     ]
-}
+},
 {
     "contestId": 1368,
     "index": "F",
@@ -153,7 +155,7 @@
         "interactive",
         "math"
     ]
-}
+},
 {
     "contestId": 1301,
     "index": "F",
@@ -167,7 +169,7 @@
         "implementation",
         "shortest paths"
     ]
-}
+},
 {
     "contestId": 1267,
     "index": "I",
@@ -181,7 +183,7 @@
         "interactive",
         "sortings"
     ]
-}
+},
 {
     "contestId": 1081,
     "index": "F",
@@ -194,7 +196,7 @@
         "implementation",
         "interactive"
     ]
-}
+},
 {
     "contestId": 763,
     "index": "C",
@@ -208,7 +210,7 @@
         "math",
         "number theory"
     ]
-}
+},
 {
     "contestId": 761,
     "index": "F",
@@ -222,7 +224,7 @@
         "dp",
         "implementation"
     ]
-}
+},
 {
     "contestId": 685,
     "index": "D",
@@ -235,7 +237,7 @@
         "implementation",
         "sortings"
     ]
-}
+},
 {
     "contestId": 484,
     "index": "C",
@@ -247,7 +249,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 374,
     "index": "E",
@@ -262,7 +264,7 @@
         "geometry",
         "implementation"
     ]
-}
+},
 {
     "contestId": 235,
     "index": "E",
@@ -277,7 +279,7 @@
         "math",
         "number theory"
     ]
-}
+},
 {
     "contestId": 36,
     "index": "E",
@@ -291,7 +293,7 @@
         "graphs",
         "implementation"
     ]
-}
+},
 {
     "contestId": 7,
     "index": "E",
@@ -303,4 +305,6 @@
         "expression parsing",
         "implementation"
     ]
+}
+]
 }

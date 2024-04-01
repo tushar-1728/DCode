@@ -1,4 +1,6 @@
 {
+    "problems": [
+{
     "contestId": 1943,
     "index": "B",
     "name": "Non-Palindromic Substring",
@@ -11,7 +13,7 @@
         "math",
         "strings"
     ]
-}
+},
 {
     "contestId": 1936,
     "index": "B",
@@ -26,7 +28,7 @@
         "math",
         "two pointers"
     ]
-}
+},
 {
     "contestId": 1905,
     "index": "D",
@@ -40,7 +42,7 @@
         "math",
         "two pointers"
     ]
-}
+},
 {
     "contestId": 1893,
     "index": "C",
@@ -53,7 +55,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1851,
     "index": "G",
@@ -70,7 +72,7 @@
         "trees",
         "two pointers"
     ]
-}
+},
 {
     "contestId": 1815,
     "index": "B",
@@ -87,7 +89,7 @@
         "shortest paths",
         "trees"
     ]
-}
+},
 {
     "contestId": 1804,
     "index": "D",
@@ -101,7 +103,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1783,
     "index": "D",
@@ -113,7 +115,7 @@
         "dp",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1772,
     "index": "F",
@@ -127,7 +129,7 @@
         "implementation",
         "sortings"
     ]
-}
+},
 {
     "contestId": 1770,
     "index": "D",
@@ -146,7 +148,7 @@
         "graphs",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1718,
     "index": "B",
@@ -160,7 +162,7 @@
         "math",
         "number theory"
     ]
-}
+},
 {
     "contestId": 1716,
     "index": "C",
@@ -174,7 +176,7 @@
         "implementation",
         "ternary search"
     ]
-}
+},
 {
     "contestId": 1685,
     "index": "B",
@@ -188,7 +190,7 @@
         "sortings",
         "strings"
     ]
-}
+},
 {
     "contestId": 1682,
     "index": "D",
@@ -201,7 +203,7 @@
         "implementation",
         "trees"
     ]
-}
+},
 {
     "contestId": 1646,
     "index": "D",
@@ -216,7 +218,7 @@
         "implementation",
         "trees"
     ]
-}
+},
 {
     "contestId": 1641,
     "index": "B",
@@ -229,7 +231,7 @@
         "implementation",
         "sortings"
     ]
-}
+},
 {
     "contestId": 1638,
     "index": "D",
@@ -243,7 +245,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1624,
     "index": "E",
@@ -258,7 +260,7 @@
         "implementation",
         "strings"
     ]
-}
+},
 {
     "contestId": 1618,
     "index": "F",
@@ -273,7 +275,7 @@
         "math",
         "strings"
     ]
-}
+},
 {
     "contestId": 1574,
     "index": "D",
@@ -290,7 +292,7 @@
         "hashing",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1567,
     "index": "D",
@@ -304,7 +306,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 1536,
     "index": "D",
@@ -317,7 +319,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1525,
     "index": "C",
@@ -330,7 +332,7 @@
         "implementation",
         "sortings"
     ]
-}
+},
 {
     "contestId": 1514,
     "index": "D",
@@ -345,7 +347,7 @@
         "implementation",
         "sortings"
     ]
-}
+},
 {
     "contestId": 1487,
     "index": "E",
@@ -361,7 +363,7 @@
         "sortings",
         "two pointers"
     ]
-}
+},
 {
     "contestId": 1481,
     "index": "D",
@@ -376,7 +378,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1427,
     "index": "D",
@@ -388,7 +390,7 @@
         "constructive algorithms",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1408,
     "index": "D",
@@ -405,7 +407,7 @@
         "sortings",
         "two pointers"
     ]
-}
+},
 {
     "contestId": 1391,
     "index": "D",
@@ -421,7 +423,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1388,
     "index": "D",
@@ -437,7 +439,7 @@
         "implementation",
         "trees"
     ]
-}
+},
 {
     "contestId": 1380,
     "index": "D",
@@ -451,7 +453,7 @@
         "math",
         "two pointers"
     ]
-}
+},
 {
     "contestId": 1370,
     "index": "D",
@@ -466,7 +468,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1359,
     "index": "D",
@@ -479,7 +481,7 @@
         "implementation",
         "two pointers"
     ]
-}
+},
 {
     "contestId": 1349,
     "index": "C",
@@ -493,7 +495,7 @@
         "implementation",
         "shortest paths"
     ]
-}
+},
 {
     "contestId": 1316,
     "index": "D",
@@ -507,7 +509,7 @@
         "graphs",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1301,
     "index": "D",
@@ -520,7 +522,7 @@
         "graphs",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1266,
     "index": "D",
@@ -537,7 +539,7 @@
         "math",
         "two pointers"
     ]
-}
+},
 {
     "contestId": 1248,
     "index": "D1",
@@ -551,7 +553,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1237,
     "index": "D",
@@ -564,7 +566,7 @@
         "data structures",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1219,
     "index": "G",
@@ -574,7 +576,7 @@
     "tags": [
         "implementation"
     ]
-}
+},
 {
     "contestId": 1209,
     "index": "G1",
@@ -589,7 +591,7 @@
         "implementation",
         "two pointers"
     ]
-}
+},
 {
     "contestId": 1200,
     "index": "E",
@@ -604,7 +606,7 @@
         "string suffix structures",
         "strings"
     ]
-}
+},
 {
     "contestId": 1185,
     "index": "E",
@@ -616,7 +618,7 @@
         "brute force",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1183,
     "index": "G",
@@ -628,7 +630,7 @@
         "implementation",
         "sortings"
     ]
-}
+},
 {
     "contestId": 1183,
     "index": "E",
@@ -641,7 +643,7 @@
         "implementation",
         "shortest paths"
     ]
-}
+},
 {
     "contestId": 1165,
     "index": "F2",
@@ -653,7 +655,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1088,
     "index": "D",
@@ -667,7 +669,7 @@
         "implementation",
         "interactive"
     ]
-}
+},
 {
     "contestId": 1080,
     "index": "D",
@@ -680,7 +682,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 1061,
     "index": "D",
@@ -694,7 +696,7 @@
         "implementation",
         "sortings"
     ]
-}
+},
 {
     "contestId": 1010,
     "index": "D",
@@ -708,7 +710,7 @@
         "implementation",
         "trees"
     ]
-}
+},
 {
     "contestId": 911,
     "index": "E",
@@ -721,7 +723,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 899,
     "index": "E",
@@ -736,7 +738,7 @@
         "implementation",
         "two pointers"
     ]
-}
+},
 {
     "contestId": 886,
     "index": "D",
@@ -749,7 +751,7 @@
         "graphs",
         "implementation"
     ]
-}
+},
 {
     "contestId": 818,
     "index": "C",
@@ -760,7 +762,7 @@
         "brute force",
         "implementation"
     ]
-}
+},
 {
     "contestId": 784,
     "index": "E",
@@ -772,7 +774,7 @@
         "brute force",
         "implementation"
     ]
-}
+},
 {
     "contestId": 696,
     "index": "C",
@@ -787,7 +789,7 @@
         "math",
         "matrices"
     ]
-}
+},
 {
     "contestId": 689,
     "index": "E",
@@ -802,7 +804,7 @@
         "geometry",
         "implementation"
     ]
-}
+},
 {
     "contestId": 676,
     "index": "D",
@@ -815,7 +817,7 @@
         "implementation",
         "shortest paths"
     ]
-}
+},
 {
     "contestId": 662,
     "index": "D",
@@ -829,7 +831,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 633,
     "index": "D",
@@ -844,7 +846,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 509,
     "index": "C",
@@ -856,7 +858,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 490,
     "index": "E",
@@ -870,7 +872,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 433,
     "index": "D",
@@ -882,7 +884,7 @@
         "dsu",
         "implementation"
     ]
-}
+},
 {
     "contestId": 427,
     "index": "E",
@@ -896,7 +898,7 @@
         "math",
         "ternary search"
     ]
-}
+},
 {
     "contestId": 374,
     "index": "A",
@@ -908,7 +910,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 358,
     "index": "C",
@@ -921,7 +923,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 317,
     "index": "B",
@@ -933,7 +935,7 @@
         "brute force",
         "implementation"
     ]
-}
+},
 {
     "contestId": 263,
     "index": "C",
@@ -946,7 +948,7 @@
         "dfs and similar",
         "implementation"
     ]
-}
+},
 {
     "contestId": 245,
     "index": "F",
@@ -959,7 +961,7 @@
         "implementation",
         "strings"
     ]
-}
+},
 {
     "contestId": 241,
     "index": "C",
@@ -970,7 +972,7 @@
         "geometry",
         "implementation"
     ]
-}
+},
 {
     "contestId": 171,
     "index": "C",
@@ -981,7 +983,7 @@
         "*special",
         "implementation"
     ]
-}
+},
 {
     "contestId": 137,
     "index": "E",
@@ -994,7 +996,7 @@
         "implementation",
         "strings"
     ]
-}
+},
 {
     "contestId": 128,
     "index": "D",
@@ -1006,7 +1008,7 @@
         "constructive algorithms",
         "implementation"
     ]
-}
+},
 {
     "contestId": 101,
     "index": "C",
@@ -1018,7 +1020,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 75,
     "index": "D",
@@ -1034,7 +1036,7 @@
         "math",
         "trees"
     ]
-}
+},
 {
     "contestId": 69,
     "index": "C",
@@ -1045,7 +1047,7 @@
     "tags": [
         "implementation"
     ]
-}
+},
 {
     "contestId": 63,
     "index": "E",
@@ -1060,7 +1062,7 @@
         "games",
         "implementation"
     ]
-}
+},
 {
     "contestId": 59,
     "index": "D",
@@ -1073,7 +1075,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 47,
     "index": "C",
@@ -1084,7 +1086,7 @@
     "tags": [
         "implementation"
     ]
-}
+},
 {
     "contestId": 43,
     "index": "D",
@@ -1097,7 +1099,7 @@
         "constructive algorithms",
         "implementation"
     ]
-}
+},
 {
     "contestId": 34,
     "index": "E",
@@ -1110,7 +1112,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 31,
     "index": "D",
@@ -1122,7 +1124,7 @@
         "dfs and similar",
         "implementation"
     ]
-}
+},
 {
     "contestId": 26,
     "index": "C",
@@ -1136,7 +1138,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 21,
     "index": "B",
@@ -1148,7 +1150,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 13,
     "index": "B",
@@ -1159,4 +1161,6 @@
         "geometry",
         "implementation"
     ]
+}
+]
 }

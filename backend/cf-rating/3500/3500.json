@@ -1,4 +1,6 @@
 {
+    "problems": [
+{
     "contestId": 1868,
     "index": "F",
     "name": "LIS?",
@@ -10,7 +12,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1835,
     "index": "F",
@@ -25,7 +27,7 @@
         "graphs",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1804,
     "index": "G",
@@ -38,7 +40,7 @@
         "dsu",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1746,
     "index": "G",
@@ -55,7 +57,7 @@
         "implementation",
         "sortings"
     ]
-}
+},
 {
     "contestId": 1726,
     "index": "H",
@@ -69,7 +71,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 1718,
     "index": "E",
@@ -83,7 +85,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 1696,
     "index": "H",
@@ -100,7 +102,7 @@
         "math",
         "two pointers"
     ]
-}
+},
 {
     "contestId": 1667,
     "index": "F",
@@ -111,7 +113,7 @@
     "tags": [
         "implementation"
     ]
-}
+},
 {
     "contestId": 1503,
     "index": "F",
@@ -127,7 +129,7 @@
         "graphs",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1208,
     "index": "H",
@@ -140,7 +142,7 @@
         "implementation",
         "trees"
     ]
-}
+},
 {
     "contestId": 1083,
     "index": "D",
@@ -152,4 +154,6 @@
         "data structures",
         "implementation"
     ]
+}
+]
 }

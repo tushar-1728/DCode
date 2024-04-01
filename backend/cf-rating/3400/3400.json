@@ -1,4 +1,6 @@
 {
+    "problems": [
+{
     "contestId": 1239,
     "index": "F",
     "name": "Swiper, no swiping!",
@@ -9,7 +11,7 @@
         "graphs",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1098,
     "index": "E",
@@ -23,7 +25,7 @@
         "math",
         "number theory"
     ]
-}
+},
 {
     "contestId": 1012,
     "index": "F",
@@ -35,4 +37,6 @@
         "dp",
         "implementation"
     ]
+}
+]
 }

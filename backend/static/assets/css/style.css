@@ -199,9 +199,12 @@ html {
 #header .subscribe {
   font-size: 15px;
   text-align: center;
+  display: flex;
+  flex-direction: row;
 }
 
 #header .subscribe h4 {
+  flex-direction: row;
   font-size: 20px;
   font-weight: 600;
   color: #fff;
@@ -217,12 +220,14 @@ html {
   position: relative;
   border-radius: 50px;
   text-align: left;
+  flex-direction: row;
 }
 
 #header .subscribe .subscribe-form input[type=email] {
   border: 0;
   padding: 4px 8px;
   width: calc(100% - 100px);
+  flex-direction: row;
 }
 
 #header .subscribe .subscribe-form input[type=submit] {
@@ -239,10 +244,12 @@ html {
   transition: 0.3s;
   border-radius: 50px;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  flex-direction: row;
 }
 
 #header .subscribe .subscribe-form input[type=submit]:hover {
   background: #22ae9c;
+  flex-direction: row;
 }
 
 #header .subscribe .error-message {
@@ -251,6 +258,7 @@ html {
   text-align: center;
   padding: 15px;
   font-weight: 600;
+  flex-direction: row;
 }
 
 #header .subscribe .sent-message {
@@ -277,6 +285,7 @@ html {
   border: 3px solid #18d26e;
   border-top-color: #eee;
   animation: animate-loading-notify 1s linear infinite;
+  flex-direction: row;
 }
 
 @keyframes animate-loading-notify {
@@ -837,10 +846,33 @@ section {
 
 /* Codeforces CSS */
 
+.form-check-label.active {
+  color: #3fbbc0; /* Color when switch is on */
+}
+
+.user-info {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.user-info-cell {
+  flex: 1;
+  color: white;
+  /* padding: 10px; */
+  text-align: center;
+  /* font-weight: bold; */
+}
+
 .table-container {
   display: flex;
   flex-direction: column;
   width: 100%;
+  /* background-color: red;*/
+  background: rgba(38, 55, 69, 0.1);
+  border: 0.2rem solid white;
+  padding: 1rem;
+  border-radius: 1rem;
 }
 
 .table-head {
@@ -855,7 +887,8 @@ section {
   display: flex;
   flex-direction: row;
   width: 100%;
-  background: rgb(114, 131, 132); /* Apply opacity to the background color */
+  /* background: rgb(114, 131, 132); */
+  background: rgb(184, 186, 66);
 }
 
 .table-cell {

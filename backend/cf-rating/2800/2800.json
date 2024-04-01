@@ -1,4 +1,6 @@
 {
+    "problems": [
+{
     "contestId": 1935,
     "index": "F",
     "name": "Andrey's Tree",
@@ -15,7 +17,7 @@
         "implementation",
         "trees"
     ]
-}
+},
 {
     "contestId": 1923,
     "index": "F",
@@ -31,7 +33,7 @@
         "string suffix structures",
         "strings"
     ]
-}
+},
 {
     "contestId": 1904,
     "index": "F",
@@ -46,7 +48,7 @@
         "implementation",
         "trees"
     ]
-}
+},
 {
     "contestId": 1900,
     "index": "F",
@@ -59,7 +61,7 @@
         "data structures",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1884,
     "index": "E",
@@ -72,7 +74,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 1783,
     "index": "G",
@@ -85,7 +87,7 @@
         "implementation",
         "trees"
     ]
-}
+},
 {
     "contestId": 1765,
     "index": "I",
@@ -96,7 +98,7 @@
         "implementation",
         "shortest paths"
     ]
-}
+},
 {
     "contestId": 1698,
     "index": "F",
@@ -110,7 +112,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 1697,
     "index": "F",
@@ -123,7 +125,7 @@
         "graphs",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1648,
     "index": "D",
@@ -138,7 +140,7 @@
         "implementation",
         "shortest paths"
     ]
-}
+},
 {
     "contestId": 1608,
     "index": "E",
@@ -151,7 +153,7 @@
         "implementation",
         "sortings"
     ]
-}
+},
 {
     "contestId": 1578,
     "index": "K",
@@ -163,7 +165,7 @@
         "graphs",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1419,
     "index": "F",
@@ -179,7 +181,7 @@
         "graphs",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1393,
     "index": "E1",
@@ -194,7 +196,7 @@
         "string suffix structures",
         "strings"
     ]
-}
+},
 {
     "contestId": 1371,
     "index": "F",
@@ -207,7 +209,7 @@
         "divide and conquer",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1303,
     "index": "F",
@@ -218,7 +220,7 @@
         "dsu",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1109,
     "index": "C",
@@ -231,7 +233,7 @@
         "data structures",
         "implementation"
     ]
-}
+},
 {
     "contestId": 833,
     "index": "D",
@@ -245,7 +247,7 @@
         "implementation",
         "trees"
     ]
-}
+},
 {
     "contestId": 776,
     "index": "F",
@@ -262,7 +264,7 @@
         "implementation",
         "trees"
     ]
-}
+},
 {
     "contestId": 750,
     "index": "F",
@@ -276,7 +278,7 @@
         "interactive",
         "trees"
     ]
-}
+},
 {
     "contestId": 722,
     "index": "F",
@@ -291,7 +293,7 @@
         "number theory",
         "two pointers"
     ]
-}
+},
 {
     "contestId": 472,
     "index": "E",
@@ -303,7 +305,7 @@
         "constructive algorithms",
         "implementation"
     ]
-}
+},
 {
     "contestId": 406,
     "index": "E",
@@ -316,7 +318,7 @@
         "math",
         "two pointers"
     ]
-}
+},
 {
     "contestId": 288,
     "index": "E",
@@ -329,7 +331,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 280,
     "index": "D",
@@ -343,7 +345,7 @@
         "graphs",
         "implementation"
     ]
-}
+},
 {
     "contestId": 204,
     "index": "E",
@@ -357,4 +359,6 @@
         "string suffix structures",
         "two pointers"
     ]
+}
+]
 }

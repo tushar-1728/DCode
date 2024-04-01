@@ -12,23 +12,46 @@
             <input type="text" name="userhandle" placeholder="CF Handle" value="{{ userhandle }}" required><input type="submit" value="🔍">
           </div>
         </form>
-        <h4> {{userhandle}} ({{rank}}) Rating: {{rating}} (Max: {{max_rating}})  </h4>
+
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+          <label class="form-check-label" for="flexSwitchCheckDefault">Tags</label>
+        </div>
+        <script>
+          const switchCheckbox = document.getElementById('flexSwitchCheckDefault');
+          const label = document.querySelector('.form-check-label');
+        
+          switchCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+              label.classList.add('active');
+            } else {
+              label.classList.remove('active');
+            }
+          });
+        </script>
+        <!--<h4> {{userhandle}} ({{rank}}) Rating: {{rating}} (Max: {{max_rating}})  </h4>-->
+      </div>
+
+      <!--CF User Details-->
+      <div class="user-info">
+        <div class="user-info-cell">{{userhandle}} ({{rank}})</div>
+        <div class="user-info-cell">Rating: {{rating}} (Max: {{max_rating}})</div>
+        <div class="user-info-cell">Solved: 0</div>
+        <div class="user-info-cell">Unsolved: 100</div>
       </div>
 
       <div class="table-container">
-        <div class="table-head">
+        <div class="table-head" style="margin-bottom: 1rem; border-radius: 5rem;">
           <div class="table-cell">Index</div>
           <div class="table-cell">Problem</div>
           <div class="table-cell">Rating</div>
           <div class="table-cell">Status</div>
         </div>
-        <div class="table-body">
-          <!--
-          <div class="table-cell">Index</div>
-          <div class="table-cell">Problem</div>
-          <div class="table-cell">Rating</div>
-          <div class="table-cell">Status</div>
-          -->
+        <div class="table-body" style="margin-bottom: 1rem; border-radius: 5rem;">
+          <div class="table-cell">1</div>
+          <div class="table-cell">Alice in BorderLand</div>
+          <div class="table-cell">1000</div>
+          <div class="table-cell">-</div>
         </div>
       </div>
 

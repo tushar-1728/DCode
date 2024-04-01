@@ -1,4 +1,6 @@
 {
+    "problems": [
+{
     "contestId": 1889,
     "index": "D",
     "name": "Game of Stacks",
@@ -12,7 +14,7 @@
         "implementation",
         "trees"
     ]
-}
+},
 {
     "contestId": 1868,
     "index": "D",
@@ -27,7 +29,7 @@
         "implementation",
         "trees"
     ]
-}
+},
 {
     "contestId": 1844,
     "index": "G",
@@ -46,7 +48,7 @@
         "number theory",
         "trees"
     ]
-}
+},
 {
     "contestId": 1535,
     "index": "F",
@@ -61,7 +63,7 @@
         "implementation",
         "strings"
     ]
-}
+},
 {
     "contestId": 1168,
     "index": "D",
@@ -74,7 +76,7 @@
         "implementation",
         "trees"
     ]
-}
+},
 {
     "contestId": 375,
     "index": "E",
@@ -87,7 +89,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 356,
     "index": "E",
@@ -102,7 +104,7 @@
         "string suffix structures",
         "strings"
     ]
-}
+},
 {
     "contestId": 331,
     "index": "D3",
@@ -115,7 +117,7 @@
         "implementation",
         "trees"
     ]
-}
+},
 {
     "contestId": 280,
     "index": "E",
@@ -130,7 +132,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 274,
     "index": "E",
@@ -142,7 +144,7 @@
         "data structures",
         "implementation"
     ]
-}
+},
 {
     "contestId": 251,
     "index": "E",
@@ -156,7 +158,7 @@
         "implementation",
         "trees"
     ]
-}
+},
 {
     "contestId": 175,
     "index": "F",
@@ -170,4 +172,6 @@
         "implementation",
         "shortest paths"
     ]
+}
+]
 }

@@ -1,4 +1,6 @@
 {
+    "problems": [
+{
     "contestId": 1864,
     "index": "G",
     "name": "Magic Square",
@@ -10,7 +12,7 @@
         "constructive algorithms",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1566,
     "index": "G",
@@ -26,7 +28,7 @@
         "implementation",
         "shortest paths"
     ]
-}
+},
 {
     "contestId": 1286,
     "index": "F",
@@ -42,7 +44,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 1239,
     "index": "E",
@@ -54,7 +56,7 @@
         "dp",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1119,
     "index": "G",
@@ -66,7 +68,7 @@
         "constructive algorithms",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1044,
     "index": "E",
@@ -77,7 +79,7 @@
     "tags": [
         "implementation"
     ]
-}
+},
 {
     "contestId": 830,
     "index": "E",
@@ -93,7 +95,7 @@
         "math",
         "trees"
     ]
-}
+},
 {
     "contestId": 780,
     "index": "H",
@@ -107,7 +109,7 @@
         "implementation",
         "two pointers"
     ]
-}
+},
 {
     "contestId": 720,
     "index": "E",
@@ -117,7 +119,7 @@
     "tags": [
         "implementation"
     ]
-}
+},
 {
     "contestId": 633,
     "index": "H",
@@ -129,4 +131,6 @@
         "data structures",
         "implementation"
     ]
+}
+]
 }

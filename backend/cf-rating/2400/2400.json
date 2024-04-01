@@ -1,4 +1,6 @@
 {
+    "problems": [
+{
     "contestId": 1936,
     "index": "C",
     "name": "Pok\u00e9mon Arena",
@@ -13,7 +15,7 @@
         "shortest paths",
         "sortings"
     ]
-}
+},
 {
     "contestId": 1902,
     "index": "F",
@@ -29,7 +31,7 @@
         "math",
         "trees"
     ]
-}
+},
 {
     "contestId": 1879,
     "index": "E",
@@ -45,7 +47,7 @@
         "interactive",
         "trees"
     ]
-}
+},
 {
     "contestId": 1868,
     "index": "C",
@@ -60,7 +62,7 @@
         "math",
         "trees"
     ]
-}
+},
 {
     "contestId": 1837,
     "index": "F",
@@ -73,7 +75,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1832,
     "index": "D2",
@@ -87,7 +89,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 1826,
     "index": "E",
@@ -104,7 +106,7 @@
         "implementation",
         "sortings"
     ]
-}
+},
 {
     "contestId": 1819,
     "index": "C",
@@ -119,7 +121,7 @@
         "math",
         "trees"
     ]
-}
+},
 {
     "contestId": 1809,
     "index": "E",
@@ -132,7 +134,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 1794,
     "index": "E",
@@ -148,7 +150,7 @@
         "implementation",
         "trees"
     ]
-}
+},
 {
     "contestId": 1774,
     "index": "F1",
@@ -161,7 +163,7 @@
         "data structures",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1765,
     "index": "L",
@@ -173,7 +175,7 @@
         "data structures",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1697,
     "index": "E",
@@ -191,7 +193,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 1638,
     "index": "E",
@@ -204,7 +206,7 @@
         "data structures",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1617,
     "index": "D2",
@@ -218,7 +220,7 @@
         "interactive",
         "math"
     ]
-}
+},
 {
     "contestId": 1606,
     "index": "D",
@@ -231,7 +233,7 @@
         "implementation",
         "sortings"
     ]
-}
+},
 {
     "contestId": 1605,
     "index": "E",
@@ -248,7 +250,7 @@
         "sortings",
         "two pointers"
     ]
-}
+},
 {
     "contestId": 1527,
     "index": "D",
@@ -263,7 +265,7 @@
         "math",
         "trees"
     ]
-}
+},
 {
     "contestId": 1463,
     "index": "E",
@@ -279,7 +281,7 @@
         "sortings",
         "trees"
     ]
-}
+},
 {
     "contestId": 1455,
     "index": "E",
@@ -296,7 +298,7 @@
         "math",
         "ternary search"
     ]
-}
+},
 {
     "contestId": 1401,
     "index": "E",
@@ -310,7 +312,7 @@
         "implementation",
         "sortings"
     ]
-}
+},
 {
     "contestId": 1374,
     "index": "F",
@@ -323,7 +325,7 @@
         "implementation",
         "sortings"
     ]
-}
+},
 {
     "contestId": 1369,
     "index": "E",
@@ -338,7 +340,7 @@
         "implementation",
         "sortings"
     ]
-}
+},
 {
     "contestId": 1358,
     "index": "E",
@@ -352,7 +354,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1343,
     "index": "F",
@@ -366,7 +368,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1329,
     "index": "C",
@@ -380,7 +382,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1205,
     "index": "C",
@@ -392,7 +394,7 @@
         "implementation",
         "interactive"
     ]
-}
+},
 {
     "contestId": 1186,
     "index": "F",
@@ -406,7 +408,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1182,
     "index": "D",
@@ -422,7 +424,7 @@
         "implementation",
         "trees"
     ]
-}
+},
 {
     "contestId": 1174,
     "index": "F",
@@ -438,7 +440,7 @@
         "interactive",
         "trees"
     ]
-}
+},
 {
     "contestId": 1146,
     "index": "E",
@@ -452,7 +454,7 @@
         "divide and conquer",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1091,
     "index": "E",
@@ -469,7 +471,7 @@
         "math",
         "sortings"
     ]
-}
+},
 {
     "contestId": 1055,
     "index": "D",
@@ -482,7 +484,7 @@
         "implementation",
         "strings"
     ]
-}
+},
 {
     "contestId": 1054,
     "index": "E",
@@ -495,7 +497,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 920,
     "index": "D",
@@ -507,7 +509,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 908,
     "index": "F",
@@ -520,7 +522,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 679,
     "index": "C",
@@ -533,7 +535,7 @@
         "dsu",
         "implementation"
     ]
-}
+},
 {
     "contestId": 641,
     "index": "D",
@@ -547,7 +549,7 @@
         "math",
         "probabilities"
     ]
-}
+},
 {
     "contestId": 625,
     "index": "D",
@@ -560,7 +562,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 534,
     "index": "E",
@@ -574,7 +576,7 @@
         "hashing",
         "implementation"
     ]
-}
+},
 {
     "contestId": 526,
     "index": "E",
@@ -586,7 +588,7 @@
         "dp",
         "implementation"
     ]
-}
+},
 {
     "contestId": 416,
     "index": "D",
@@ -599,7 +601,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 380,
     "index": "B",
@@ -611,7 +613,7 @@
         "graphs",
         "implementation"
     ]
-}
+},
 {
     "contestId": 332,
     "index": "E",
@@ -624,7 +626,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 331,
     "index": "D1",
@@ -636,7 +638,7 @@
         "dfs and similar",
         "implementation"
     ]
-}
+},
 {
     "contestId": 277,
     "index": "C",
@@ -648,7 +650,7 @@
         "games",
         "implementation"
     ]
-}
+},
 {
     "contestId": 226,
     "index": "C",
@@ -663,7 +665,7 @@
         "matrices",
         "number theory"
     ]
-}
+},
 {
     "contestId": 200,
     "index": "E",
@@ -677,7 +679,7 @@
         "number theory",
         "ternary search"
     ]
-}
+},
 {
     "contestId": 97,
     "index": "A",
@@ -689,7 +691,7 @@
         "brute force",
         "implementation"
     ]
-}
+},
 {
     "contestId": 39,
     "index": "G",
@@ -699,7 +701,7 @@
     "tags": [
         "implementation"
     ]
-}
+},
 {
     "contestId": 32,
     "index": "E",
@@ -711,4 +713,6 @@
         "geometry",
         "implementation"
     ]
+}
+]
 }

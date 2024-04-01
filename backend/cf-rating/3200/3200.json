@@ -1,4 +1,6 @@
 {
+    "problems": [
+{
     "contestId": 1896,
     "index": "G",
     "name": "Pepe Racing",
@@ -11,7 +13,7 @@
         "interactive",
         "sortings"
     ]
-}
+},
 {
     "contestId": 1648,
     "index": "E",
@@ -28,7 +30,7 @@
         "implementation",
         "trees"
     ]
-}
+},
 {
     "contestId": 1608,
     "index": "F",
@@ -41,7 +43,7 @@
         "dp",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1495,
     "index": "E",
@@ -55,7 +57,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1470,
     "index": "E",
@@ -72,7 +74,7 @@
         "implementation",
         "two pointers"
     ]
-}
+},
 {
     "contestId": 1403,
     "index": "C",
@@ -86,7 +88,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 1393,
     "index": "E2",
@@ -102,7 +104,7 @@
         "strings",
         "two pointers"
     ]
-}
+},
 {
     "contestId": 1089,
     "index": "J",
@@ -113,7 +115,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 585,
     "index": "F",
@@ -126,4 +128,6 @@
         "implementation",
         "strings"
     ]
+}
+]
 }

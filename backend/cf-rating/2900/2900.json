@@ -1,4 +1,6 @@
 {
+    "problems": [
+{
     "contestId": 1928,
     "index": "F",
     "name": "Digital Patterns",
@@ -11,7 +13,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 1860,
     "index": "F",
@@ -25,7 +27,7 @@
         "math",
         "sortings"
     ]
-}
+},
 {
     "contestId": 1847,
     "index": "E",
@@ -41,7 +43,7 @@
         "math",
         "probabilities"
     ]
-}
+},
 {
     "contestId": 1687,
     "index": "D",
@@ -57,7 +59,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 1646,
     "index": "F",
@@ -70,7 +72,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1494,
     "index": "F",
@@ -84,7 +86,7 @@
         "graphs",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1361,
     "index": "D",
@@ -98,7 +100,7 @@
         "math",
         "trees"
     ]
-}
+},
 {
     "contestId": 815,
     "index": "E",
@@ -111,7 +113,7 @@
         "constructive algorithms",
         "implementation"
     ]
-}
+},
 {
     "contestId": 704,
     "index": "C",
@@ -125,7 +127,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 679,
     "index": "D",
@@ -141,7 +143,7 @@
         "math",
         "probabilities"
     ]
-}
+},
 {
     "contestId": 403,
     "index": "E",
@@ -154,7 +156,7 @@
         "implementation",
         "trees"
     ]
-}
+},
 {
     "contestId": 331,
     "index": "E1",
@@ -167,7 +169,7 @@
         "graphs",
         "implementation"
     ]
-}
+},
 {
     "contestId": 238,
     "index": "D",
@@ -179,7 +181,7 @@
         "data structures",
         "implementation"
     ]
-}
+},
 {
     "contestId": 145,
     "index": "D",
@@ -192,7 +194,7 @@
         "data structures",
         "implementation"
     ]
-}
+},
 {
     "contestId": 117,
     "index": "E",
@@ -206,7 +208,7 @@
         "implementation",
         "trees"
     ]
-}
+},
 {
     "contestId": 65,
     "index": "E",
@@ -218,4 +220,6 @@
         "dfs and similar",
         "implementation"
     ]
+}
+]
 }

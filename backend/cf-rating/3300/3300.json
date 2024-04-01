@@ -1,4 +1,6 @@
 {
+    "problems": [
+{
     "contestId": 1450,
     "index": "H2",
     "name": "Multithreading (Hard Version)",
@@ -10,7 +12,7 @@
         "implementation",
         "math"
     ]
-}
+},
 {
     "contestId": 1416,
     "index": "F",
@@ -24,7 +26,7 @@
         "greedy",
         "implementation"
     ]
-}
+},
 {
     "contestId": 1361,
     "index": "F",
@@ -37,4 +39,6 @@
         "implementation",
         "math"
     ]
+}
+]
 }
