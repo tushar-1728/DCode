@@ -199,6 +199,7 @@ html {
 #header .subscribe {
   font-size: 15px;
   text-align: center;
+  align-items: center;
   display: flex;
   flex-direction: row;
 }
@@ -846,6 +847,16 @@ section {
 
 /* Codeforces CSS */
 
+.subscribe {
+  margin-left: auto; /* Move to the extreme right */
+  margin-right: 10px; /* Apply a margin of 10px */
+}
+
+.form-switch {
+  padding-left: 2.5em;
+  margin-left: 1rem;
+}
+
 .form-check-label.active {
   color: #3fbbc0; /* Color when switch is on */
 }
@@ -879,19 +890,25 @@ section {
   display: flex;
   flex-direction: row;
   width: 100%;
-  background: #3fbbc0;
-
+  /* background: #3fbbc0; */
+  /* background: #183D3D; */
+  background: #3C2A21;
 }
 
 .table-body {
   display: flex;
   flex-direction: row;
   width: 100%;
+  align-items: center;
   /* background: rgb(114, 131, 132); */
-  background: rgb(184, 186, 66);
+  /* background: rgb(184, 186, 66); */
+  /* background: #377c7c; */
+  background: rgba(84, 58, 46, 0.7);
 }
 
 .table-cell {
+  display: flex;
+  flex-direction: row;
   flex: 1;
   /* border: 1px solid #ccc; */
   color: white;
@@ -900,6 +917,38 @@ section {
   font-weight: bold;
 }
 
-.table-cell:nth-child(2) {
+.table-cell:nth-child(2), .table-cell:nth-child(3) {
   flex: 3;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+.w-full {
+  width: 100%;
+}
+.flex {
+  display: flex;
+}
+/* .my-2 {
+  margin-bottom: .5rem;
+  margin-top: .5rem;
+} */
+
+.text-sm {
+  font-size: .875rem;
+  line-height: 1.25rem;
+}
+
+.justify-items-start {
+  justify-items: start;
+}
+.content-center {
+  align-content: center;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.m-3 {
+  margin: 1rem;
 }

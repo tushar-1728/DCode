@@ -40,19 +40,39 @@
         <div class="user-info-cell">Unsolved: 100</div>
       </div>
 
+      <div class="table-container" style="margin-bottom: 1rem;">
+        <div class="text-sm flex flex-wrap justify-items-start m-3 content-center">
+          {% for tag in tags %}
+          <button style="color: white; padding: 0.2rem 0.5rem; margin: 1rem; border-color: white; border-radius: 1rem; background-color: #183D3D;">{{tag}}</button>
+          {% endfor %}
+
+        </div>
+      </div>
+
       <div class="table-container">
-        <div class="table-head" style="margin-bottom: 1rem; border-radius: 5rem;">
+        <div class="table-head" style="margin-bottom: 1rem; border-radius: 0.5rem;">
           <div class="table-cell">Index</div>
           <div class="table-cell">Problem</div>
+          <div class="table-cell">Tags</div>
           <div class="table-cell">Rating</div>
           <div class="table-cell">Status</div>
         </div>
-        <div class="table-body" style="margin-bottom: 1rem; border-radius: 5rem;">
-          <div class="table-cell">1</div>
-          <div class="table-cell">Alice in BorderLand</div>
-          <div class="table-cell">1000</div>
-          <div class="table-cell">-</div>
-        </div>
+        {% for problem in problems %}
+        <a href="https://codeforces.com/contest/{{problem.contestId}}/problem/{{problem.index}}">
+          <div class="table-body" style="border-radius: 0.5rem;">
+            <div class="table-cell">{{ loop.index }}</div>
+            <div class="table-cell">{{ problem.name }}</div>
+            <div class="table-cell flex flex-wrap">
+              {% for tag in problem.tags %}
+                  <div>{{ tag }}</div> <!-- Each tag in a separate div -->
+              {% endfor %}
+            </div>
+            <div class="table-cell">{{ problem.rating }}</div>
+            <div class="table-cell">-</div>
+          </div>
+        </a>
+        <div style="height: 1rem;"></div>
+        {% endfor %}
       </div>
 
     </div>

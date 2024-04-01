@@ -33,6 +33,13 @@ def home():
 @app.route("/codeforces", methods=['POST', 'GET'])
 def codeforces():
     userhandle = request.form.get('userhandle', '')  # Get userhandle from form data
+    user_rating = 1500
+    with open(f'cf-rating-problems/{user_rating}.json', 'r') as f:
+        problems = json.load(f)[:100]  # Load the first hundred problems
+    
+    with open(f'cf-problem-tags/tags.json', 'r') as f:
+        tags = json.load(f)
+
     if request.method == "POST" and userhandle:
         url = f"https://codeforces.com/api/user.info?handles={userhandle}&checkHistoricHandles=false"
         response = requests.get(url)
@@ -45,13 +52,21 @@ def codeforces():
             rank = data["result"][0]["rank"]
             max_rating = data["result"][0]["maxRating"]
             rating = data["result"][0]["rating"]
+
+            user_rating = min(max(800, (rating - rating%100)+200), 3500)
+
+            with open(f'cf-rating-problems/{user_rating}.json', 'r') as f:
+                problems = json.load(f)[:100]  # Load the first hundred problems
             
             # Render the template with userhandle included
-            return render_template("codeforces.html", userhandle=userhandle, rank=rank, max_rating=max_rating, rating=rating)
-        return render_template("codeforces.html", userhandle='')
+            return render_template("codeforces.html", userhandle=userhandle, rank=rank, max_rating=max_rating, rating=rating, problems=problems, tags=tags['tags'])
+        return render_template("codeforces.html", userhandle='', problems=problems, tags=tags['tags'])
     # Render the template with userhandle unchanged
-    return render_template("codeforces.html", userhandle=userhandle)
+    return render_template("codeforces.html", userhandle=userhandle, problems=problems, tags=tags['tags'])
 
+@app.route("/atcoder", methods=['POST', 'GET'])
+def atcoder():
+    return render_template("atcoder.html")
 
 
 app.run(debug=True)

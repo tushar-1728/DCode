@@ -2,7 +2,7 @@ import json
 import requests
 import os
 
-url = "https://codeforces.com/api/problemset.problems?tags=implementation"
+url = "https://codeforces.com/api/problemset.problems"
 response = requests.get(url)
 
 # Parse JSON response
@@ -19,7 +19,7 @@ if data.get("status") == "OK":
             # Ensure rating falls within the specified range
             if 800 <= rating <= 3500:
                 # Create directory if it doesn't exist
-                directory = os.path.join("cf-rating", str(rating))
+                directory = os.path.join("cf-rating-problems")
                 if not os.path.exists(directory):
                     os.makedirs(directory)
                 
@@ -29,7 +29,7 @@ if data.get("status") == "OK":
                     json.dump(problem, json_file, indent=4)
                     json_file.write("\n")
 
-                print(f"Problem with rating {rating} saved to {file_path}")
+                # print(f"Problem with rating {rating} saved to {file_path}")
 
 else:
     print("Failed to fetch data from the API.")
