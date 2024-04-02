@@ -69,9 +69,15 @@ def codeforces():
     # Render the template with userhandle unchanged
     return render_template("codeforces.html", userhandle=userhandle, problems=problems, tags=tags['tags'])
 
+
+
 @app.route("/atcoder", methods=['POST', 'GET'])
 def atcoder():
     return render_template("atcoder.html")
 
+
+@app.route("/codechef", methods=['POST', 'GET'])
+def codechef():
+    return render_template("codechef.html")
 
 app.run(debug=True)
