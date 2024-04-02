@@ -915,6 +915,8 @@ section {
   padding: 10px;
   text-align: center;
   font-weight: bold;
+  justify-content: center; /* Horizontally center the content */
+  align-items: center; /* Vertically center the content */
 }
 
 .table-cell:nth-child(2), .table-cell:nth-child(3) {

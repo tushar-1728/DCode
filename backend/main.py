@@ -53,13 +53,18 @@ def codeforces():
             max_rating = data["result"][0]["maxRating"]
             rating = data["result"][0]["rating"]
 
+            url = f"https://codeforces.com/api/user.status?handle={userhandle}&from=1&count=9999"
+            response = requests.get(url)
+            probs = response.json()
+
+            # user_rating = 1700
             user_rating = min(max(800, (rating - rating%100)+200), 3500)
 
             with open(f'cf-rating-problems/{user_rating}.json', 'r') as f:
                 problems = json.load(f)[:100]  # Load the first hundred problems
             
             # Render the template with userhandle included
-            return render_template("codeforces.html", userhandle=userhandle, rank=rank, max_rating=max_rating, rating=rating, problems=problems, tags=tags['tags'])
+            return render_template("codeforces.html", userhandle=userhandle, rank=rank, max_rating=max_rating, rating=rating, problems=problems, tags=tags['tags'], probs=probs["result"])
         return render_template("codeforces.html", userhandle='', problems=problems, tags=tags['tags'])
     # Render the template with userhandle unchanged
     return render_template("codeforces.html", userhandle=userhandle, problems=problems, tags=tags['tags'])

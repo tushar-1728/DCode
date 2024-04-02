@@ -68,7 +68,25 @@
               {% endfor %}
             </div>
             <div class="table-cell">{{ problem.rating }}</div>
-            <div class="table-cell">-</div>
+            <!--<div class="table-cell">-</div>-->
+            <div class="table-cell">
+              <div class="table-cell">
+                {% set match_found = false %}
+                {% for prob in probs %}
+                    {% if not match_found and prob["problem"]["contestId"] == problem.contestId and prob["problem"]["index"] == problem.index %}
+                        {% set match_found = true %}
+                        {% if prob["verdict"] == "OK" %}
+                          <div style="color: green;">AC</div>
+                        {% else %}
+                        <div style="color: red;">WA</div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                {% if not match_found %}
+                    -
+                {% endif %}
+              </div>
+            </div>
           </div>
         </a>
         <div style="height: 1rem;"></div>
