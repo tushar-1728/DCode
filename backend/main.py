@@ -32,6 +32,7 @@ def getHandleColor(rating):
 def user__Verdict(probs, problems):
     user_verdicts = {}
     key_counter = 1
+    correct_cnt = 0
 
     for problem in problems:
         verdict = "NA"
@@ -39,7 +40,7 @@ def user__Verdict(probs, problems):
             if prob["problem"]["contestId"] == problem["contestId"] and prob["problem"]["index"] == problem["index"]:
                 if prob["verdict"] == "OK":
                     verdict = "AC"
-                    # print(verdict)
+                    correct_cnt += 1
                     break
                 else:
                     verdict = "WA"
@@ -47,7 +48,7 @@ def user__Verdict(probs, problems):
         user_verdicts[key_counter] = verdict
         key_counter += 1
 
-    return user_verdicts
+    return user_verdicts, correct_cnt
 
 @app.route("/")
 def home():
@@ -87,13 +88,13 @@ def codeforces():
             with open(f'cf-rating-problems/{list_rating}.json', 'r') as f:
                 problems = json.load(f)[:100]  # Load the first hundred problems
 
-            user_verdicts = user__Verdict(probs["result"], problems)
+            correct_cnt = 0
+            user_verdicts, correct_cnt = user__Verdict(probs["result"], problems)
             for verdict in user_verdicts:
                 print(user_verdicts[verdict])
             
             # Render the template with userhandle included
-            return render_template("codeforces.html", userhandle=userhandle, rank=rank, max_rating=max_rating, rating=rating, problems=problems, tags=tags['tags'], probs=probs["result"], ratingColor=ratingColor, user_verdicts=user_verdicts)
-        # return render_template("codeforces.html", userhandle='', problems=problems, tags=tags['tags'])
+            return render_template("codeforces.html", userhandle=userhandle, rank=rank, max_rating=max_rating, rating=rating, problems=problems, tags=tags['tags'], probs=probs["result"], ratingColor=ratingColor, user_verdicts=user_verdicts, correct_cnt=correct_cnt)
     # Render the template with userhandle unchanged
     return render_template("codeforces.html", userhandle=userhandle, problems=problems, tags=tags['tags'])
 
