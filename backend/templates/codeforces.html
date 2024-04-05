@@ -2,6 +2,13 @@
 
 {% block form %}
 
+<script>
+  // Automatically refresh the page every 5 minutes
+  setTimeout(function(){
+      location.reload();
+  }, 300000); // 5 minutes = 300000 milliseconds
+</script>
+
 <main id="main">
 
   <header id="header" class="d-flex align-items-center">
@@ -12,85 +19,70 @@
             <input type="text" name="userhandle" placeholder="CF Handle" value="{{ userhandle }}" required><input type="submit" value="🔍">
           </div>
         </form>
-
-        <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-          <label class="form-check-label" for="flexSwitchCheckDefault">Tags</label>
-        </div>
-        <script>
-          const switchCheckbox = document.getElementById('flexSwitchCheckDefault');
-          const label = document.querySelector('.form-check-label');
-        
-          switchCheckbox.addEventListener('change', function() {
-            if (this.checked) {
-              label.classList.add('active');
-            } else {
-              label.classList.remove('active');
-            }
-          });
-        </script>
-        <!--<h4> {{userhandle}} ({{rank}}) Rating: {{rating}} (Max: {{max_rating}})  </h4>-->
       </div>
 
       <!--CF User Details-->
       <div class="user-info">
-        <div class="user-info-cell">{{userhandle}} ({{rank}})</div>
+        <div class="user-info-cell" style="color: {{ratingColor}};">{{userhandle}} ({{rank}})</div>
         <div class="user-info-cell">Rating: {{rating}} (Max: {{max_rating}})</div>
         <div class="user-info-cell">Solved: 0</div>
         <div class="user-info-cell">Unsolved: 100</div>
       </div>
 
-      <div class="table-container" style="margin-bottom: 1rem;">
+      <!--CF Problem Tags-->
+      <div class="table-container" style="margin-bottom: 1rem; padding:0;">
         <div class="text-sm flex flex-wrap justify-items-start m-3 content-center">
           {% for tag in tags %}
-          <button style="color: white; padding: 0.2rem 0.5rem; margin: 1rem; border-color: white; border-radius: 1rem; background-color: #183D3D;">{{tag}}</button>
+          <button style="color: white; padding: 0.2rem 0.5rem; margin: 0.2rem; border-color: white; border-radius: 1rem; background-color: #183D3D;">{{tag}}</button>
           {% endfor %}
-
         </div>
       </div>
 
+      <!--
+      <div>
+        {% for verdict in user_verdicts %}
+          <div> {{user_verdicts[verdict]}} </div>
+        {% endfor %}
+      </div>
+      -->
+
+      <!--CF Problem Table-->
       <div class="table-container">
+        <!--Table Head-->
         <div class="table-head" style="margin-bottom: 1rem; border-radius: 0.5rem;">
           <div class="table-cell">Index</div>
           <div class="table-cell">Problem</div>
-          <div class="table-cell">Tags</div>
           <div class="table-cell">Rating</div>
           <div class="table-cell">Status</div>
         </div>
+        <!--Table Body-->
         {% for problem in problems %}
-        <a href="https://codeforces.com/contest/{{problem.contestId}}/problem/{{problem.index}}">
-          <div class="table-body" style="border-radius: 0.5rem;">
-            <div class="table-cell">{{ loop.index }}</div>
-            <div class="table-cell">{{ problem.name }}</div>
-            <div class="table-cell flex flex-wrap">
-              {% for tag in problem.tags %}
-                  <div>{{ tag }}</div> <!-- Each tag in a separate div -->
-              {% endfor %}
-            </div>
-            <div class="table-cell">{{ problem.rating }}</div>
-            <!--<div class="table-cell">-</div>-->
-            <div class="table-cell">
+          {% set verdict = '-' %}
+          {% set prob_color = "white" %}
+
+          {% if user_verdicts[loop.index] == 'AC' %}
+            {% set verdict = 'AC' %}
+            {% set prob_color = "green" %}
+          {% elif user_verdicts[loop.index] == 'WA' %}
+            {% set verdict = 'WA' %}
+            {% set prob_color = "red" %}
+          {% endif %}
+
+
+          <a href="https://codeforces.com/contest/{{problem.contestId}}/problem/{{problem.index}}" target="__blank">
+            <div class="table-body" style="border-radius: 0.5rem; color:{{prob_color}}; color:green;">
+
+              <div class="table-cell">{{ loop.index }}</div>
+              <div class="table-cell">{{ problem.name }}</div>
+              <div class="table-cell">{{ problem.rating }}</div>
               <div class="table-cell">
-                {% set verdict = "-" %}
-                {% set found_higher_priority = false %}
-                {% for prob in probs %}
-                    {% if prob["problem"]["contestId"] == problem.contestId and prob["problem"]["index"] == problem.index %}
-                        {% if prob["verdict"] == "OK" %}
-                            {% set verdict = "AC" %}
-                            <!--<div>{{ verdict }}</div>-->
-                            {% set found_higher_priority = true %}
-                        {% elif prob["verdict"] == "WA" and not found_higher_priority %}
-                            {% set verdict = "WA" %}
-                            {% set found_higher_priority = true %}
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}
-                <div style="color: {{ 'green' if verdict == 'AC' else 'red' }};">{{ verdict }}</div>
+                <div class="table-cell">
+                  <div>{{verdict}}</div>
+                </div>
+              </div>
+
             </div>
-            
-            </div>
-          </div>
-        </a>
+          </a>
         <div style="height: 1rem;"></div>
         {% endfor %}
       </div>

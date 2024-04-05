@@ -1,30 +1,53 @@
-from flask import Flask, request, redirect, render_template, flash, session, render_template_string
+from flask import Flask, request, redirect, render_template, flash, render_template_string
 from flask.helpers import url_for
-from flask_sqlalchemy import SQLAlchemy
 
+import os
 import json, requests
-from flask_mail import Mail, Message
 
-#my database connection
-# local_server = True
 app = Flask("DCODE")
 app.secret_key = "divyaraj"
 
-# with open('config.json', 'r') as c:
-#     params = json.load(c)["params"]
+def getHandleColor(rating):
+    if rating<1200:
+        return "gray"
+    elif 1200<=rating<1400:
+        return "green"
+    elif 1400<=rating<1600:
+        return "cyan"
+    elif 1600<=rating<1900:
+        return "blue"
+    elif 1900<=rating<2100:
+        return "violet"
+    elif 2100<=rating<2300:
+        return "orange"
+    elif 2300<=rating<2400:
+        return "orange"
+    elif 2400<=rating<2600:
+        return "red"
+    elif 2600<=rating<3000:
+        return "red"
+    else:
+        return "red"
+    
+def user__Verdict(probs, problems):
+    user_verdicts = {}
+    key_counter = 1
 
-# app.config.update(
-#     MAIL_SERVER = 'smtp.gmail.com',
-#     MAIL_PORT = '465',
-#     MAIL_USE_SSL = True,
-#     MAIL_USERNAME = params['gmail-user'],
-#     MAIL_PASSWORD = params['gmail-pswd']
-# )
-# mail = Mail(app)
+    for problem in problems:
+        verdict = "NA"
+        for prob in probs:
+            if prob["problem"]["contestId"] == problem["contestId"] and prob["problem"]["index"] == problem["index"]:
+                if prob["verdict"] == "OK":
+                    verdict = "AC"
+                    # print(verdict)
+                    break
+                else:
+                    verdict = "WA"
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://username:password@localhost/databsename'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/covid'
-# db = SQLAlchemy(app)
+        user_verdicts[key_counter] = verdict
+        key_counter += 1
+
+    return user_verdicts
 
 @app.route("/")
 def home():
@@ -52,20 +75,25 @@ def codeforces():
             rank = data["result"][0]["rank"]
             max_rating = data["result"][0]["maxRating"]
             rating = data["result"][0]["rating"]
+            ratingColor = getHandleColor(rating)
 
             url = f"https://codeforces.com/api/user.status?handle={userhandle}&from=1&count=9999"
             response = requests.get(url)
             probs = response.json()
 
             # user_rating = 1700
-            user_rating = min(max(800, (rating - rating%100)+200), 3500)
+            list_rating = min(max(800, (rating - rating%100)+200), 3500)
 
-            with open(f'cf-rating-problems/{user_rating}.json', 'r') as f:
+            with open(f'cf-rating-problems/{list_rating}.json', 'r') as f:
                 problems = json.load(f)[:100]  # Load the first hundred problems
+
+            user_verdicts = user__Verdict(probs["result"], problems)
+            for verdict in user_verdicts:
+                print(user_verdicts[verdict])
             
             # Render the template with userhandle included
-            return render_template("codeforces.html", userhandle=userhandle, rank=rank, max_rating=max_rating, rating=rating, problems=problems, tags=tags['tags'], probs=probs["result"])
-        return render_template("codeforces.html", userhandle='', problems=problems, tags=tags['tags'])
+            return render_template("codeforces.html", userhandle=userhandle, rank=rank, max_rating=max_rating, rating=rating, problems=problems, tags=tags['tags'], probs=probs["result"], ratingColor=ratingColor, user_verdicts=user_verdicts)
+        # return render_template("codeforces.html", userhandle='', problems=problems, tags=tags['tags'])
     # Render the template with userhandle unchanged
     return render_template("codeforces.html", userhandle=userhandle, problems=problems, tags=tags['tags'])
 

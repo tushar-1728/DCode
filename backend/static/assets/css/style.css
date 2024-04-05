@@ -865,6 +865,7 @@ section {
   display: flex;
   flex-direction: row;
   width: 100%;
+  margin-bottom: 1rem;
 }
 
 .user-info-cell {
@@ -919,7 +920,7 @@ section {
   align-items: center; /* Vertically center the content */
 }
 
-.table-cell:nth-child(2), .table-cell:nth-child(3) {
+.table-cell:nth-child(2) {
   flex: 3;
 }
 
