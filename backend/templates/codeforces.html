@@ -23,10 +23,21 @@
 
       <!--CF User Details-->
       <div class="user-info">
-        <div class="user-info-cell" style="color: {{ratingColor}};">{{userhandle}} ({{rank}})</div>
+        {% if userhandle != '' %}
+        <div class="user-info-cell" style="color: {{ratingColor}};">
+          <a href = "https://codeforces.com/profile/{{userhandle}}" style="color: {{ratingColor}};" target="__blank">
+            <b>{{userhandle}}</b> ({{rank}})
+          </a>
+        </div>
         <div class="user-info-cell">Rating: {{rating}} (Max: {{max_rating}})</div>
         <div class="user-info-cell">Solved: {{correct_cnt}}</div>
         <div class="user-info-cell">Unsolved: {{100-correct_cnt}}</div>
+        {% else %}
+        <div class="user-info-cell" style="color: {{ratingColor}};"></div>
+        <div class="user-info-cell"></div>
+        <div class="user-info-cell">Solved: {{correct_cnt}}</div>
+        <div class="user-info-cell">Unsolved: {{100-correct_cnt}}</div>
+        {% endif %}
       </div>
 
       <!--CF Problem Tags-->
