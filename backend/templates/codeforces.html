@@ -71,21 +71,23 @@
             <!--<div class="table-cell">-</div>-->
             <div class="table-cell">
               <div class="table-cell">
-                {% set match_found = false %}
+                {% set verdict = "-" %}
+                {% set found_higher_priority = false %}
                 {% for prob in probs %}
-                    {% if not match_found and prob["problem"]["contestId"] == problem.contestId and prob["problem"]["index"] == problem.index %}
-                        {% set match_found = true %}
+                    {% if prob["problem"]["contestId"] == problem.contestId and prob["problem"]["index"] == problem.index %}
                         {% if prob["verdict"] == "OK" %}
-                          <div style="color: green;">AC</div>
-                        {% else %}
-                        <div style="color: red;">WA</div>
+                            {% set verdict = "AC" %}
+                            <!--<div>{{ verdict }}</div>-->
+                            {% set found_higher_priority = true %}
+                        {% elif prob["verdict"] == "WA" and not found_higher_priority %}
+                            {% set verdict = "WA" %}
+                            {% set found_higher_priority = true %}
                         {% endif %}
                     {% endif %}
                 {% endfor %}
-                {% if not match_found %}
-                    -
-                {% endif %}
-              </div>
+                <div style="color: {{ 'green' if verdict == 'AC' else 'red' }};">{{ verdict }}</div>
+            </div>
+            
             </div>
           </div>
         </a>

@@ -7,7 +7,7 @@ from flask_mail import Mail, Message
 
 #my database connection
 # local_server = True
-app = Flask(__name__)
+app = Flask("DCODE")
 app.secret_key = "divyaraj"
 
 # with open('config.json', 'r') as c:
