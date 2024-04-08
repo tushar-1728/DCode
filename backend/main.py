@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template, session, flash, render_template_string
+from flask import Flask, request, redirect, render_template, render_template_string
 from flask.helpers import url_for
 from config import API_USER_INFO, API_USER_STATUS, API_ATCODER_USER_INFO
 from dotenv import load_dotenv
@@ -31,6 +31,39 @@ def getHandleColor(rating):
     else:
         return "red"
     
+def getAtcoderHandleRankColor(rating):
+    color = ""
+    rank = ""
+    if rating<400:
+        color = "#36454F"
+    elif 400<=rating<800:
+        color = "#3C2A21"
+    elif 800<=rating<1200:
+        color = "green"
+    elif 1200<=rating<1600:
+        color = "cyan"
+    elif 1600<=rating<2000:
+        color = "blue"
+    elif 2000<=rating<2400:
+        color = "yellow"
+    elif 2400<=rating<2800:
+        color = "orange"
+    else:
+        color = "red"
+    
+    if rating<2000:
+        if rating<400:
+            rank = "Unrated"
+        else:
+            num = (2000-rating)//200 + (rating%200 != 0)
+            rank = f"{num} Kyu"
+        # print(rank)
+    else:
+        num = (rating-2000)//200 + 1
+        rank = f"{num} Dan"
+
+    return rank, color
+    
 def user__Verdict(probs, problems):
     user_verdicts = {}
     key_counter = 1
@@ -51,6 +84,11 @@ def user__Verdict(probs, problems):
         key_counter += 1
 
     return user_verdicts, correct_cnt
+
+def find_max_and_cur_rating_Atcoder(data):
+    max_rating = max(result['NewRating'] for result in data)
+    cur_rating = data[-1]['NewRating']
+    return max_rating, cur_rating
 
 def get_visit_count():
     if os.path.exists("visit_count.txt"):
@@ -143,6 +181,8 @@ def atcoder():
 
     userhandle = request.form.get('userhandle', '')  # Get userhandle from form data
     user_rating = 1400
+    with open(f'atcoder-rating-problems/{user_rating}.json', 'r') as f:
+        problems = json.load(f)[:100]  # Load the first hundred problems
 
     if request.method == "POST" and userhandle:
         url = API_ATCODER_USER_INFO.format(userhandle)
@@ -152,9 +192,16 @@ def atcoder():
         if response.status_code == 200:
             # Parse JSON response
             data = response.json()
-            pass
 
-    return render_template("atcoder.html", visit_count=visit_count, correct_cnt=0)
+            max_rating, rating = find_max_and_cur_rating_Atcoder(data)
+            # print("HEllo")
+
+            rank, ratingColor = getAtcoderHandleRankColor(rating)
+
+
+            return render_template("atcoder.html", userhandle=userhandle, rank=rank, ratingColor=ratingColor, visit_count=visit_count, max_rating=max_rating, rating=rating, problems=problems, user_verdicts={}, correct_cnt=0)
+
+    return render_template("atcoder.html", userhandle='', visit_count=visit_count, correct_cnt=0)
 
 
 @app.route("/codechef", methods=['POST', 'GET'])

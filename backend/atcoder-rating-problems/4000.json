@@ -1,20 +1,92 @@
 [
-    "agc015_f",
-    "agc021_f",
-    "agc028_e",
-    "apc001_i",
-    "apc001_j",
-    "agc039_f",
-    "agc047_f",
-    "agc050_f",
-    "agc051_e",
-    "agc051_f",
-    "agc053_e",
-    "agc057_e",
-    "agc057_f",
-    "arc141_f",
-    "arc147_f",
-    "agc061_f",
-    "arc156_f",
-    "agc064_e"
+    {
+        "id": "agc015_f",
+        "contest_id": "agc015",
+        "name": "Kenus the Ancient Greek"
+    },
+    {
+        "id": "agc021_f",
+        "contest_id": "agc021",
+        "name": "Trinity"
+    },
+    {
+        "id": "agc028_e",
+        "contest_id": "agc028",
+        "name": "High Elements"
+    },
+    {
+        "id": "apc001_i",
+        "contest_id": "apc001",
+        "name": "Simple APSP Problem"
+    },
+    {
+        "id": "apc001_j",
+        "contest_id": "apc001",
+        "name": "Rectangles"
+    },
+    {
+        "id": "agc039_f",
+        "contest_id": "agc039",
+        "name": "Min Product Sum"
+    },
+    {
+        "id": "agc047_f",
+        "contest_id": "agc047",
+        "name": "Rooks"
+    },
+    {
+        "id": "agc050_f",
+        "contest_id": "agc050",
+        "name": "NAND Tree"
+    },
+    {
+        "id": "agc051_e",
+        "contest_id": "agc051",
+        "name": "Middle Point"
+    },
+    {
+        "id": "agc051_f",
+        "contest_id": "agc051",
+        "name": "rng_58's Last Problem"
+    },
+    {
+        "id": "agc053_e",
+        "contest_id": "agc053",
+        "name": "More Peaks More Fun"
+    },
+    {
+        "id": "agc057_e",
+        "contest_id": "agc057",
+        "name": "RowCol/ColRow Sort"
+    },
+    {
+        "id": "agc057_f",
+        "contest_id": "agc057",
+        "name": "Reflection"
+    },
+    {
+        "id": "arc141_f",
+        "contest_id": "arc141",
+        "name": "Well-defined Abbreviation"
+    },
+    {
+        "id": "arc147_f",
+        "contest_id": "arc147",
+        "name": "Again ABC String"
+    },
+    {
+        "id": "agc061_f",
+        "contest_id": "agc061",
+        "name": "Perfect Strings"
+    },
+    {
+        "id": "arc156_f",
+        "contest_id": "arc156",
+        "name": "Make Same Set"
+    },
+    {
+        "id": "agc064_e",
+        "contest_id": "agc064",
+        "name": "Cross Sum Construction"
+    }
 ]

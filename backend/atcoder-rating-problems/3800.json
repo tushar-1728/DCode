@@ -1,41 +1,197 @@
 [
-    "agc004_f",
-    "agc007_e",
-    "agc008_f",
-    "agc010_e",
-    "agc011_f",
-    "agc013_f",
-    "agc018_e",
-    "agc021_e",
-    "agc022_d",
-    "agc025_f",
-    "agc031_f",
-    "agc032_f",
-    "cf17_final_h",
-    "cf17_final_i",
-    "cf17_final_j",
-    "mujin_pc_2017_d",
-    "agc038_e",
-    "arc096_d",
-    "nikkei2019_2_qual_f",
-    "agc041_f",
-    "agc046_f",
-    "agc048_e",
-    "arc113_f",
-    "agc053_d",
-    "agc056_e",
-    "arc135_f",
-    "abc243_h",
-    "arc138_f",
-    "arc145_f",
-    "agc058_e",
-    "agc059_e",
-    "agc061_e",
-    "wtf22_day1_c",
-    "wtf22_day1_d",
-    "wtf22_day1_e",
-    "arc167_f",
-    "agc065_f",
-    "arc170_f",
-    "ahc032_a"
+    {
+        "id": "agc004_f",
+        "contest_id": "agc004",
+        "name": "Namori"
+    },
+    {
+        "id": "agc007_e",
+        "contest_id": "agc007",
+        "name": "Shik and Travel"
+    },
+    {
+        "id": "agc008_f",
+        "contest_id": "agc008",
+        "name": "Black Radius"
+    },
+    {
+        "id": "agc010_e",
+        "contest_id": "agc010",
+        "name": "Rearranging"
+    },
+    {
+        "id": "agc011_f",
+        "contest_id": "agc011",
+        "name": "Train Service Planning"
+    },
+    {
+        "id": "agc013_f",
+        "contest_id": "agc013",
+        "name": "Two Faced Cards"
+    },
+    {
+        "id": "agc018_e",
+        "contest_id": "agc018",
+        "name": "Sightseeing Plan"
+    },
+    {
+        "id": "agc021_e",
+        "contest_id": "agc021",
+        "name": "Ball Eat Chameleons"
+    },
+    {
+        "id": "agc022_d",
+        "contest_id": "agc022",
+        "name": "Shopping"
+    },
+    {
+        "id": "agc025_f",
+        "contest_id": "agc025",
+        "name": "Addition and Andition"
+    },
+    {
+        "id": "agc031_f",
+        "contest_id": "agc031",
+        "name": "Walk on Graph"
+    },
+    {
+        "id": "agc032_f",
+        "contest_id": "agc032",
+        "name": "One Third"
+    },
+    {
+        "id": "cf17_final_h",
+        "contest_id": "cf17-final",
+        "name": "Poor Penguin"
+    },
+    {
+        "id": "cf17_final_i",
+        "contest_id": "cf17-final",
+        "name": "Full Tournament"
+    },
+    {
+        "id": "cf17_final_j",
+        "contest_id": "cf17-final",
+        "name": "Tree MST"
+    },
+    {
+        "id": "mujin_pc_2017_d",
+        "contest_id": "mujin-pc-2017",
+        "name": "Oriented Tree"
+    },
+    {
+        "id": "agc038_e",
+        "contest_id": "agc038",
+        "name": "Gachapon"
+    },
+    {
+        "id": "arc096_d",
+        "contest_id": "arc096",
+        "name": "Sweet Alchemy"
+    },
+    {
+        "id": "nikkei2019_2_qual_f",
+        "contest_id": "nikkei2019-2-qual",
+        "name": "Mirror Frame"
+    },
+    {
+        "id": "agc041_f",
+        "contest_id": "agc041",
+        "name": "Histogram Rooks"
+    },
+    {
+        "id": "agc046_f",
+        "contest_id": "agc046",
+        "name": "Forbidden Tournament"
+    },
+    {
+        "id": "agc048_e",
+        "contest_id": "agc048",
+        "name": "Strange Relation"
+    },
+    {
+        "id": "arc113_f",
+        "contest_id": "arc113",
+        "name": "Social Distance"
+    },
+    {
+        "id": "agc053_d",
+        "contest_id": "agc053",
+        "name": "Everyone is a winner"
+    },
+    {
+        "id": "agc056_e",
+        "contest_id": "agc056",
+        "name": "Cheese"
+    },
+    {
+        "id": "arc135_f",
+        "contest_id": "arc135",
+        "name": "Delete 1, 4, 7, ..."
+    },
+    {
+        "id": "abc243_h",
+        "contest_id": "abc243",
+        "name": "Builder Takahashi (Enhanced version)"
+    },
+    {
+        "id": "arc138_f",
+        "contest_id": "arc138",
+        "name": "KD Tree"
+    },
+    {
+        "id": "arc145_f",
+        "contest_id": "arc145",
+        "name": "Modulo Sum of Increasing Sequences"
+    },
+    {
+        "id": "agc058_e",
+        "contest_id": "agc058",
+        "name": "Nearer Permutation"
+    },
+    {
+        "id": "agc059_e",
+        "contest_id": "agc059",
+        "name": "Grid 3-coloring"
+    },
+    {
+        "id": "agc061_e",
+        "contest_id": "agc061",
+        "name": "Increment or XOR"
+    },
+    {
+        "id": "wtf22_day1_c",
+        "contest_id": "wtf22-day1-open",
+        "name": "Shrink the Tree"
+    },
+    {
+        "id": "wtf22_day1_d",
+        "contest_id": "wtf22-day1-open",
+        "name": "Welcome to Tokyo!"
+    },
+    {
+        "id": "wtf22_day1_e",
+        "contest_id": "wtf22-day1-open",
+        "name": "Sort A[i]-i"
+    },
+    {
+        "id": "arc167_f",
+        "contest_id": "arc167",
+        "name": "Tree Tree Tree"
+    },
+    {
+        "id": "agc065_f",
+        "contest_id": "agc065",
+        "name": "Always Perfect"
+    },
+    {
+        "id": "arc170_f",
+        "contest_id": "arc170",
+        "name": "Edge Deletion 2"
+    },
+    {
+        "id": "ahc032_a",
+        "contest_id": "ahc032",
+        "name": "Mod Stamp"
+    }
 ]

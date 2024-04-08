@@ -1,128 +1,632 @@
 [
-    "agc002_e",
-    "agc003_e",
-    "agc005_d",
-    "agc006_c",
-    "agc010_f",
-    "agc011_d",
-    "agc016_d",
-    "agc020_e",
-    "agc021_c",
-    "agc022_e",
-    "agc025_d",
-    "agc027_d",
-    "agc031_d",
-    "agc033_d",
-    "agc035_d",
-    "apc001_f",
-    "arc060_d",
-    "arc064_d",
-    "arc065_c",
-    "arc073_d",
-    "arc076_d",
-    "arc078_d",
-    "arc086_c",
-    "arc088_d",
-    "arc089_c",
-    "arc090_d",
-    "arc097_d",
-    "arc101_c",
-    "arc101_d",
-    "arc103_d",
-    "cf17_final_e",
-    "cf17_final_g",
-    "codefestival_2016_qualC_e",
-    "code_festival_2017_qualb_e",
-    "dwacon5th_prelims_d",
-    "dwacon5th_prelims_e",
-    "keyence2019_f",
-    "m_solutions2019_f",
-    "tenka1_2019_f",
-    "arc009_4",
-    "arc011_4",
-    "arc019_3",
-    "arc025_4",
-    "arc028_4",
-    "arc031_4",
-    "arc032_4",
-    "arc041_d",
-    "arc046_d",
-    "arc049_d",
-    "arc056_d",
-    "ddcc2020_qual_f",
-    "tenka1_2012_8",
-    "tenka1_2013_qualA_e",
-    "code_festival_final_i",
-    "cf_2015_morning_hard_h",
-    "panasonic2020_f",
-    "agc043_c",
-    "agc044_c",
-    "nomura2020_d",
-    "nomura2020_e",
-    "agc045_b",
-    "agc046_d",
-    "agc047_d",
-    "agc047_e",
-    "abc176_f",
-    "arc104_e",
-    "arc106_e",
-    "arc110_e",
-    "agc051_c",
-    "agc051_d",
-    "agc052_c",
-    "agc053_c",
-    "abc202_f",
-    "arc121_f",
-    "arc123_e",
-    "abc213_h",
-    "abc214_g",
-    "arc125_e",
-    "abc218_h",
-    "abc221_g",
-    "abc224_h",
-    "agc055_c",
-    "abc226_h",
-    "abc235_h",
-    "abc236_h",
-    "abc237_h",
-    "abc241_h",
-    "abc242_h",
-    "abc244_h",
-    "abc248_h",
-    "arc139_d",
-    "arc141_d",
-    "abc254_g",
-    "arc142_d",
-    "abc261_g",
-    "abc262_h",
-    "agc058_c",
-    "abc266_h",
-    "abc271_h",
-    "arc149_d",
-    "abc277_h",
-    "arc152_e",
-    "abc280_g",
-    "agc059_c",
-    "arc157_e",
-    "abc293_h",
-    "arc158_d",
-    "abc296_h",
-    "abc297_h",
-    "abc298_h",
-    "abc299_h",
-    "abc301_h",
-    "abc308_h",
-    "abc314_h",
-    "agc064_c",
-    "agc064_d",
-    "abc315_h",
-    "wtf22_day1_b",
-    "abc322_g",
-    "abc327_g",
-    "abc329_g",
-    "arc169_d",
-    "arc172_d",
-    "arc173_e",
-    "abc347_g",
-    "agc066_e"
+    {
+        "id": "agc002_e",
+        "contest_id": "agc002",
+        "name": "Candy Piles"
+    },
+    {
+        "id": "agc003_e",
+        "contest_id": "agc003",
+        "name": "Sequential operations on Sequence"
+    },
+    {
+        "id": "agc005_d",
+        "contest_id": "agc005",
+        "name": "~K Perm Counting"
+    },
+    {
+        "id": "agc006_c",
+        "contest_id": "agc006",
+        "name": "Rabbit Exercise"
+    },
+    {
+        "id": "agc010_f",
+        "contest_id": "agc010",
+        "name": "Tree Game"
+    },
+    {
+        "id": "agc011_d",
+        "contest_id": "agc011",
+        "name": "Half Reflector"
+    },
+    {
+        "id": "agc016_d",
+        "contest_id": "agc016",
+        "name": "XOR Replace"
+    },
+    {
+        "id": "agc020_e",
+        "contest_id": "agc020",
+        "name": "Encoding Subsets"
+    },
+    {
+        "id": "agc021_c",
+        "contest_id": "agc021",
+        "name": "Tiling"
+    },
+    {
+        "id": "agc022_e",
+        "contest_id": "agc022",
+        "name": "Median Replace"
+    },
+    {
+        "id": "agc025_d",
+        "contest_id": "agc025",
+        "name": "Choosing Points"
+    },
+    {
+        "id": "agc027_d",
+        "contest_id": "agc027",
+        "name": "Modulo Matrix"
+    },
+    {
+        "id": "agc031_d",
+        "contest_id": "agc031",
+        "name": "A Sequence of Permutations"
+    },
+    {
+        "id": "agc033_d",
+        "contest_id": "agc033",
+        "name": "Complexity"
+    },
+    {
+        "id": "agc035_d",
+        "contest_id": "agc035",
+        "name": "Add and Remove"
+    },
+    {
+        "id": "apc001_f",
+        "contest_id": "apc001",
+        "name": "XOR Tree"
+    },
+    {
+        "id": "arc060_d",
+        "contest_id": "arc060",
+        "name": "Best Representation"
+    },
+    {
+        "id": "arc064_d",
+        "contest_id": "arc064",
+        "name": "Rotated Palindromes"
+    },
+    {
+        "id": "arc065_c",
+        "contest_id": "arc065",
+        "name": "Manhattan Compass"
+    },
+    {
+        "id": "arc073_d",
+        "contest_id": "arc073",
+        "name": "Many Moves"
+    },
+    {
+        "id": "arc076_d",
+        "contest_id": "arc076",
+        "name": "Exhausted?"
+    },
+    {
+        "id": "arc078_d",
+        "contest_id": "arc078",
+        "name": "Mole and Abandoned Mine"
+    },
+    {
+        "id": "arc086_c",
+        "contest_id": "arc086",
+        "name": "Smuggling Marbles"
+    },
+    {
+        "id": "arc088_d",
+        "contest_id": "arc088",
+        "name": "Christmas Tree"
+    },
+    {
+        "id": "arc089_c",
+        "contest_id": "arc089",
+        "name": "GraphXY"
+    },
+    {
+        "id": "arc090_d",
+        "contest_id": "arc090",
+        "name": "Number of Digits"
+    },
+    {
+        "id": "arc097_d",
+        "contest_id": "arc097",
+        "name": "Monochrome Cat"
+    },
+    {
+        "id": "arc101_c",
+        "contest_id": "arc101",
+        "name": "Ribbons on Tree"
+    },
+    {
+        "id": "arc101_d",
+        "contest_id": "arc101",
+        "name": "Robots and Exits"
+    },
+    {
+        "id": "arc103_d",
+        "contest_id": "arc103",
+        "name": "Distance Sums"
+    },
+    {
+        "id": "cf17_final_e",
+        "contest_id": "cf17-final",
+        "name": "Combination Lock"
+    },
+    {
+        "id": "cf17_final_g",
+        "contest_id": "cf17-final",
+        "name": "Mancala"
+    },
+    {
+        "id": "codefestival_2016_qualC_e",
+        "contest_id": "code-festival-2016-qualc",
+        "name": "Encyclopedia of Permutations"
+    },
+    {
+        "id": "code_festival_2017_qualb_e",
+        "contest_id": "code-festival-2017-qualb",
+        "name": "Popping Balls"
+    },
+    {
+        "id": "dwacon5th_prelims_d",
+        "contest_id": "dwacon5th-prelims",
+        "name": "Square Rotation"
+    },
+    {
+        "id": "dwacon5th_prelims_e",
+        "contest_id": "dwacon5th-prelims",
+        "name": "Cyclic GCDs"
+    },
+    {
+        "id": "keyence2019_f",
+        "contest_id": "keyence2019",
+        "name": "Paper Cutting"
+    },
+    {
+        "id": "m_solutions2019_f",
+        "contest_id": "m-solutions2019",
+        "name": "Random Tournament"
+    },
+    {
+        "id": "tenka1_2019_f",
+        "contest_id": "tenka1-2019",
+        "name": "Banned X"
+    },
+    {
+        "id": "arc009_4",
+        "contest_id": "arc009",
+        "name": "\u899a\u9192\u30ce\u9ad8\u6a4b\u541b"
+    },
+    {
+        "id": "arc011_4",
+        "contest_id": "arc011",
+        "name": "\u304d\u3064\u306d\u3055\u3093\u304b\u3089\u306e\u6311\u6226\u72b6"
+    },
+    {
+        "id": "arc019_3",
+        "contest_id": "arc019",
+        "name": "\u6700\u5f8c\u306e\u68ee"
+    },
+    {
+        "id": "arc025_4",
+        "contest_id": "arc025",
+        "name": "\u30b3\u30f3\u30bb\u30f3\u30c8"
+    },
+    {
+        "id": "arc028_4",
+        "contest_id": "arc028",
+        "name": "\u6ce8\u6587\u306e\u591a\u3044\u9ad8\u6a4b\u5546\u5e97"
+    },
+    {
+        "id": "arc031_4",
+        "contest_id": "arc031",
+        "name": "\u8cb7\u3044\u7269\u4e0a\u624b"
+    },
+    {
+        "id": "arc032_4",
+        "contest_id": "arc032",
+        "name": "\u30a2\u30c3\u30c8\u30b3\u30fc\u30c0\u30fc\u30e2\u30f3\u30b9\u30bf\u30fc\u30ba"
+    },
+    {
+        "id": "arc041_d",
+        "contest_id": "arc041",
+        "name": "\u8fba\u5f69\u8272"
+    },
+    {
+        "id": "arc046_d",
+        "contest_id": "arc046",
+        "name": "\u3046\u3055\u304e\u3068\u30de\u30b9\u76ee"
+    },
+    {
+        "id": "arc049_d",
+        "contest_id": "arc049",
+        "name": "\u3059\u308f\u3063\u3077\u3057\u307e\u30fc\u3059"
+    },
+    {
+        "id": "arc056_d",
+        "contest_id": "arc056",
+        "name": "\u30b5\u30b1\u30ce\u30df"
+    },
+    {
+        "id": "ddcc2020_qual_f",
+        "contest_id": "ddcc2020-qual",
+        "name": "DISCOSMOS"
+    },
+    {
+        "id": "tenka1_2012_8",
+        "contest_id": "tenka1-2012-qualB",
+        "name": "\u5927\u7206\u767a"
+    },
+    {
+        "id": "tenka1_2013_qualA_e",
+        "contest_id": "tenka1-2013-quala",
+        "name": "\u5929\u4e0b\u4e00\u30b8\u30b0\u30bd\u30fc\u30d1\u30ba\u30eb"
+    },
+    {
+        "id": "code_festival_final_i",
+        "contest_id": "code-festival-2014-final",
+        "name": "Shapes"
+    },
+    {
+        "id": "cf_2015_morning_hard_h",
+        "contest_id": "code-festival-2015-morning-hard",
+        "name": "\u3042\u308a\u3093\u3053"
+    },
+    {
+        "id": "panasonic2020_f",
+        "contest_id": "panasonic2020",
+        "name": "Fractal Shortest Path"
+    },
+    {
+        "id": "agc043_c",
+        "contest_id": "agc043",
+        "name": "Giant Graph"
+    },
+    {
+        "id": "agc044_c",
+        "contest_id": "agc044",
+        "name": "Strange Dance"
+    },
+    {
+        "id": "nomura2020_d",
+        "contest_id": "nomura2020",
+        "name": "Urban Planning"
+    },
+    {
+        "id": "nomura2020_e",
+        "contest_id": "nomura2020",
+        "name": "Binary Programming"
+    },
+    {
+        "id": "agc045_b",
+        "contest_id": "agc045",
+        "name": "01 Unbalanced"
+    },
+    {
+        "id": "agc046_d",
+        "contest_id": "agc046",
+        "name": "Secret Passage"
+    },
+    {
+        "id": "agc047_d",
+        "contest_id": "agc047",
+        "name": "Twin Binary Trees"
+    },
+    {
+        "id": "agc047_e",
+        "contest_id": "agc047",
+        "name": "Product Simulation"
+    },
+    {
+        "id": "abc176_f",
+        "contest_id": "abc176",
+        "name": "Brave CHAIN"
+    },
+    {
+        "id": "arc104_e",
+        "contest_id": "arc104",
+        "name": "Random LIS"
+    },
+    {
+        "id": "arc106_e",
+        "contest_id": "arc106",
+        "name": "Medals"
+    },
+    {
+        "id": "arc110_e",
+        "contest_id": "arc110",
+        "name": "Shorten ABC"
+    },
+    {
+        "id": "agc051_c",
+        "contest_id": "agc051",
+        "name": "Flipper"
+    },
+    {
+        "id": "agc051_d",
+        "contest_id": "agc051",
+        "name": "C4"
+    },
+    {
+        "id": "agc052_c",
+        "contest_id": "agc052",
+        "name": "Nondivisible Prefix Sums"
+    },
+    {
+        "id": "agc053_c",
+        "contest_id": "agc053",
+        "name": "Random Card Game"
+    },
+    {
+        "id": "abc202_f",
+        "contest_id": "abc202",
+        "name": "Integer Convex Hull"
+    },
+    {
+        "id": "arc121_f",
+        "contest_id": "arc121",
+        "name": "Logical Operations on Tree"
+    },
+    {
+        "id": "arc123_e",
+        "contest_id": "arc123",
+        "name": "Training"
+    },
+    {
+        "id": "abc213_h",
+        "contest_id": "abc213",
+        "name": "Stroll"
+    },
+    {
+        "id": "abc214_g",
+        "contest_id": "abc214",
+        "name": "Three Permutations"
+    },
+    {
+        "id": "arc125_e",
+        "contest_id": "arc125",
+        "name": "Snack"
+    },
+    {
+        "id": "abc218_h",
+        "contest_id": "abc218",
+        "name": "Red and Blue Lamps"
+    },
+    {
+        "id": "abc221_g",
+        "contest_id": "abc221",
+        "name": "Jumping sequence"
+    },
+    {
+        "id": "abc224_h",
+        "contest_id": "abc224",
+        "name": "Security Camera 2"
+    },
+    {
+        "id": "agc055_c",
+        "contest_id": "agc055",
+        "name": "Weird LIS"
+    },
+    {
+        "id": "abc226_h",
+        "contest_id": "abc226",
+        "name": "Random Kth Max"
+    },
+    {
+        "id": "abc235_h",
+        "contest_id": "abc235",
+        "name": "Painting Weighted Graph"
+    },
+    {
+        "id": "abc236_h",
+        "contest_id": "abc236",
+        "name": "Distinct Multiples"
+    },
+    {
+        "id": "abc237_h",
+        "contest_id": "abc237",
+        "name": "Hakata"
+    },
+    {
+        "id": "abc241_h",
+        "contest_id": "abc241",
+        "name": "Card Deck Score"
+    },
+    {
+        "id": "abc242_h",
+        "contest_id": "abc242",
+        "name": "Random Painting"
+    },
+    {
+        "id": "abc244_h",
+        "contest_id": "abc244",
+        "name": "Linear Maximization"
+    },
+    {
+        "id": "abc248_h",
+        "contest_id": "abc248",
+        "name": "Beautiful Subsequences"
+    },
+    {
+        "id": "arc139_d",
+        "contest_id": "arc139",
+        "name": "Priority Queue 2"
+    },
+    {
+        "id": "arc141_d",
+        "contest_id": "arc141",
+        "name": "Non-divisible Set"
+    },
+    {
+        "id": "abc254_g",
+        "contest_id": "abc254",
+        "name": "Elevators"
+    },
+    {
+        "id": "arc142_d",
+        "contest_id": "arc142",
+        "name": "Deterministic Placing"
+    },
+    {
+        "id": "abc261_g",
+        "contest_id": "abc261",
+        "name": "Replace"
+    },
+    {
+        "id": "abc262_h",
+        "contest_id": "abc262",
+        "name": "Max Limited Sequence"
+    },
+    {
+        "id": "agc058_c",
+        "contest_id": "agc058",
+        "name": "Planar Tree"
+    },
+    {
+        "id": "abc266_h",
+        "contest_id": "abc266",
+        "name": "Snuke Panic (2D)"
+    },
+    {
+        "id": "abc271_h",
+        "contest_id": "abc271",
+        "name": "General General"
+    },
+    {
+        "id": "arc149_d",
+        "contest_id": "arc149",
+        "name": "Simultaneous Sugoroku"
+    },
+    {
+        "id": "abc277_h",
+        "contest_id": "abc277",
+        "name": "Constrained Sums"
+    },
+    {
+        "id": "arc152_e",
+        "contest_id": "arc152",
+        "name": "Xor Annihilation"
+    },
+    {
+        "id": "abc280_g",
+        "contest_id": "abc280",
+        "name": "Do Use Hexagon Grid 2"
+    },
+    {
+        "id": "agc059_c",
+        "contest_id": "agc059",
+        "name": "Guessing Permutation for as Long as Possible"
+    },
+    {
+        "id": "arc157_e",
+        "contest_id": "arc157",
+        "name": "XXYX Binary Tree"
+    },
+    {
+        "id": "abc293_h",
+        "contest_id": "abc293",
+        "name": "Optimal Path Decomposition"
+    },
+    {
+        "id": "arc158_d",
+        "contest_id": "arc158",
+        "name": "Equation"
+    },
+    {
+        "id": "abc296_h",
+        "contest_id": "abc296",
+        "name": "Unite"
+    },
+    {
+        "id": "abc297_h",
+        "contest_id": "abc297",
+        "name": "Diff Adjacent"
+    },
+    {
+        "id": "abc298_h",
+        "contest_id": "abc298",
+        "name": "Sum of Min of Length"
+    },
+    {
+        "id": "abc299_h",
+        "contest_id": "abc299",
+        "name": "Dice Sum Infinity"
+    },
+    {
+        "id": "abc301_h",
+        "contest_id": "abc301",
+        "name": "Difference of Distance"
+    },
+    {
+        "id": "abc308_h",
+        "contest_id": "abc308",
+        "name": "Make Q"
+    },
+    {
+        "id": "abc314_h",
+        "contest_id": "abc314",
+        "name": "Disk and Segments"
+    },
+    {
+        "id": "agc064_c",
+        "contest_id": "agc064",
+        "name": "Erase and Divide Game"
+    },
+    {
+        "id": "agc064_d",
+        "contest_id": "agc064",
+        "name": "Red and Blue Chips"
+    },
+    {
+        "id": "abc315_h",
+        "contest_id": "abc315",
+        "name": "Typical Convolution Problem"
+    },
+    {
+        "id": "wtf22_day1_b",
+        "contest_id": "wtf22-day1-open",
+        "name": "Non-Overlapping Swaps"
+    },
+    {
+        "id": "abc322_g",
+        "contest_id": "abc322",
+        "name": "Two Kinds of Base"
+    },
+    {
+        "id": "abc327_g",
+        "contest_id": "abc327",
+        "name": "Many Good Tuple Problems"
+    },
+    {
+        "id": "abc329_g",
+        "contest_id": "abc329",
+        "name": "Delivery on Tree"
+    },
+    {
+        "id": "arc169_d",
+        "contest_id": "arc169",
+        "name": "Add to Make a Permutation"
+    },
+    {
+        "id": "arc172_d",
+        "contest_id": "arc172",
+        "name": "Distance Ranking"
+    },
+    {
+        "id": "arc173_e",
+        "contest_id": "arc173",
+        "name": "Rearrange and Adjacent XOR"
+    },
+    {
+        "id": "abc347_g",
+        "contest_id": "abc347",
+        "name": "Grid Coloring 2"
+    },
+    {
+        "id": "agc066_e",
+        "contest_id": "agc066",
+        "name": "Sliding Puzzle On Tree"
+    }
 ]

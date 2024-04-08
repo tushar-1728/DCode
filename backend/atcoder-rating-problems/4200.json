@@ -1,11 +1,47 @@
 [
-    "agc014_f",
-    "agc043_f",
-    "agc045_f",
-    "agc054_f",
-    "agc055_f",
-    "agc056_f",
-    "agc062_e",
-    "agc063_f",
-    "agc065_e"
+    {
+        "id": "agc014_f",
+        "contest_id": "agc014",
+        "name": "Strange Sorting"
+    },
+    {
+        "id": "agc043_f",
+        "contest_id": "agc043",
+        "name": "Jewelry Box"
+    },
+    {
+        "id": "agc045_f",
+        "contest_id": "agc045",
+        "name": "Division into Multiples"
+    },
+    {
+        "id": "agc054_f",
+        "contest_id": "agc054",
+        "name": "Decrement"
+    },
+    {
+        "id": "agc055_f",
+        "contest_id": "agc055",
+        "name": "Creative Splitting"
+    },
+    {
+        "id": "agc056_f",
+        "contest_id": "agc056",
+        "name": "Degree Sequence in DFS Order"
+    },
+    {
+        "id": "agc062_e",
+        "contest_id": "agc062",
+        "name": "Overlap Binary Tree"
+    },
+    {
+        "id": "agc063_f",
+        "contest_id": "agc063",
+        "name": "Simultaneous Floor"
+    },
+    {
+        "id": "agc065_e",
+        "contest_id": "agc065",
+        "name": "One Two Three"
+    }
 ]

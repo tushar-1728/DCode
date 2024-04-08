@@ -65,7 +65,7 @@
           {% endif %}
 
           <!--https://atcoder.jp/contests/abc347/tasks/abc347_a-->
-          <a href="https://atcoder.jp/contests/{{problem.contestId}}/tasks/{{problem.index}}" target="__blank">
+          <a href="https://atcoder.jp/contests/{{problem.contest_id}}/tasks/{{problem.id}}" target="__blank">
             <div class="table-body" style="border-radius: 0.5rem;">
 
               <div class="table-cell" style = "color:{{prob_color}}">{{ loop.index }}</div>
@@ -82,7 +82,6 @@
         <div style="height: 1rem;"></div>
         {% endfor %}
       </div>
-      <div style="font-size: 1.2rem; background-color: black; padding: 1rem; margin-top: 1rem;">Visit Count: {{visit_count}}</div>
 
 
     </div>
