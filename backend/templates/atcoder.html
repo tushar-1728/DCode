@@ -2,68 +2,93 @@
 
 {% block form %}
 
-<!-- ======= Header ======= -->
-<header id="header" class="d-flex align-items-center">
-  <div class="container d-flex flex-column align-items-center">
-      <h1>AtCoder</h1>
-      <h3>We are still tweaking few details, Stay Tuned!</h3>
-      <div style="height: 2rem;"></div>
-      <div class="countdown d-flex justify-content-center" data-count="2024/4/11">
-          <div id="days">
-              <h3>0</h3>
-              <h4>Days</h4>
+<script>
+  // Automatically refresh the page every 5 minutes
+  setTimeout(function(){
+      location.reload();
+  }, 300000); // 5 minutes = 300000 milliseconds
+</script>
+
+<main id="main">
+
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex flex-column align-items-center">
+      <div class="subscribe">
+        <form action="/atcoder" method="post" role="form">
+          <div class="subscribe-form">
+            <input type="text" name="userhandle" placeholder="AtCoder Handle" value="{{ userhandle }}" style="border:none; outline: none;" required>
+            <input type="submit" value="🔍">
           </div>
-          <div id="hours">
-              <h3>0</h3>
-              <h4>Hours</h4>
-          </div>
-          <div id="minutes">
-              <h3>0</h3>
-              <h4>Minutes</h4>
-          </div>
-          <div id="seconds">
-              <h3>0</h3>
-              <h4>Seconds</h4>
-          </div>
+        </form>
       </div>
-  </div>
-</header>
 
-<script>
-  // Function to update countdown
-  function updateCountdown() {
-      const countdown = document.querySelector('.countdown');
-      const targetDate = new Date(countdown.getAttribute('data-count')).getTime();
-      const now = new Date().getTime();
-      const distance = targetDate - now;
+      <!--AtCoder User Details-->
+      <div class="user-info">
+        {% if userhandle != '' %}
+        <div class="user-info-cell" style="color: {{ratingColor}};">
+            <!--https://atcoder.jp/users/tourist-->
+          <a href = "https://atcoder.jp/users/{{userhandle}}" style="color: {{ratingColor}};" target="__blank">
+            <b>{{userhandle}}</b> ({{rank}})
+          </a>
+        </div>
+        <div class="user-info-cell">Rating: {{rating}} (Max: {{max_rating}})</div>
+        <div class="user-info-cell" style="color: #0FFF50">Solved: {{correct_cnt}}</div>
+        <div class="user-info-cell" style="color: #F88379">Unsolved: {{100-correct_cnt}}</div>
+        {% else %}
+        <div class="user-info-cell" style="color: {{ratingColor}};"></div>
+        <div class="user-info-cell"></div>
+        <div class="user-info-cell">Solved: {{correct_cnt}}</div>
+        <div class="user-info-cell">Unsolved: {{100-correct_cnt}}</div>
+        {% endif %}
+      </div>
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      <!--AtCoder Problem Table-->
+      <div class="table-container">
+        <!--Table Head-->
+        <div class="table-head" style="margin-bottom: 1rem; border-radius: 0.5rem;">
+          <div class="table-cell">Index</div>
+          <div class="table-cell">Problem</div>
+          <div class="table-cell">Rating</div>
+          <div class="table-cell">Status</div>
+        </div>
+        <!--Table Body-->
+        {% for problem in problems %}
+          {% set verdict = '-' %}
+          {% set prob_color = "white" %}
 
-      document.getElementById('days').querySelector('h3').innerText = days;
-      document.getElementById('hours').querySelector('h3').innerText = hours;
-      document.getElementById('minutes').querySelector('h3').innerText = minutes;
-      document.getElementById('seconds').querySelector('h3').innerText = seconds;
-  }
+          {% if user_verdicts[loop.index] == 'AC' %}
+            {% set verdict = 'AC' %}
+            {% set prob_color = "#009E60" %}
+          {% elif user_verdicts[loop.index] == 'WA' %}
+            {% set verdict = 'WA' %}
+            {% set prob_color = "#D22B2B" %}
+          {% endif %}
 
-  // Update countdown every second
-  setInterval(updateCountdown, 1000);
+          <!--https://atcoder.jp/contests/abc347/tasks/abc347_a-->
+          <a href="https://atcoder.jp/contests/{{problem.contestId}}/tasks/{{problem.index}}" target="__blank">
+            <div class="table-body" style="border-radius: 0.5rem;">
 
-  // Initial call to update countdown immediately
-  updateCountdown();
-</script>
+              <div class="table-cell" style = "color:{{prob_color}}">{{ loop.index }}</div>
+              <div class="table-cell" style = "color:{{prob_color}}">{{ problem.name }}</div>
+              <div class="table-cell" style = "color:{{prob_color}}">{{ problem.rating }}</div>
+              <div class="table-cell" style = "color:{{prob_color}}">
+                <div class="table-cell">
+                  <div style = "color:{{prob_color}}">{{verdict}}</div>
+                </div>
+              </div>
+
+            </div>
+          </a>
+        <div style="height: 1rem;"></div>
+        {% endfor %}
+      </div>
+      <div style="font-size: 1.2rem; background-color: black; padding: 1rem; margin-top: 1rem;">Visit Count: {{visit_count}}</div>
 
 
-<!--
-<script>
-    // Function to redirect after 5 seconds
-    setTimeout(function() {
-        window.location.href = '/'; // Redirect to the specified URL
-    }, 5000); // 5000 milliseconds = 5 seconds
-</script>
--->
+    </div>
+  </header>
+
+</main>
 
 
 {% endblock form %}

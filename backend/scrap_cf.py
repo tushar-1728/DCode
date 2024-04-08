@@ -1,8 +1,9 @@
 import json
 import requests
 import os
+from config import API_PROBLEMSET_LIST
 
-url = "https://codeforces.com/api/problemset.problems"
+url = API_PROBLEMSET_LIST
 response = requests.get(url)
 
 # Parse JSON response
