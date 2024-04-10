@@ -1,6 +1,6 @@
 from flask import Flask, request, redirect, render_template, render_template_string
 from flask.helpers import url_for
-from config import API_CODEFORCES_USER_INFO, API_CODEFORCES_USER_PROBLEM_STATUS, API_ATCODER_USER_INFO
+from config import API_CODEFORCES_USER_INFO, API_CODEFORCES_USER_PROBLEM_STATUS, API_ATCODER_USER_INFO, API_CODEFORCES_USER_CONTEST_INFO
 from dotenv import load_dotenv
 from collections import Counter
 
@@ -86,7 +86,7 @@ def user__Verdict(probs, problems):
 
     return user_verdicts, correct_cnt
 
-def tag_find(probs):
+def get_stats(probs):
     visited = set()
     tag_frequencies = []
     level_frequencies = []
@@ -94,10 +94,10 @@ def tag_find(probs):
     stats = [0] * 4 #tried, solved, avg attempts, solved with one submission
 
     for prob in probs["result"]:
+        stats[2] += 1
         if prob["verdict"] == "OK":
             contest_id = prob["problem"]["contestId"]
             index = prob["problem"]["index"]
-            stats[2] += 1
             if (contest_id, index) not in visited:
                 visited.add((contest_id, index))
                 stats[1] += 1
@@ -112,6 +112,8 @@ def tag_find(probs):
                 tag_frequencies.extend(tags)
 
     stats[2] /= stats[1]
+    print(type(stats[2]))
+    stats[2] = float(f"{stats[2]:.2f}")
 
     # Count the frequencies of each tag
     tag_counts = Counter(tag_frequencies)
@@ -122,7 +124,19 @@ def tag_find(probs):
     sorted_level_frequencies = sorted(level_counts.items(), key=lambda x: x[0])
     sorted_problem_rating_frequencies = sorted(problem_rating_counts.items(), key=lambda x: x[0])
 
-    return sorted_tag_frequencies, sorted_level_frequencies, sorted_problem_rating_frequencies
+    return sorted_tag_frequencies, sorted_level_frequencies, sorted_problem_rating_frequencies, stats
+
+def get_user_info(user_infos):
+    info = [0] * 5 # #contests, #best_rank, #worst_rank, max_up, max_down
+    info[1] = info[4] = 100000
+    info[3] = -10000
+    for user_info in user_infos:
+        info[0] = info[0]+1
+        info[1] = min(user_info["rank"], info[1])
+        info[2] = max(user_info["rank"], info[2])
+        info[3] = max(user_info["newRating"]-user_info["oldRating"], info[3])
+        info[4] = min(user_info["newRating"]-user_info["oldRating"], info[4])
+    return info
 
 def find_max_and_cur_rating_Atcoder(data):
     max_rating = max(result['NewRating'] for result in data)
@@ -238,7 +252,7 @@ def atcoder():
 
             return render_template("atcoder.html", userhandle=userhandle, rank=rank, ratingColor=ratingColor, visit_count=visit_count, max_rating=max_rating, rating=rating, problems=problems, user_verdicts={}, correct_cnt=0)
 
-    return render_template("atcoder.html", userhandle='', visit_count=visit_count, correct_cnt=0)
+    return render_template("atcoder.html", userhandle='', problems=problems, user_verdicts={}, visit_count=visit_count, correct_cnt=0)
 
 
 @app.route("/codechef", methods=['POST', 'GET'])
@@ -271,13 +285,19 @@ def cfvisualizer():
             url = API_CODEFORCES_USER_PROBLEM_STATUS.format(userhandle)
             response = requests.get(url)
             probs = response.json()
+            
+            tag_frequencies, level_frequencies, rating_frequencies, stats = get_stats(probs)
 
-            tag_frequencies, level_frequencies, rating_frequencies = tag_find(probs)
+            url = API_CODEFORCES_USER_CONTEST_INFO.format(userhandle)
+            response = requests.get(url)
+            user_infos = response.json()
+
+            info = get_user_info(user_infos["result"])
 
             # for level, frequency in level_frequencies:
                 # print(f"Tag: {level}, Frequency: {frequency}")
 
-            return render_template("cfvisualizer.html", userhandle=userhandle, tag_frequencies=tag_frequencies, level_frequencies=level_frequencies, rating_frequencies=rating_frequencies, visit_count=visit_count)
+            return render_template("cfvisualizer.html", userhandle=userhandle, stats=stats, info=info, tag_frequencies=tag_frequencies, level_frequencies=level_frequencies, rating_frequencies=rating_frequencies, visit_count=visit_count)
 
     return render_template("cfvisualizer.html", userhandle='', visit_count=visit_count)
 

@@ -26,6 +26,9 @@
         <br>
         <div style="display: flex; justify-content: center;"> Problem ratings of {{userhandle}} </div>
         <canvas id="ratingChart" style="height:15rem; width: 40rem"></canvas>
+        <br>
+        <div> Solved : {{stats[1]}}, Average attempts : {{stats[2]}} </div>
+        <div> Number of contests: {{info[0]}}, Best Rank: {{info[1]}}, Worst Rank: {{info[2]}}, Max Up: {{info[3]}}, Max Down: {{info[4]}} </div>
       </div>
       <script>
         var ctx = document.getElementById('donutChart').getContext('2d');
@@ -136,8 +139,8 @@
             ratingData.push(item[1]); // Frequency
         });
 
-        var barCtx = document.getElementById('barChart').getContext('2d');
-        var barChart = new Chart(barCtx, {
+        var barCtx1 = document.getElementById('barChart').getContext('2d');
+        var barChart = new Chart(barCtx1, {
             type: 'bar',
             data: {
                 labels: ratingLabels,
