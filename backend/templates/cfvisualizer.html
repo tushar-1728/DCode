@@ -17,16 +17,22 @@
 
 
       {% if userhandle != '' %}
-      <div>
+      <div style="padding-top: 2rem;">
         <div style="display: flex; justify-content: center;"> Tags of {{userhandle}} </div>
-        <canvas id="pieChart" style="height:500px; width: 500px"></canvas>
+        <canvas id="donutChart" style="width:50%"></canvas>
+        <br>
+        <div style="display: flex; justify-content: center;"> Levels of {{userhandle}} </div>
+        <canvas id="barChart" style="height:15rem; width: 40rem"></canvas>
+        <br>
+        <div style="display: flex; justify-content: center;"> Problem ratings of {{userhandle}} </div>
+        <canvas id="ratingChart" style="height:15rem; width: 40rem"></canvas>
       </div>
       <script>
-        var ctx = document.getElementById('pieChart').getContext('2d');
+        var ctx = document.getElementById('donutChart').getContext('2d');
         var sortedTagFrequencies = {{ tag_frequencies | tojson }};
         
         var labels = sortedTagFrequencies.map(function(item) {
-            return item[0] + " - " + item[1];
+            return item[0] + ": " + item[1];
         });
         var data = sortedTagFrequencies.map(function(item) {
             return item[1];
@@ -38,8 +44,8 @@
           return ((value * 100) / totFreq).toFixed(1);
         });
 
-        var pieChart = new Chart(ctx, {
-            type: 'pie',
+        var donutChart = new Chart(ctx, {
+            type: 'doughnut',
             data: {
                 labels: labels,
                 datasets: [{
@@ -58,12 +64,13 @@
                         'rgb(255, 215, 0)',
                         'rgb(218, 165, 32)',
                         'rgb(236, 88, 0)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
+                        'rgb(139, 64, 0)',
+                        'rgb(138, 154, 91)',
+                        'rgb(54, 69, 79)',
+                        'rgb(69, 75, 27)',
+                        'rgb(9, 121, 105)',
+                        'rgb(2, 48, 32)',
+                        'rgb(25, 25, 112)'
                     ],
                     borderWidth: 1
                 }]
@@ -81,6 +88,77 @@
                 maintainAspectRatio: true
             }
         });
+      </script>
+
+      <script>
+        var levelLabels = [];
+        var levelData = [];
+        level_frequencies = {{level_frequencies | tojson}}
+        // Assuming level_frequencies is already defined
+        level_frequencies.forEach(function(item) {
+            console.log(item);
+            levelLabels.push(item[0]); // Level
+            levelData.push(item[1]); // Frequency
+        });
+
+        var barCtx = document.getElementById('ratingChart').getContext('2d');
+        var barChart = new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: levelLabels,
+                datasets: [{
+                    label: 'Frequency',
+                    data: levelData,
+                    backgroundColor: 'rgb(237, 234, 222)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+      </script>
+
+      <script>
+        var ratingLabels = [];
+        var ratingData = [];
+        rating_frequencies = {{rating_frequencies | tojson}}
+        // Assuming rating_frequencies is already defined
+        rating_frequencies.forEach(function(item) {
+            console.log(item);
+            ratingLabels.push(item[0]); // Level
+            ratingData.push(item[1]); // Frequency
+        });
+
+        var barCtx = document.getElementById('barChart').getContext('2d');
+        var barChart = new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: ratingLabels,
+                datasets: [{
+                    label: 'Frequency',
+                    data: ratingData,
+                    backgroundColor: 'rgb(237, 234, 222)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
       </script>
       {% else %}
         <div style="height: 7rem"></div>

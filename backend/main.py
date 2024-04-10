@@ -89,21 +89,40 @@ def user__Verdict(probs, problems):
 def tag_find(probs):
     visited = set()
     tag_frequencies = []
+    level_frequencies = []
+    problem_rating_frequencies = []
+    stats = [0] * 4 #tried, solved, avg attempts, solved with one submission
 
     for prob in probs["result"]:
         if prob["verdict"] == "OK":
             contest_id = prob["problem"]["contestId"]
             index = prob["problem"]["index"]
+            stats[2] += 1
             if (contest_id, index) not in visited:
                 visited.add((contest_id, index))
+                stats[1] += 1
+                level_frequencies.extend(index[0])
+                if "rating" in prob["problem"]:
+                    rating = prob["problem"]["rating"]
+                    if isinstance(rating, list):  # Check if it's iterable
+                        problem_rating_frequencies.extend(rating)
+                    else:
+                        problem_rating_frequencies.append(rating)
                 tags = prob["problem"]["tags"]
                 tag_frequencies.extend(tags)
 
+    stats[2] /= stats[1]
+
     # Count the frequencies of each tag
     tag_counts = Counter(tag_frequencies)
+    level_counts = Counter(level_frequencies)
+    problem_rating_counts = Counter(problem_rating_frequencies)
     # Sort the tag frequencies in decreasing order
     sorted_tag_frequencies = sorted(tag_counts.items(), key=lambda x: x[1], reverse=True)
-    return sorted_tag_frequencies
+    sorted_level_frequencies = sorted(level_counts.items(), key=lambda x: x[0])
+    sorted_problem_rating_frequencies = sorted(problem_rating_counts.items(), key=lambda x: x[0])
+
+    return sorted_tag_frequencies, sorted_level_frequencies, sorted_problem_rating_frequencies
 
 def find_max_and_cur_rating_Atcoder(data):
     max_rating = max(result['NewRating'] for result in data)
@@ -253,19 +272,12 @@ def cfvisualizer():
             response = requests.get(url)
             probs = response.json()
 
-            tag_frequencies = tag_find(probs)
+            tag_frequencies, level_frequencies, rating_frequencies = tag_find(probs)
 
-            for tag, frequency in tag_frequencies:
-                print(f"Tag: {tag}, Frequency: {frequency}")
+            # for level, frequency in level_frequencies:
+                # print(f"Tag: {level}, Frequency: {frequency}")
 
-            # tag_frequencies = [
-            #     {"tag": "Tag1", "frequency": 30},
-            #     {"tag": "Tag2", "frequency": 20},
-            #     {"tag": "Tag3", "frequency": 10},
-            #     # Add more tag frequencies as needed
-            # ]
-            return render_template("cfvisualizer.html", userhandle=userhandle, tag_frequencies=tag_frequencies, visit_count=visit_count)
-
+            return render_template("cfvisualizer.html", userhandle=userhandle, tag_frequencies=tag_frequencies, level_frequencies=level_frequencies, rating_frequencies=rating_frequencies, visit_count=visit_count)
 
     return render_template("cfvisualizer.html", userhandle='', visit_count=visit_count)
 
