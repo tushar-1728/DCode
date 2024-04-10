@@ -1,7 +1,8 @@
 from flask import Flask, request, redirect, render_template, render_template_string
 from flask.helpers import url_for
-from config import API_USER_INFO, API_USER_STATUS, API_ATCODER_USER_INFO
+from config import API_CODEFORCES_USER_INFO, API_CODEFORCES_USER_PROBLEM_STATUS, API_ATCODER_USER_INFO
 from dotenv import load_dotenv
+from collections import Counter
 
 import os
 import json, requests
@@ -15,7 +16,7 @@ app.secret_key = os.environ.get("FLASK_SECRET_KEY")
 
 print(os.environ.get("FLASK_SECRET_KEY"))
 
-def getHandleColor(rating):
+def get_handle_color(rating):
     if rating<1200:
         return "#36454F"
     elif 1200<=rating<1400:
@@ -31,7 +32,7 @@ def getHandleColor(rating):
     else:
         return "red"
     
-def getAtcoderHandleRankColor(rating):
+def get_atcoder_handle_rank_color(rating):
     color = ""
     rank = ""
     if rating<400:
@@ -85,6 +86,25 @@ def user__Verdict(probs, problems):
 
     return user_verdicts, correct_cnt
 
+def tag_find(probs):
+    visited = set()
+    tag_frequencies = []
+
+    for prob in probs["result"]:
+        if prob["verdict"] == "OK":
+            contest_id = prob["problem"]["contestId"]
+            index = prob["problem"]["index"]
+            if (contest_id, index) not in visited:
+                visited.add((contest_id, index))
+                tags = prob["problem"]["tags"]
+                tag_frequencies.extend(tags)
+
+    # Count the frequencies of each tag
+    tag_counts = Counter(tag_frequencies)
+    # Sort the tag frequencies in decreasing order
+    sorted_tag_frequencies = sorted(tag_counts.items(), key=lambda x: x[1], reverse=True)
+    return sorted_tag_frequencies
+
 def find_max_and_cur_rating_Atcoder(data):
     max_rating = max(result['NewRating'] for result in data)
     cur_rating = data[-1]['NewRating']
@@ -115,7 +135,6 @@ def home():
 
 @app.route("/codeforces", methods=['POST', 'GET'])
 def codeforces():
-
     visit_count = get_visit_count()
     visit_count += 1
     # Update the visit count in the persistent storage
@@ -130,7 +149,7 @@ def codeforces():
         tags = json.load(f)
 
     if request.method == "POST" and userhandle:
-        url = API_USER_INFO.format(userhandle)
+        url = API_CODEFORCES_USER_INFO.format(userhandle)
         response = requests.get(url)
         # Parse JSON response
         data = response.json()
@@ -142,14 +161,14 @@ def codeforces():
                 rank = data["result"][0]["rank"]
                 max_rating = data["result"][0]["maxRating"]
                 rating = data["result"][0]["rating"]
-                ratingColor = getHandleColor(rating)
+                ratingColor = get_handle_color(rating)
             else:
                 rank = "Unrated"
                 rating = 0
                 max_rating = 0
-                ratingColor = getHandleColor(rating)
+                ratingColor = get_handle_color(rating)
 
-            url = API_USER_STATUS.format(userhandle)
+            url = API_CODEFORCES_USER_PROBLEM_STATUS.format(userhandle)
             response = requests.get(url)
             probs = response.json()
 
@@ -173,7 +192,6 @@ def codeforces():
 
 @app.route("/atcoder", methods=['POST', 'GET'])
 def atcoder():
-
     visit_count = get_visit_count()
     visit_count += 1
     # Update the visit count in the persistent storage
@@ -196,7 +214,7 @@ def atcoder():
             max_rating, rating = find_max_and_cur_rating_Atcoder(data)
             # print("HEllo")
 
-            rank, ratingColor = getAtcoderHandleRankColor(rating)
+            rank, ratingColor = get_atcoder_handle_rank_color(rating)
 
 
             return render_template("atcoder.html", userhandle=userhandle, rank=rank, ratingColor=ratingColor, visit_count=visit_count, max_rating=max_rating, rating=rating, problems=problems, user_verdicts={}, correct_cnt=0)
@@ -206,12 +224,51 @@ def atcoder():
 
 @app.route("/codechef", methods=['POST', 'GET'])
 def codechef():
-
     visit_count = get_visit_count()
     visit_count += 1
     # Update the visit count in the persistent storage
     update_visit_count(visit_count)
 
     return render_template("codechef.html")
+
+
+@app.route("/cfvisualizer", methods=['POST', 'GET'])
+def cfvisualizer():
+    visit_count = get_visit_count()
+    visit_count += 1
+    # Update the visit count in the persistent storage
+    update_visit_count(visit_count)
+
+    userhandle = request.form.get('userhandle', '')  # Get userhandle from form data
+
+    if request.method == "POST" and userhandle:
+        url = API_CODEFORCES_USER_INFO.format(userhandle)
+        response = requests.get(url)
+        # Parse JSON response
+        data = response.json()
+        
+        # Check if API response is successful
+        if data.get("status") == "OK":
+            url = API_CODEFORCES_USER_PROBLEM_STATUS.format(userhandle)
+            response = requests.get(url)
+            probs = response.json()
+
+            tag_frequencies = tag_find(probs)
+
+            for tag, frequency in tag_frequencies:
+                print(f"Tag: {tag}, Frequency: {frequency}")
+
+            # tag_frequencies = [
+            #     {"tag": "Tag1", "frequency": 30},
+            #     {"tag": "Tag2", "frequency": 20},
+            #     {"tag": "Tag3", "frequency": 10},
+            #     # Add more tag frequencies as needed
+            # ]
+            return render_template("cfvisualizer.html", userhandle=userhandle, tag_frequencies=tag_frequencies, visit_count=visit_count)
+
+
+    return render_template("cfvisualizer.html", userhandle='', visit_count=visit_count)
+
+
 
 app.run(debug=True)

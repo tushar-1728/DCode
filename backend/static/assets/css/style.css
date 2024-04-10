@@ -216,7 +216,8 @@ html {
 #header .subscribe .subscribe-form {
   min-width: 300px;
   margin-top: 10px;
-  background: #fff;
+  /* background: #fff; */
+  background: rgb(198, 198, 198);
   padding: 6px 10px;
   position: relative;
   border-radius: 50px;

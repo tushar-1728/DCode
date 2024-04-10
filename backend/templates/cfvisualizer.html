@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block form %}
+
+<main id="main">
+
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex flex-column align-items-center">
+      <div class="subscribe">
+        <form action="/cfvisualizer" method="post" role="form">
+          <div class="subscribe-form" style="right:0">
+            <input type="text" name="userhandle" placeholder="CF Handle" value="{{ userhandle }}" style="border:none; outline: none; background: rgb(198, 198, 198);" required>
+            <input type="submit" value="🔍">
+          </div>
+        </form>
+      </div>
+
+
+      {% if userhandle != '' %}
+      <div>
+        <div style="display: flex; justify-content: center;"> Tags of {{userhandle}} </div>
+        <canvas id="pieChart" style="height:500px; width: 500px"></canvas>
+      </div>
+      <script>
+        var ctx = document.getElementById('pieChart').getContext('2d');
+        var sortedTagFrequencies = {{ tag_frequencies | tojson }};
+        
+        var labels = sortedTagFrequencies.map(function(item) {
+            return item[0] + " - " + item[1];
+        });
+        var data = sortedTagFrequencies.map(function(item) {
+            return item[1];
+        });
+        var totFreq = sortedTagFrequencies.reduce(function(total, item) {
+          return total + item[1];
+        }, 0);
+        var percentage = data.map(function(value) {
+          return ((value * 100) / totFreq).toFixed(1);
+        });
+
+        var pieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                  label: '%',
+                  data: percentage,
+                    backgroundColor: [
+                        'rgb(255, 49, 49)',
+                        'rgb(159, 43, 104)',
+                        'rgb(227, 11, 92)',
+                        'rgb(127, 0, 255)',
+                        'rgb(64, 224, 208)',
+                        'rgb(0, 128, 128)',
+                        'rgb(80, 200, 120)',
+                        'rgb(50, 205, 50)',
+                        'rgb(0, 128, 0)',
+                        'rgb(255, 215, 0)',
+                        'rgb(218, 165, 32)',
+                        'rgb(236, 88, 0)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var datasetLabel = data.labels[tooltipItem.index];
+                            return datasetLabel;
+                        }
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: true
+            }
+        });
+      </script>
+      {% else %}
+        <div style="height: 7rem"></div>
+      {% endif %}
+    </div>
+  </header>
+  
+</main>
+  
+  
+
+{% endblock form %}

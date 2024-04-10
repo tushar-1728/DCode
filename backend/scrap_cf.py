@@ -1,9 +1,9 @@
 import json
 import requests
 import os
-from config import API_PROBLEMSET_LIST
+from config import API_CODEFORCES_PROBLEMSET_LIST
 
-url = API_PROBLEMSET_LIST
+url = API_CODEFORCES_PROBLEMSET_LIST
 response = requests.get(url)
 
 # Parse JSON response
