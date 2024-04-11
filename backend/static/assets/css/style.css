@@ -971,3 +971,24 @@ section {
   text-align: center;
   color: white;
 }
+
+.canvas-div {
+  overflow-x: scroll;
+  border: 2px solid white;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.5); 
+  padding: 1rem 2rem;
+}
+
+.canvas-div-text {
+  display: flex; 
+  justify-content: center; 
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.canvas-verdict-lang {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}

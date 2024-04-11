@@ -18,18 +18,142 @@
 
       {% if userhandle != '' %}
       <div style="padding-top: 2rem;">
-        <div style="display: flex; justify-content: center;"> Tags of {{userhandle}} </div>
-        <canvas id="donutChart" style="width:50%"></canvas>
+        <div class="canvas-verdict-lang">
+          <div class="canvas-div">
+            <div class="canvas-div-text"> Verdicts of {{userhandle}} </div>
+            <canvas id="verdictChart" style="height: 20rem; width: 20rem;"></canvas>
+          </div>
+          <div style="width:1rem"> </div>
+          <div class="canvas-div">
+            <div class="canvas-div-text"> Languages of {{userhandle}} </div>
+            <canvas id="langChart" style="height: 20rem; width: 20rem;"></canvas>
+          </div>
+        </div>
+      </div>
+      <div style="padding-top: 2rem;">
+
+        <div class="canvas-div">
+          <div class="canvas-div-text"> Tags of {{userhandle}} </div>
+          <canvas id="donutChart" style="height: 40rem; width: 40rem;"></canvas>
+        </div>
+
         <br>
-        <div style="display: flex; justify-content: center;"> Levels of {{userhandle}} </div>
-        <canvas id="barChart" style="height:15rem; width: 40rem"></canvas>
+
+        <div class="canvas-div">
+          <div class="canvas-div-text"> Problem ratings of {{userhandle}} </div>
+          <canvas id="levelChart" style="height: 15rem; width: 40rem;"></canvas>
+        </div>
+
         <br>
-        <div style="display: flex; justify-content: center;"> Problem ratings of {{userhandle}} </div>
-        <canvas id="ratingChart" style="height:15rem; width: 40rem"></canvas>
+
+        <div class="canvas-div">
+          <div class="canvas-div-text"> Levels of {{userhandle}} </div>
+          <canvas id="ratingChart" style="height:15rem; width: 40rem"></canvas>
+        </div>
+
         <br>
+
         <div> Solved : {{stats[1]}}, Average attempts : {{stats[2]}} </div>
         <div> Number of contests: {{info[0]}}, Best Rank: {{info[1]}}, Worst Rank: {{info[2]}}, Max Up: {{info[3]}}, Max Down: {{info[4]}} </div>
       </div>
+
+      <!--Verdict PieChart of User-->
+      <script>
+        var verdict_counts = {{ verdict_counts | tojson }};
+        
+        var labels = Object.keys(verdict_counts);
+        var data = Object.values(verdict_counts);
+        var totSum = data.reduce((acc, curr) => acc + curr, 0);
+        console.log(totSum)
+        var dtau = data.map(value => `${((value * 100) / totSum).toFixed(1)}%`);
+        var duta = data.map((value, index) => `${data[index]}: ${dtau[index]}`);
+        console.log(dtau);
+        console.log(data);
+        console.log(duta);
+
+        var ctx = document.getElementById('verdictChart').getContext('2d');
+        var pieChart = new Chart(ctx, {
+          type: 'pie',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: '',
+              data: data,
+              backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(153, 102, 255)',
+                'rgb(255, 159, 64)'
+              ],
+              borderWidth: 1,
+              hoverOffset: 4
+            }]
+          },
+          options: {
+            responsive: false,
+            maintainAspectRatio: true
+          }
+        });
+      </script>
+      <!--Language PieChart of User-->
+      <script>
+        var ctx = document.getElementById('langChart').getContext('2d');
+        var lang_counts = {{ lang_counts | tojson }};
+        
+        var labels = lang_counts.map(function(item) {
+            return item[0] + ": " + item[1];
+        });
+        var data = lang_counts.map(function(item) {
+            return item[1];
+        });
+        var totFreq = lang_counts.reduce(function(total, item) {
+          return total + item[1];
+        }, 0);
+        var percentage = data.map(function(value) {
+          return ((value * 100) / totFreq).toFixed(1);
+        });
+        console.log(data)
+
+        var pieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                  label: '',
+                  data: percentage,
+                    backgroundColor: [
+                        'rgb(255, 49, 49)',
+                        'rgb(159, 43, 104)',
+                        'rgb(227, 11, 92)',
+                        'rgb(127, 0, 255)',
+                        'rgb(64, 224, 208)',
+                        'rgb(0, 128, 128)',
+                        'rgb(80, 200, 120)',
+                        'rgb(50, 205, 50)'
+                    ],
+                    borderWidth: 1,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+              tooltips: {
+                  callbacks: {
+                      label: function(tooltipItem, data) {
+                          var datasetLabel = data.labels[tooltipItem.index];
+                          return datasetLabel;
+                      }
+                  }
+              },
+              responsive: false,
+              maintainAspectRatio: true
+            }
+        });
+      </script>
+
+
+      <!--Tag Doughnut Chart of User-->
       <script>
         var ctx = document.getElementById('donutChart').getContext('2d');
         var sortedTagFrequencies = {{ tag_frequencies | tojson }};
@@ -52,7 +176,7 @@
             data: {
                 labels: labels,
                 datasets: [{
-                  label: '%',
+                  label: '',
                   data: percentage,
                     backgroundColor: [
                         'rgb(255, 49, 49)',
@@ -75,31 +199,33 @@
                         'rgb(2, 48, 32)',
                         'rgb(25, 25, 112)'
                     ],
-                    borderWidth: 1
+                    borderWidth: 1,
+                    hoverOffset: 4
                 }]
             },
             options: {
-                tooltips: {
-                    callbacks: {
-                        label: function(tooltipItem, data) {
-                            var datasetLabel = data.labels[tooltipItem.index];
-                            return datasetLabel;
-                        }
-                    }
-                },
-                responsive: true,
-                maintainAspectRatio: true
+              tooltips: {
+                  callbacks: {
+                      label: function(tooltipItem, data) {
+                          var datasetLabel = data.labels[tooltipItem.index];
+                          return datasetLabel;
+                      }
+                  }
+              },
+              responsive: false,
+              maintainAspectRatio: true
             }
         });
       </script>
 
+      <!--Rating BarChart of User-->
       <script>
         var levelLabels = [];
         var levelData = [];
         level_frequencies = {{level_frequencies | tojson}}
         // Assuming level_frequencies is already defined
         level_frequencies.forEach(function(item) {
-            console.log(item);
+            //console.log(item);
             levelLabels.push(item[0]); // Level
             levelData.push(item[1]); // Frequency
         });
@@ -110,10 +236,11 @@
             data: {
                 labels: levelLabels,
                 datasets: [{
-                    label: 'Frequency',
+                    label: 'Solved',
                     data: levelData,
                     backgroundColor: 'rgb(237, 234, 222)',
-                    borderWidth: 1
+                    borderWidth: 1,
+                    hoverOffset: 4
                 }]
             },
             options: {
@@ -128,27 +255,29 @@
         });
       </script>
 
+      <!--Level BarChart of User-->
       <script>
         var ratingLabels = [];
         var ratingData = [];
         rating_frequencies = {{rating_frequencies | tojson}}
         // Assuming rating_frequencies is already defined
         rating_frequencies.forEach(function(item) {
-            console.log(item);
+            //console.log(item);
             ratingLabels.push(item[0]); // Level
             ratingData.push(item[1]); // Frequency
         });
 
-        var barCtx1 = document.getElementById('barChart').getContext('2d');
+        var barCtx1 = document.getElementById('levelChart').getContext('2d');
         var barChart = new Chart(barCtx1, {
             type: 'bar',
             data: {
                 labels: ratingLabels,
                 datasets: [{
-                    label: 'Frequency',
+                    label: 'Solved',
                     data: ratingData,
                     backgroundColor: 'rgb(237, 234, 222)',
-                    borderWidth: 1
+                    borderWidth: 1,
+                    hoverOffset: 4
                 }]
             },
             options: {

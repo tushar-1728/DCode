@@ -91,6 +91,8 @@ def get_stats(probs):
     tag_frequencies = []
     level_frequencies = []
     problem_rating_frequencies = []
+    language_frequency = []
+    verdict_frequency = {'AC': 0, 'WA': 0, 'TLE': 0, 'MLE': 0, 'CE': 0, 'RE': 0}
     stats = [0] * 4 #tried, solved, avg attempts, solved with one submission
 
     for prob in probs["result"]:
@@ -98,6 +100,7 @@ def get_stats(probs):
         if prob["verdict"] == "OK":
             contest_id = prob["problem"]["contestId"]
             index = prob["problem"]["index"]
+            verdict_frequency["AC"] += 1
             if (contest_id, index) not in visited:
                 visited.add((contest_id, index))
                 stats[1] += 1
@@ -110,12 +113,25 @@ def get_stats(probs):
                         problem_rating_frequencies.append(rating)
                 tags = prob["problem"]["tags"]
                 tag_frequencies.extend(tags)
+                language_frequency.append(prob["programmingLanguage"])
+        elif prob["verdict"] == "WRONG_ANSWER":
+            verdict_frequency["WA"] += 1
+        elif prob["verdict"] == "TIME_LIMIT_EXCEEDED":
+            verdict_frequency["TLE"] += 1
+        elif prob["verdict"] == "MEMORY_LIMIT_EXCEEDED":
+            verdict_frequency["MLE"] += 1
+        elif prob["verdict"] == "COMPILATION_ERROR":
+            verdict_frequency["CE"] += 1
+        elif prob["verdict"] == "RUNTIME_ERROR":
+            verdict_frequency["RE"] += 1
 
     stats[2] /= stats[1]
-    print(type(stats[2]))
+    # print(type(stats[2]))
     stats[2] = float(f"{stats[2]:.2f}")
 
     # Count the frequencies of each tag
+    lang_counts = Counter(language_frequency)
+    lang_counts = sorted(lang_counts.items(), key=lambda x: x[1], reverse=True)
     tag_counts = Counter(tag_frequencies)
     level_counts = Counter(level_frequencies)
     problem_rating_counts = Counter(problem_rating_frequencies)
@@ -124,7 +140,7 @@ def get_stats(probs):
     sorted_level_frequencies = sorted(level_counts.items(), key=lambda x: x[0])
     sorted_problem_rating_frequencies = sorted(problem_rating_counts.items(), key=lambda x: x[0])
 
-    return sorted_tag_frequencies, sorted_level_frequencies, sorted_problem_rating_frequencies, stats
+    return sorted_tag_frequencies, sorted_level_frequencies, sorted_problem_rating_frequencies, stats, lang_counts, verdict_frequency
 
 def get_user_info(user_infos):
     info = [0] * 5 # #contests, #best_rank, #worst_rank, max_up, max_down
@@ -286,7 +302,7 @@ def cfvisualizer():
             response = requests.get(url)
             probs = response.json()
             
-            tag_frequencies, level_frequencies, rating_frequencies, stats = get_stats(probs)
+            tag_frequencies, level_frequencies, rating_frequencies, stats, lang_counts, verdict_counts = get_stats(probs)
 
             url = API_CODEFORCES_USER_CONTEST_INFO.format(userhandle)
             response = requests.get(url)
@@ -294,10 +310,10 @@ def cfvisualizer():
 
             info = get_user_info(user_infos["result"])
 
-            # for level, frequency in level_frequencies:
-                # print(f"Tag: {level}, Frequency: {frequency}")
+            # for lang, count in lang_counts:
+            #     print(f"Language: {lang}, Count: {count}")
 
-            return render_template("cfvisualizer.html", userhandle=userhandle, stats=stats, info=info, tag_frequencies=tag_frequencies, level_frequencies=level_frequencies, rating_frequencies=rating_frequencies, visit_count=visit_count)
+            return render_template("cfvisualizer.html", userhandle=userhandle, lang_counts=lang_counts, verdict_counts=verdict_counts, stats=stats, info=info, tag_frequencies=tag_frequencies, level_frequencies=level_frequencies, rating_frequencies=rating_frequencies, visit_count=visit_count)
 
     return render_template("cfvisualizer.html", userhandle='', visit_count=visit_count)
 
