@@ -17,44 +17,88 @@
 
 
       {% if userhandle != '' %}
+      <!--verdict and language chart-->
       <div style="padding-top: 2rem;">
         <div class="canvas-verdict-lang">
           <div class="canvas-div">
-            <div class="canvas-div-text"> Verdicts of {{userhandle}} </div>
+            <div class="canvas-div-chart"> Verdicts of {{userhandle}} </div>
             <canvas id="verdictChart" style="height: 20rem; width: 20rem;"></canvas>
           </div>
           <div style="width:1rem"> </div>
           <div class="canvas-div">
-            <div class="canvas-div-text"> Languages of {{userhandle}} </div>
+            <div class="canvas-div-chart"> Languages of {{userhandle}} </div>
             <canvas id="langChart" style="height: 20rem; width: 20rem;"></canvas>
           </div>
         </div>
       </div>
-      <div style="padding-top: 2rem;">
 
+      <!--Tags, problem-rating, level chart of user-->
+      <div style="padding-top: 2rem;">
         <div class="canvas-div">
-          <div class="canvas-div-text"> Tags of {{userhandle}} </div>
+          <div class="canvas-div-chart"> Tags of {{userhandle}} </div>
           <canvas id="donutChart" style="height: 40rem; width: 40rem;"></canvas>
         </div>
 
         <br>
 
         <div class="canvas-div">
-          <div class="canvas-div-text"> Problem ratings of {{userhandle}} </div>
+          <div class="canvas-div-chart"> Problem ratings of {{userhandle}} </div>
           <canvas id="levelChart" style="height: 15rem; width: 40rem;"></canvas>
         </div>
 
         <br>
 
         <div class="canvas-div">
-          <div class="canvas-div-text"> Levels of {{userhandle}} </div>
+          <div class="canvas-div-chart"> Levels of {{userhandle}} </div>
           <canvas id="ratingChart" style="height:15rem; width: 40rem"></canvas>
         </div>
+      </div>
 
-        <br>
-
-        <div> Solved : {{stats[1]}}, Average attempts : {{stats[2]}} </div>
-        <div> Number of contests: {{info[0]}}, Best Rank: {{info[1]}}, Worst Rank: {{info[2]}}, Max Up: {{info[3]}}, Max Down: {{info[4]}} </div>
+      <!--stats report of user-->
+      <div style="padding-top: 2rem;">
+        <div class="canvas-verdict-lang">
+          <div class="canvas-div canvas-div-stats">
+            <div class="canvas-div-text" style="background: #3fbbc0;"> 
+              <span>Some numbers about</span>
+              <span class="user-handle">{{userhandle}} </span>
+            </div>
+            <div class="canvas-div-text canvas-div-text-hover">
+              <span>Solved :</span>
+              <span class="user-handle">{{stats[1]}}</span>
+            </div>
+            <div class="canvas-div-text canvas-div-text-hover">
+              <span>Average attempts :</span>
+              <span class="user-handle">{{stats[2]}}</span>
+            </div>
+          </div>
+          <div style="width:1rem"> </div>
+          <div class="canvas-div canvas-div-stats">
+            <div class="canvas-div-text" style="background: #3fbbc0;">
+              <span>Contests of</span>
+              <span class="user-handle">{{userhandle}}</span>
+            </div>
+            <div class="canvas-div-text canvas-div-text-hover">
+              <span>Number of contests:</span>
+              <span class="user-handle">{{info[0]}}</span>
+            </div>
+            <div class="canvas-div-text canvas-div-text-hover">
+              <span>Best Rank:</span>
+              <span class="user-handle">{{info[1]}}</span>
+            </div>
+            <div class="canvas-div-text canvas-div-text-hover">
+              <span>Worst Rank:</span>
+              <span class="user-handle">{{info[2]}}</span>
+            </div>
+            <div class="canvas-div-text canvas-div-text-hover">
+              <span>Max Up:</span>
+              <span class="user-handle">{{info[3]}}</span>
+            </div>
+            <div class="canvas-div-text canvas-div-text-hover">
+              <span>Max Down:</span>
+              <span class="user-handle">{{info[4]}}</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!--Verdict PieChart of User-->
@@ -97,6 +141,7 @@
           }
         });
       </script>
+
       <!--Language PieChart of User-->
       <script>
         var ctx = document.getElementById('langChart').getContext('2d');
@@ -151,7 +196,6 @@
             }
         });
       </script>
-
 
       <!--Tag Doughnut Chart of User-->
       <script>

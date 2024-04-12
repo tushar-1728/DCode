@@ -96,6 +96,8 @@ def get_stats(probs):
     stats = [0] * 4 #tried, solved, avg attempts, solved with one submission
 
     for prob in probs["result"]:
+        if "contestId" not in prob["problem"]:
+            continue
         stats[2] += 1
         if prob["verdict"] == "OK":
             contest_id = prob["problem"]["contestId"]
