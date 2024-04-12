@@ -14,7 +14,7 @@ load_dotenv()
 app = Flask("DCODE")
 app.secret_key = os.environ.get("FLASK_SECRET_KEY")
 
-print(os.environ.get("FLASK_SECRET_KEY"))
+# print(os.environ.get("FLASK_SECRET_KEY"))
 
 def get_handle_color(rating):
     if rating<1200:
