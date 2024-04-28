@@ -865,6 +865,14 @@ section {
 
 /* Codeforces CSS */
 
+.submit-tag {
+  margin-top: -0.7rem;
+  margin-bottom: 0.5rem;
+  margin-right: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
 .subscribe {
   margin-left: auto; /* Move to the extreme right */
   margin-right: 10px; /* Apply a margin of 10px */

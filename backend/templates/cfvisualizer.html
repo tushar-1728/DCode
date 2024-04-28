@@ -103,10 +103,12 @@
 
       <!--Verdict PieChart of User-->
       <script>
+        document.addEventListener('DOMContentLoaded', function() {
         var verdict_counts = {{ verdict_counts | tojson }};
         
         var labels = Object.keys(verdict_counts);
         var data = Object.values(verdict_counts);
+        <!--
         var totSum = data.reduce((acc, curr) => acc + curr, 0);
         console.log(totSum)
         var dtau = data.map(value => `${((value * 100) / totSum).toFixed(1)}%`);
@@ -114,6 +116,7 @@
         console.log(dtau);
         console.log(data);
         console.log(duta);
+        -->
 
         var ctx = document.getElementById('verdictChart').getContext('2d');
         var pieChart = new Chart(ctx, {
@@ -140,10 +143,12 @@
             maintainAspectRatio: true
           }
         });
+        });
       </script>
 
       <!--Language PieChart of User-->
       <script>
+        document.addEventListener('DOMContentLoaded', function() {
         var ctx = document.getElementById('langChart').getContext('2d');
         var lang_counts = {{ lang_counts | tojson }};
         
@@ -206,10 +211,12 @@
               maintainAspectRatio: true
             }
         });
+        });
       </script>
 
       <!--Tag Doughnut Chart of User-->
       <script>
+        document.addEventListener('DOMContentLoaded', function() {
         var ctx = document.getElementById('donutChart').getContext('2d');
         var sortedTagFrequencies = {{ tag_frequencies | tojson }};
         
@@ -271,10 +278,12 @@
               maintainAspectRatio: true
             }
         });
+        });
       </script>
 
       <!--Rating BarChart of User-->
       <script>
+        document.addEventListener('DOMContentLoaded', function() {
         var levelLabels = [];
         var levelData = [];
         level_frequencies = {{level_frequencies | tojson}}
@@ -308,10 +317,12 @@
                 }
             }
         });
+        });
       </script>
 
       <!--Level BarChart of User-->
       <script>
+        document.addEventListener('DOMContentLoaded', function() {
         var ratingLabels = [];
         var ratingData = [];
         rating_frequencies = {{rating_frequencies | tojson}}
@@ -344,6 +355,7 @@
                     }]
                 }
             }
+        });
         });
 
       </script>
