@@ -258,7 +258,7 @@ html {
 }
 
 #header .subscribe .subscribe-form input[type=submit]:hover {
-  background: #22ae9c;
+  /* background: #22ae9c; */
   flex-direction: row;
 }
 
@@ -923,7 +923,8 @@ section {
   width: 100%;
   /* background: #3fbbc0; */
   /* background: #183D3D; */
-  background: #3C2A21;
+  /* background: #3C2A21; */
+  background: #63809B;
 }
 
 .table-body {
@@ -934,7 +935,7 @@ section {
   /* background: rgb(114, 131, 132); */
   /* background: rgb(184, 186, 66); */
   /* background: #377c7c; */
-  background: rgba(84, 58, 46, 0.7);
+  background: rgba(99, 128, 155, 0.3);
 }
 
 .table-cell {

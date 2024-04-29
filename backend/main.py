@@ -30,7 +30,7 @@ def get_handle_color(rating):
     elif 2100<=rating<2400:
         return "orange"
     else:
-        return "red"
+        return "#8B0000"
     
 def get_atcoder_handle_rank_color(rating):
     color = ""
