@@ -14,6 +14,55 @@
   <header id="header" class="d-flex align-items-center">
     <div class="container d-flex flex-column align-items-center">
       <div class="subscribe">
+        
+        <button id="prevBtn">Prev</button>
+        <div class="slider-container">
+          <div class="slides">
+            <div class="slide">
+              <!-- Add buttons here for ratings 800 to 1700 -->
+              {% for rating in range(800, 1701, 100) %}
+              <button class="rating-btn" value="{{ rating }}">{{ rating }}</button>
+              {% endfor %}
+            </div>
+            <div class="slide">
+              <!-- Add buttons here for ratings 1800 to 2700 -->
+              {% for rating in range(1800, 2701, 100) %}
+              <button class="rating-btn" value="{{ rating }}">{{ rating }}</button>
+              {% endfor %}
+            </div>
+            <div class="slide">
+              <!-- Add buttons here for ratings 2800 to 3500 -->
+              {% for rating in range(2800, 3501, 100) %}
+              <button class="rating-btn" value="{{ rating }}">{{ rating }}</button>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <button id="nextBtn">Next</button>
+
+        <script>
+          const prevBtn = document.getElementById('prevBtn');
+          const nextBtn = document.getElementById('nextBtn');
+          const slides = document.querySelector('.slides');
+          const slideWidth = document.querySelector('.slide').offsetWidth;
+          const totalSlides = document.querySelectorAll('.slide').length;
+          let currentSlide = 0;
+        
+          prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+              currentSlide--;
+              slides.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+            }
+          });
+        
+          nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides - 1) {
+              currentSlide++;
+              slides.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+            }
+          });
+        </script>
+
         <form action="/codeforces" method="post" role="form">
           <div class="subscribe-form">
             <input type="text" name="userhandle" placeholder="CF Handle" value="{{ userhandle }}" style="border:none; outline: none; background: rgb(198, 198, 198);" required>
@@ -68,9 +117,27 @@
               button.classList.add('selected');
             }
           }
+          // Function to send selectedTags to Flask backend
+          function sendTagsToFlask() {
+            fetch('/your-flask-endpoint', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ selectedTags: selectedTags }),
+            })
+            .then(response => {
+              // Handle response
+              console.log(response);
+            })
+            .catch(error => {
+              // Handle error
+              console.error('Error:', error);
+            });
+          }
         </script>
         <div class="submit-tag">
-          <button style="color: white; padding: 0.2rem 0.5rem; margin: 0.2rem; border-color: white; border-radius: 1rem; background-color: rgb(62, 148, 85); font-weight: bold"> Search </button>
+          <button style="color: white; padding: 0.2rem 0.5rem; margin: 0.2rem; border-color: white; border-radius: 1rem; background-color: rgb(62, 148, 85); font-weight: bold onclick="sendTagsToFlask()"> Search </button>
         </div>
       </div>
 

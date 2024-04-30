@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template, render_template_string
+from flask import Flask, request, redirect, render_template, render_template_string, jsonify
 from flask.helpers import url_for
 from config import API_CODEFORCES_USER_INFO, API_CODEFORCES_USER_PROBLEM_STATUS, API_ATCODER_USER_INFO, API_CODEFORCES_USER_CONTEST_INFO
 from dotenv import load_dotenv
@@ -276,11 +276,11 @@ def atcoder():
 @app.route("/codechef", methods=['POST', 'GET'])
 def codechef():
     visit_count = get_visit_count()
-    visit_count += 1
+    # visit_count += 1
     # Update the visit count in the persistent storage
-    update_visit_count(visit_count)
+    # update_visit_count(visit_count)
 
-    return render_template("codechef.html")
+    return render_template("codechef.html", visit_count=visit_count)
 
 
 @app.route("/cfvisualizer", methods=['POST', 'GET'])
@@ -319,6 +319,12 @@ def cfvisualizer():
 
     return render_template("cfvisualizer.html", userhandle='', visit_count=visit_count)
 
-
+@app.route('/your-flask-endpoint', methods=['POST'])
+def receive_selected_tags():
+    data = request.json
+    selected_tags = data.get('selectedTags')
+    # Process selected tags as needed
+    print(selected_tags)
+    return jsonify({'message': 'Selected tags received successfully'})
 
 app.run(debug=True)
