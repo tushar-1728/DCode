@@ -192,9 +192,10 @@ def codeforces():
     update_visit_count(visit_count)
 
     userhandle = request.form.get('userhandle', '')  # Get userhandle from form data
-    user_rating = 1500
-    with open(f'cf-rating-problems/{user_rating}.json', 'r') as f:
-        problems = json.load(f)[:100]  # Load the first hundred problems
+    # user_rating = 1500
+    user_rating = request.form.get('rating')
+    if user_rating==None:
+        user_rating = 1500
     
     with open(f'cf-problem-tags/tags.json', 'r') as f:
         tags = json.load(f)
@@ -224,7 +225,10 @@ def codeforces():
             probs = response.json()
 
             # user_rating = 1700
-            list_rating = min(max(800, (rating - rating%100)+200), 3500)
+            if user_rating != None:
+                list_rating = user_rating
+            else:
+                list_rating = min(max(800, (rating - rating%100)+200), 3500)
 
             with open(f'cf-rating-problems/{list_rating}.json', 'r') as f:
                 problems = json.load(f)[:100]  # Load the first hundred problems
@@ -235,9 +239,17 @@ def codeforces():
             #     print(user_verdicts[verdict])
             
             # Render the template with userhandle included
-            return render_template("codeforces.html", userhandle=userhandle, rank=rank, max_rating=max_rating, rating=rating, problems=problems, tags=tags['tags'], probs=probs["result"], ratingColor=ratingColor, user_verdicts=user_verdicts, correct_cnt=correct_cnt, visit_count=visit_count)
+            return render_template("codeforces.html", userhandle=userhandle, rank=rank, max_rating=max_rating, 
+                                   rating=rating, problems=problems, tags=tags['tags'], probs=probs["result"], 
+                                   ratingColor=ratingColor, user_verdicts=user_verdicts, correct_cnt=correct_cnt, 
+                                   visit_count=visit_count, user_rating=user_rating)
+    
+    with open(f'cf-rating-problems/{user_rating}.json', 'r') as f:
+        problems = json.load(f)[:100]  # Load the first hundred problems
+
     # Render the template with userhandle unchanged
-    return render_template("codeforces.html", userhandle='', problems=problems, tags=tags['tags'], correct_cnt=0, user_verdicts={}, visit_count=visit_count)
+    return render_template("codeforces.html", userhandle='', problems=problems, tags=tags['tags'], correct_cnt=0, 
+                           user_verdicts={}, visit_count=visit_count, user_rating=user_rating)
 
 
 

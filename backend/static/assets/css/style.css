@@ -104,7 +104,8 @@ h6 {
   /* border-radius: 6px; Round the thumb */
 }
 ::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Set track color */
+  /* background-color: #f1f1f1; */
+  background-color: rgb(198, 198, 198);
 }
 
 /* For Firefox */
@@ -880,6 +881,7 @@ section {
 
 .subscribe-form {
   color: rgb(68, 68, 68);
+  margin-left: 5rem;
 }
 
 .form-switch {
@@ -1061,14 +1063,22 @@ section {
   margin: 0.5rem;
   cursor: pointer;
   border: none;
+  border-radius: 0.2rem;
   color: white;
   font-weight: bold;
   background: none;
 }
 
 #nextBtn, #prevBtn {
+  cursor: pointer;
   border: none;
   color: white;
   font-weight: bold;
   background: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.2rem;
+}
+
+#nextBtn:hover, #prevBtn:hover, .rating-btn:hover {
+  background: #63809B;
 }
