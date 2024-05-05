@@ -172,7 +172,12 @@ def update_visit_count(visit_count):
     with open("visit_count.txt", "w") as file:
         file.write(str(visit_count))
 
-
+def get_slide_num(prob_rating):
+    if prob_rating<=1700:
+        return 0
+    elif prob_rating<=2700:
+        return 1
+    return 2
 
 @app.route("/")
 def home():
@@ -188,14 +193,12 @@ def home():
 def codeforces():
     visit_count = get_visit_count()
     visit_count += 1
-    # Update the visit count in the persistent storage
     update_visit_count(visit_count)
 
     userhandle = request.form.get('userhandle', '')  # Get userhandle from form data
-    # user_rating = 1500
-    user_rating = request.form.get('rating')
-    if user_rating==None:
-        user_rating = 1500
+    prob_rating = request.form.get('rating')
+    if prob_rating==None:
+        prob_rating = 1500
     
     with open(f'cf-problem-tags/tags.json', 'r') as f:
         tags = json.load(f)
@@ -224,32 +227,37 @@ def codeforces():
             response = requests.get(url)
             probs = response.json()
 
-            # user_rating = 1700
-            if user_rating != None:
-                list_rating = user_rating
+            if prob_rating != None:
+                list_rating = prob_rating
             else:
                 list_rating = min(max(800, (rating - rating%100)+200), 3500)
+                prob_rating = list_rating
 
             with open(f'cf-rating-problems/{list_rating}.json', 'r') as f:
                 problems = json.load(f)[:100]  # Load the first hundred problems
 
             correct_cnt = 0
             user_verdicts, correct_cnt = user__Verdict(probs["result"], problems)
-            # for verdict in user_verdicts:
-            #     print(user_verdicts[verdict])
+
+            prob_rating = int(prob_rating)
+            slide_num = get_slide_num(prob_rating)
             
             # Render the template with userhandle included
             return render_template("codeforces.html", userhandle=userhandle, rank=rank, max_rating=max_rating, 
                                    rating=rating, problems=problems, tags=tags['tags'], probs=probs["result"], 
                                    ratingColor=ratingColor, user_verdicts=user_verdicts, correct_cnt=correct_cnt, 
-                                   visit_count=visit_count, user_rating=user_rating)
+                                   visit_count=visit_count, prob_rating=prob_rating, slide_num=slide_num)
     
-    with open(f'cf-rating-problems/{user_rating}.json', 'r') as f:
+    with open(f'cf-rating-problems/{prob_rating}.json', 'r') as f:
         problems = json.load(f)[:100]  # Load the first hundred problems
+    
+    prob_rating = int(prob_rating)
+
+    slide_num = get_slide_num(prob_rating)
 
     # Render the template with userhandle unchanged
     return render_template("codeforces.html", userhandle='', problems=problems, tags=tags['tags'], correct_cnt=0, 
-                           user_verdicts={}, visit_count=visit_count, user_rating=user_rating)
+                           user_verdicts={}, visit_count=visit_count, prob_rating=prob_rating, slide_num=slide_num)
 
 
 

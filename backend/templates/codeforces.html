@@ -22,19 +22,23 @@
               <div class="slide">
                 <!-- Add buttons here for ratings 800 to 1700 -->
                 {% for rating in range(800, 1701, 100) %}
-                <input class="rating-btn" name = "rating" value="{{ rating }}" type="submit"></input>
+                <input class="rating-btn" name = "rating" value="{{rating}}" 
+                  {% if prob_rating == rating %} style="background: #63809B" {% endif %} type="submit"/>
+                
                 {% endfor %}
               </div>
               <div class="slide">
                 <!-- Add buttons here for ratings 1800 to 2700 -->
                 {% for rating in range(1800, 2701, 100) %}
-                <input class="rating-btn" name = "rating" value="{{ rating }}" type="submit"></input>
+                <input class="rating-btn" name = "rating" value="{{rating}}" 
+                  {% if prob_rating == rating %} style="background: #63809B" {% endif %} type="submit"/>
                 {% endfor %}
               </div>
               <div class="slide">
                 <!-- Add buttons here for ratings 2800 to 3500 -->
                 {% for rating in range(2800, 3501, 100) %}
-                <input class="rating-btn" name = "rating" value="{{ rating }}" type="submit"></input>
+                <input class="rating-btn" name = "rating" value="{{rating}}" 
+                  {% if prob_rating == rating %} style="background: #63809B" {% endif %} type="submit"/>
                 {% endfor %}
               </div>
           </div>
@@ -47,7 +51,10 @@
           const slides = document.querySelector('.slides');
           const slideWidth = document.querySelector('.slide').offsetWidth;
           const totalSlides = document.querySelectorAll('.slide').length;
-          let currentSlide = 0;
+          let currentSlide = {{slide_num}};
+
+          // Adjust the transform property to show the initial slide
+          slides.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
         
           prevBtn.addEventListener('click', () => {
             if (currentSlide > 0) {
@@ -66,7 +73,7 @@
 
           <div class="subscribe-form">
             <input type="text" name="userhandle" placeholder="CF Handle" value="{{ userhandle }}" 
-            style="border:none; outline: none; background: rgb(198, 198, 198);" required>
+            style="border:none; outline: none; background: rgb(198, 198, 198);">
             <input type="submit" value="🔍">
           </div>
         </div>
@@ -95,7 +102,8 @@
       <div class="table-container" style="margin-bottom: 1rem; padding:0;">
         <div class="text-sm flex flex-wrap justify-items-start m-3 content-center">
           {% for tag in tags %}
-          <button style="color: white; padding: 0.2rem 0.5rem; margin: 0.2rem; border-color: white; border-radius: 1rem; background-color: rgb(55, 87, 117);" onclick="toggleButton(this, '{{ tag }}')">{{ tag }}</button>
+          <button style="color: white; padding: 0.2rem 0.5rem; margin: 0.2rem; border-color: white; 
+          border-radius: 1rem; background-color: rgb(55, 87, 117);" onclick="toggleButton(this, '{{ tag }}')">{{ tag }}</button>
           {% endfor %}
         </div>
         <script>
@@ -138,7 +146,8 @@
           }
         </script>
         <div class="submit-tag">
-          <button style="color: white; padding: 0.2rem 0.5rem; margin: 0.2rem; border-color: white; border-radius: 1rem; background-color: rgb(62, 148, 85); font-weight: bold onclick="sendTagsToFlask()"> Search </button>
+          <button style="color: white; padding: 0.2rem 0.5rem; margin: 0.2rem; border-color: white; 
+          border-radius: 1rem; background-color: rgb(62, 148, 85); font-weight: bold onclick="sendTagsToFlask()"> Search </button>
         </div>
       </div>
 
