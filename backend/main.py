@@ -24,13 +24,13 @@ def get_handle_color(rating):
     elif 1400<=rating<1600:
         return "cyan"
     elif 1600<=rating<1900:
-        return "#00008B"
+        return "#4169E1"
     elif 1900<=rating<2100:
         return "violet"
     elif 2100<=rating<2400:
         return "orange"
     else:
-        return "#8B0000"
+        return "#D22B2B"
     
 def get_atcoder_handle_rank_color(rating):
     color = ""
@@ -65,7 +65,7 @@ def get_atcoder_handle_rank_color(rating):
 
     return rank, color
     
-def user__Verdict(probs, problems):
+def get_user_verdict(probs, problems):
     user_verdicts = {}
     key_counter = 1
     correct_cnt = 0
@@ -73,7 +73,7 @@ def user__Verdict(probs, problems):
     for problem in problems:
         verdict = "NA"
         for prob in probs:
-            if prob["problem"]["contestId"] == problem["contestId"] and prob["problem"]["index"] == problem["index"]:
+            if "contestId" in prob["problem"] and prob["problem"]["contestId"] == problem["contestId"] and prob["problem"]["index"] == problem["index"]:
                 if prob["verdict"] == "OK":
                     verdict = "AC"
                     correct_cnt += 1
@@ -237,7 +237,7 @@ def codeforces():
                 problems = json.load(f)[:100]  # Load the first hundred problems
 
             correct_cnt = 0
-            user_verdicts, correct_cnt = user__Verdict(probs["result"], problems)
+            user_verdicts, correct_cnt = get_user_verdict(probs["result"], problems)
 
             prob_rating = int(prob_rating)
             slide_num = get_slide_num(prob_rating)
