@@ -179,6 +179,13 @@ def get_slide_num(prob_rating):
         return 1
     return 2
 
+def get_slide_num_atcoder(prob_rating):
+    if prob_rating<=1400:
+        return 0
+    elif prob_rating<=2800:
+        return 1
+    return 2
+
 @app.route("/")
 def home():
 
@@ -269,7 +276,7 @@ def atcoder():
     update_visit_count(visit_count)
 
     userhandle = request.form.get('userhandle', '')  # Get userhandle from form data
-    user_rating = 200
+    prob_rating = request.form.get('rating')
     # with open(f'atcoder-rating-problems/{user_rating}.json', 'r') as f:
     #     problems = json.load(f)[:100]  # Load the first hundred problems
 
@@ -287,13 +294,28 @@ def atcoder():
 
             rank, ratingColor = get_atcoder_handle_rank_color(rating)
             user_rating = min(3800, max(0, (rating - rating%200)+200))
+            if prob_rating:
+                user_rating = prob_rating
+            else:
+                prob_rating = user_rating
+            prob_rating = int(prob_rating)
+            slide_num = get_slide_num_atcoder(prob_rating)
             with open(f'atcoder-rating-problems/{user_rating}.json', 'r') as f:
                 problems = json.load(f)[:100]  # Load the first hundred problems
 
-            return render_template("atcoder.html", userhandle=userhandle, user_rating=user_rating, rank=rank, ratingColor=ratingColor, visit_count=visit_count, max_rating=max_rating, rating=rating, problems=problems, user_verdicts={}, correct_cnt=0)
+            return render_template("atcoder.html", userhandle=userhandle, prob_rating=prob_rating, rank=rank, ratingColor=ratingColor, visit_count=visit_count, max_rating=max_rating, rating=rating, problems=problems, user_verdicts={}, correct_cnt=0, slide_num=slide_num)
+    user_rating = 200
+    if prob_rating:
+        user_rating = prob_rating
+    else:
+        prob_rating = user_rating 
+    prob_rating = int(prob_rating)
+
+    slide_num = get_slide_num_atcoder(prob_rating)
+    
     with open(f'atcoder-rating-problems/{user_rating}.json', 'r') as f:
         problems = json.load(f)[:100]  # Load the first hundred problems
-    return render_template("atcoder.html", userhandle='', user_rating=user_rating, problems=problems, user_verdicts={}, visit_count=visit_count, correct_cnt=0)
+    return render_template("atcoder.html", userhandle='', prob_rating=prob_rating, problems=problems, user_verdicts={}, visit_count=visit_count, correct_cnt=0, slide_num=slide_num)
 
 
 @app.route("/codechef", methods=['POST', 'GET'])

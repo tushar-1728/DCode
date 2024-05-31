@@ -19,7 +19,8 @@
       <form action="/atcoder" method="post" role="form">
         <div class="subscribe" style="justify-content: flex-end;">
           <div class="subscribe-form">
-            <input type="text" name="userhandle" placeholder="AtCoder Handle" value="{{ userhandle }}" style="border:none; outline: none; background: rgb(198, 198, 198);" required>
+            <input type="text" name="userhandle" placeholder="AtCoder Handle" value="{{ userhandle }}" 
+            style="border:none; outline: none; background: none;">
             <input type="submit" value="🔍">
           </div>
         </div>
@@ -29,7 +30,7 @@
             <div class="slides">
                 <div class="slide">
                   <!-- Add buttons here for ratings 800 to 1700 -->
-                  {% for rating in range(800, 1701, 100) %}
+                  {% for rating in range(200, 1401, 200) %}
                   <input class="rating-btn" name = "rating" value="{{rating}}" 
                     {% if prob_rating == rating %} style="background: #63809B" {% endif %} type="submit"/>
                   
@@ -37,14 +38,14 @@
                 </div>
                 <div class="slide">
                   <!-- Add buttons here for ratings 1800 to 2700 -->
-                  {% for rating in range(1800, 2701, 100) %}
+                  {% for rating in range(1600, 2801, 200) %}
                   <input class="rating-btn" name = "rating" value="{{rating}}" 
                     {% if prob_rating == rating %} style="background: #63809B" {% endif %} type="submit"/>
                   {% endfor %}
                 </div>
                 <div class="slide">
                   <!-- Add buttons here for ratings 2800 to 3500 -->
-                  {% for rating in range(2800, 3501, 100) %}
+                  {% for rating in range(3000, 3801, 200) %}
                   <input class="rating-btn" name = "rating" value="{{rating}}" 
                     {% if prob_rating == rating %} style="background: #63809B" {% endif %} type="submit"/>
                   {% endfor %}
@@ -135,7 +136,7 @@
 
               <div class="table-cell" style = "color:{{prob_color}}">{{ loop.index }}</div>
               <div class="table-cell" style = "color:{{prob_color}}">{{ problem.name }}</div>
-              <div class="table-cell" style = "color:{{prob_color}}">{{ user_rating }}</div>
+              <div class="table-cell" style = "color:{{prob_color}}">{{ prob_rating }}</div>
               <div class="table-cell" style = "color:{{prob_color}}">
                 <div class="table-cell">
                   <div style = "color:{{prob_color}}">{{verdict}}</div>
