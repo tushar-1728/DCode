@@ -269,9 +269,9 @@ def atcoder():
     update_visit_count(visit_count)
 
     userhandle = request.form.get('userhandle', '')  # Get userhandle from form data
-    user_rating = 1400
-    with open(f'atcoder-rating-problems/{user_rating}.json', 'r') as f:
-        problems = json.load(f)[:100]  # Load the first hundred problems
+    user_rating = 200
+    # with open(f'atcoder-rating-problems/{user_rating}.json', 'r') as f:
+    #     problems = json.load(f)[:100]  # Load the first hundred problems
 
     if request.method == "POST" and userhandle:
         url = API_ATCODER_USER_INFO.format(userhandle)
@@ -286,11 +286,14 @@ def atcoder():
             # print("HEllo")
 
             rank, ratingColor = get_atcoder_handle_rank_color(rating)
+            user_rating = min(3800, max(0, (rating - rating%200)+200))
+            with open(f'atcoder-rating-problems/{user_rating}.json', 'r') as f:
+                problems = json.load(f)[:100]  # Load the first hundred problems
 
-
-            return render_template("atcoder.html", userhandle=userhandle, rank=rank, ratingColor=ratingColor, visit_count=visit_count, max_rating=max_rating, rating=rating, problems=problems, user_verdicts={}, correct_cnt=0)
-
-    return render_template("atcoder.html", userhandle='', problems=problems, user_verdicts={}, visit_count=visit_count, correct_cnt=0)
+            return render_template("atcoder.html", userhandle=userhandle, user_rating=user_rating, rank=rank, ratingColor=ratingColor, visit_count=visit_count, max_rating=max_rating, rating=rating, problems=problems, user_verdicts={}, correct_cnt=0)
+    with open(f'atcoder-rating-problems/{user_rating}.json', 'r') as f:
+        problems = json.load(f)[:100]  # Load the first hundred problems
+    return render_template("atcoder.html", userhandle='', user_rating=user_rating, problems=problems, user_verdicts={}, visit_count=visit_count, correct_cnt=0)
 
 
 @app.route("/codechef", methods=['POST', 'GET'])
