@@ -38,7 +38,7 @@ def get_atcoder_handle_rank_color(rating):
     if rating<400:
         color = "#36454F"
     elif 400<=rating<800:
-        color = "#3C2A21"
+        color = "#E97451"
     elif 800<=rating<1200:
         color = "green"
     elif 1200<=rating<1600:

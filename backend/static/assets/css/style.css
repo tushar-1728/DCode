@@ -213,6 +213,7 @@ html {
 }
 
 #header .subscribe h4 {
+  display: flex;
   flex-direction: row;
   font-size: 20px;
   font-weight: 600;
@@ -881,7 +882,8 @@ section {
 
 .subscribe-form {
   color: rgb(68, 68, 68);
-  margin-left: 5rem;
+  left: 0;
+  margin-bottom: 20px;
 }
 
 .form-switch {
@@ -1043,16 +1045,33 @@ section {
   flex: 1;
 }
 
+#verdictChart, #langChart {
+  height: 250px;
+  width: 250px;
+}
+
+@media (max-width: 850px) {
+  .canvas-verdict-lang {
+    flex-direction: column;
+  }
+  #verdictChart, #langChart {
+    height: 200px;
+    width: 200px;
+  }
+  #verdictChart {
+    margin-bottom: 2px;
+  }
+}
 
 .slider-container {
-  width: 60%;
+  width: 100%;
   margin: 0 auto;
   overflow: hidden;
   position: relative;
 }
 .slides {
   display: flex;
-  transition: transform 0.5s ease;
+  transition: transform 0.5s ease-in-out;
 }
 .slide {
   width: 100%;
@@ -1096,4 +1115,10 @@ section {
 
 #nextBtn:hover, #prevBtn:hover, .rating-btn:hover {
   background: #63809B;
+}
+
+.center-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Optional: If you also want to center it vertically within its container */
 }

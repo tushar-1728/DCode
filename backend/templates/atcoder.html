@@ -11,16 +11,81 @@
 
 <main id="main">
 
-  <header id="header" class="d-flex align-items-center">
+  <header id="header">
+    <div class="center-logo">
+      <h1><i><span style="color:#000000">AT</span><span>CODER</span></i></h1>
+    </div>
     <div class="container d-flex flex-column align-items-center">
-      <div class="subscribe">
-        <form action="/atcoder" method="post" role="form">
+      <form action="/atcoder" method="post" role="form">
+        <div class="subscribe" style="justify-content: flex-end;">
           <div class="subscribe-form">
             <input type="text" name="userhandle" placeholder="AtCoder Handle" value="{{ userhandle }}" style="border:none; outline: none; background: rgb(198, 198, 198);" required>
             <input type="submit" value="🔍">
           </div>
-        </form>
-      </div>
+        </div>
+        <div class="subscribe">
+          <div id="prevBtn">Prev</div>
+          <div class="slider-container">
+            <div class="slides">
+                <div class="slide">
+                  <!-- Add buttons here for ratings 800 to 1700 -->
+                  {% for rating in range(800, 1701, 100) %}
+                  <input class="rating-btn" name = "rating" value="{{rating}}" 
+                    {% if prob_rating == rating %} style="background: #63809B" {% endif %} type="submit"/>
+                  
+                  {% endfor %}
+                </div>
+                <div class="slide">
+                  <!-- Add buttons here for ratings 1800 to 2700 -->
+                  {% for rating in range(1800, 2701, 100) %}
+                  <input class="rating-btn" name = "rating" value="{{rating}}" 
+                    {% if prob_rating == rating %} style="background: #63809B" {% endif %} type="submit"/>
+                  {% endfor %}
+                </div>
+                <div class="slide">
+                  <!-- Add buttons here for ratings 2800 to 3500 -->
+                  {% for rating in range(2800, 3501, 100) %}
+                  <input class="rating-btn" name = "rating" value="{{rating}}" 
+                    {% if prob_rating == rating %} style="background: #63809B" {% endif %} type="submit"/>
+                  {% endfor %}
+                </div>
+            </div>
+          </div>
+          <div id="nextBtn">Next</div>
+          <script>
+            let currentSlide = {{slide_num}};
+      
+            function updateSlideWidth() {
+                const slideWidth = document.querySelector('.slide').offsetWidth;
+                const slides = document.querySelector('.slides');
+                slides.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+            }
+
+            // Initial setup
+            updateSlideWidth();
+
+            window.addEventListener('resize', updateSlideWidth);
+
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const totalSlides = document.querySelectorAll('.slide').length;
+
+            prevBtn.addEventListener('click', () => {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateSlideWidth();
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    updateSlideWidth();
+                }
+            });
+          </script>
+        </div>
+      </form>
 
       <!--AtCoder User Details-->
       <div class="user-info">
