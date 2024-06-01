@@ -1,6 +1,6 @@
 from flask import Flask, request, redirect, render_template, render_template_string, jsonify
 from flask.helpers import url_for
-from config import API_CODEFORCES_USER_INFO, API_CODEFORCES_USER_PROBLEM_STATUS, API_ATCODER_USER_INFO, API_CODEFORCES_USER_CONTEST_INFO
+from config import API_CODEFORCES_USER_INFO, API_CODEFORCES_USER_PROBLEM_STATUS, API_ATCODER_USER_INFO, API_CODEFORCES_USER_CONTEST_INFO, API_ATCODER_USER_STATUS
 from dotenv import load_dotenv
 from collections import Counter
 
@@ -75,6 +75,27 @@ def get_user_verdict(probs, problems):
         for prob in probs:
             if "contestId" in prob["problem"] and prob["problem"]["contestId"] == problem["contestId"] and prob["problem"]["index"] == problem["index"]:
                 if prob["verdict"] == "OK":
+                    verdict = "AC"
+                    correct_cnt += 1
+                    break
+                else:
+                    verdict = "WA"
+
+        user_verdicts[key_counter] = verdict
+        key_counter += 1
+
+    return user_verdicts, correct_cnt
+
+def get_user_verdict_atcoder(probs, problems):
+    user_verdicts = {}
+    key_counter = 1
+    correct_cnt = 0
+
+    for problem in problems:
+        verdict = "NA"
+        for prob in probs:
+            if "problem_id" and prob["problem_id"] == problem["id"]:
+                if prob["result"] == "AC":
                     verdict = "AC"
                     correct_cnt += 1
                     break
@@ -292,6 +313,10 @@ def atcoder():
             max_rating, rating = find_max_and_cur_rating_Atcoder(data)
             # print("HEllo")
 
+            url = API_ATCODER_USER_STATUS.format(userhandle, 0)
+            response = requests.get(url)
+            probs = response.json()
+
             rank, ratingColor = get_atcoder_handle_rank_color(rating)
             user_rating = min(3800, max(0, (rating - rating%200)+200))
             if prob_rating:
@@ -300,10 +325,16 @@ def atcoder():
                 prob_rating = user_rating
             prob_rating = int(prob_rating)
             slide_num = get_slide_num_atcoder(prob_rating)
+
             with open(f'atcoder-rating-problems/{user_rating}.json', 'r') as f:
                 problems = json.load(f)[:100]  # Load the first hundred problems
 
-            return render_template("atcoder.html", userhandle=userhandle, prob_rating=prob_rating, rank=rank, ratingColor=ratingColor, visit_count=visit_count, max_rating=max_rating, rating=rating, problems=problems, user_verdicts={}, correct_cnt=0, slide_num=slide_num)
+            correct_cnt = 0
+            user_verdicts, correct_cnt = get_user_verdict_atcoder(probs, problems)
+
+            return render_template("atcoder.html", userhandle=userhandle, prob_rating=prob_rating, rank=rank, 
+                                   ratingColor=ratingColor, visit_count=visit_count, max_rating=max_rating, rating=rating, problems=problems,
+                                   slide_num=slide_num, user_verdicts=user_verdicts, correct_cnt=correct_cnt)
     user_rating = 200
     if prob_rating:
         user_rating = prob_rating
