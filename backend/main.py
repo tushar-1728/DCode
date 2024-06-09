@@ -225,8 +225,6 @@ def codeforces():
 
     userhandle = request.form.get('userhandle', '')  # Get userhandle from form data
     prob_rating = request.form.get('rating')
-    if prob_rating==None:
-        prob_rating = 1500
     
     with open(f'cf-problem-tags/tags.json', 'r') as f:
         tags = json.load(f)
@@ -276,6 +274,9 @@ def codeforces():
                                    ratingColor=ratingColor, user_verdicts=user_verdicts, correct_cnt=correct_cnt, 
                                    visit_count=visit_count, prob_rating=prob_rating, slide_num=slide_num)
     
+    if prob_rating==None:
+        prob_rating = 1500
+
     with open(f'cf-rating-problems/{prob_rating}.json', 'r') as f:
         problems = json.load(f)[:100]  # Load the first hundred problems
     
@@ -403,4 +404,4 @@ def receive_selected_tags():
     print(selected_tags)
     return jsonify({'message': 'Selected tags received successfully'})
 
-app.run(debug=True)
+app.run(debug=True, host='0.0.0.0', port='80')

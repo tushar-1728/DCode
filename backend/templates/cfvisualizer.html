@@ -1,251 +1,266 @@
-{% extends 'base.html' %}
+<html lang="en">
 
-{% block form %}
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>DCode</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
-<main id="main">
+  <!-- Favicons -->
+  <link href="static/assets/img/html-coding.png" rel="icon">
+  <link href="static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <header id="header" class="d-flex align-items-center">
-    <div class="container d-flex flex-column align-items-center">
-      <div class="subscribe">
-        <form action="/cfvisualizer" method="post" role="form">
-          <div class="subscribe-form" style="right:0">
-            <input type="text" name="userhandle" placeholder="CF Handle" value="{{ userhandle }}" style="border:none; outline: none; background: rgb(198, 198, 198);" required>
-            <input type="submit" value="🔍">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="static/assets/css/style.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.27.3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    /* Hide main content on small screens */
+    @media (max-width: 700px) {
+      body > *:not(.desktop-warning) {
+        display: none !important;
+      }
+    }
+
+    /* Styles for the desktop warning */
+    .desktop-warning {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Show the warning on small screens */
+    @media (max-width: 700px) {
+      .desktop-warning {
+        display: block;
+      }
+    }
+  </style>
+  <script>
+    function redirectToDesktop() {
+      if (window.innerWidth < 700) {
+        // Hide content and show warning message
+        document.body.innerHTML = `
+          <div class="desktop-warning">
+            <h1>Desktop View Required</h1>
+            <p>This page is best viewed on a desktop. Please switch to a desktop device to access the content.</p>
           </div>
-        </form>
+        `;
+      }
+    }
+
+    // Check on page load
+    window.onload = redirectToDesktop;
+
+    // Check on window resize
+    window.onresize = redirectToDesktop;
+  </script>
+</head>
+
+<body class="specific-page">
+
+  <!-- ======= Top Bar ======= -->
+  <div id="topbar" class="d-flex align-items-center fixed-top">
+    <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
+      <div class="align-items-center d-md-flex">
+        <a href="/" style="color: white; font-size: larger";>
+          <b>&lt;/&gt;</b> DCode
+        </a>
       </div>
+      <!--<div class="d-flex align-items-center">
+        <i class="bi bi-phone"></i> Call us now +91 82528 42683
+      </div>-->
+    </div>
+  </div>
 
+  <div class="desktop-warning">
+    <h1>Desktop View Required</h1>
+    <p>This page is best viewed on a desktop. Please switch to a desktop device to access the content.</p>
+  </div>
 
-      {% if userhandle != '' %}
-      <!--verdict and language chart-->
-      <div style="padding-top: 2rem;">
-        <div class="canvas-verdict-lang">
-          <div class="canvas-div">
-            <div class="canvas-div-chart"> Verdicts of {{userhandle}} </div>
-            <canvas id="verdictChart"></canvas>
-          </div>
-          <div style="width:1rem"> </div>
-          <div class="canvas-div">
-            <div class="canvas-div-chart"> Languages of {{userhandle}} </div>
-            <canvas id="langChart"></canvas>
-          </div>
+  <main id="main">
+  
+    <header id="header" class="d-flex align-items-center">
+      <div class="container d-flex flex-column align-items-center">
+        <div class="subscribe">
+          <form action="/cfvisualizer" method="post" role="form">
+            <div class="subscribe-form" style="right:0">
+              <input type="text" name="userhandle" placeholder="CF Handle" value="{{ userhandle }}" style="border:none; outline: none; background: rgb(198, 198, 198);" required>
+              <input type="submit" value="🔍">
+            </div>
+          </form>
         </div>
-      </div>
-
-      <!--Tags, problem-rating, level chart of user-->
-      <div style="padding-top: 2rem;">
-        <div class="canvas-div">
-          <div class="canvas-div-chart"> Tags of {{userhandle}} </div>
-          <canvas id="donutChart" style="height: 20rem; width: 20rem;"></canvas>
-        </div>
-
-        <br>
-
-        <div class="canvas-div">
-          <div class="canvas-div-chart"> Problem ratings of {{userhandle}} </div>
-          <canvas id="levelChart" style="height: 15rem; width: 40rem;"></canvas>
-        </div>
-
-        <br>
-
-        <div class="canvas-div">
-          <div class="canvas-div-chart"> Levels of {{userhandle}} </div>
-          <canvas id="ratingChart" style="height:15rem; width: 40rem"></canvas>
-        </div>
-      </div>
-
-      <!--stats report of user-->
-      <div style="padding-top: 2rem;">
-        <div class="canvas-verdict-lang">
-          <div class="canvas-div canvas-div-stats">
-            <div class="canvas-div-text" style="background: #63809B;"> 
-              <span>Some stats of</span>
-              <span class="user-handle">{{userhandle}} </span>
+  
+  
+        {% if userhandle != '' %}
+        <!--verdict and language chart-->
+        <div style="padding-top: 2rem;">
+          <div class="canvas-verdict-lang">
+            <div class="canvas-div">
+              <div class="canvas-div-chart"> Verdicts of {{userhandle}} </div>
+              <canvas id="verdictChart"></canvas>
             </div>
-            <div class="canvas-div-text canvas-div-text-hover">
-              <span>Solved :</span>
-              <span class="user-handle">{{stats[1]}}</span>
-            </div>
-            <div class="canvas-div-text canvas-div-text-hover">
-              <span>Average attempts :</span>
-              <span class="user-handle">{{stats[2]}}</span>
-            </div>
-          </div>
-          <div style="width:1rem"> </div>
-          <div class="canvas-div canvas-div-stats">
-            <div class="canvas-div-text" style="background: #63809B;">
-              <span>Contests of</span>
-              <span class="user-handle">{{userhandle}}</span>
-            </div>
-            <div class="canvas-div-text canvas-div-text-hover">
-              <span>Number of contests:</span>
-              <span class="user-handle">{{info[0]}}</span>
-            </div>
-            <div class="canvas-div-text canvas-div-text-hover">
-              <span>Best Rank:</span>
-              <span class="user-handle">{{info[1]}}</span>
-            </div>
-            <div class="canvas-div-text canvas-div-text-hover">
-              <span>Worst Rank:</span>
-              <span class="user-handle">{{info[2]}}</span>
-            </div>
-            <div class="canvas-div-text canvas-div-text-hover">
-              <span>Max Up:</span>
-              <span class="user-handle">{{info[3]}}</span>
-            </div>
-            <div class="canvas-div-text canvas-div-text-hover">
-              <span>Max Down:</span>
-              <span class="user-handle">{{info[4]}}</span>
+            <div style="width:2rem"> </div>
+            <div class="canvas-div">
+              <div class="canvas-div-chart"> Languages of {{userhandle}} </div>
+              <canvas id="langChart"></canvas>
             </div>
           </div>
         </div>
-      </div>
-
-      <!--Verdict PieChart of User-->
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        var verdict_counts = {{ verdict_counts | tojson }};
-        
-        var labels = Object.keys(verdict_counts);
-        var data = Object.values(verdict_counts);
-        <!--
-        var totSum = data.reduce((acc, curr) => acc + curr, 0);
-        console.log(totSum)
-        var dtau = data.map(value => `${((value * 100) / totSum).toFixed(1)}%`);
-        var duta = data.map((value, index) => `${data[index]}: ${dtau[index]}`);
-        console.log(dtau);
-        console.log(data);
-        console.log(duta);
-        -->
-
-        var ctx = document.getElementById('verdictChart').getContext('2d');
-        var pieChart = new Chart(ctx, {
-          type: 'pie',
-          data: {
-            labels: labels,
-            datasets: [{
-              label: '',
-              data: data,
-              backgroundColor: [
-                'rgb(0, 128, 0)',
-                'rgb(178, 190, 181)',
-                'rgb(255, 191, 0)',
-                'rgb(242, 140, 40)',
-                'rgb(0, 71, 171)',
-                'rgb(210, 43, 43)'
-              ],
-              borderWidth: 1,
-              hoverOffset: 4
-            }]
-          },
-          options: {
-            responsive: false,
-            maintainAspectRatio: true
-          }
-        });
-        });
-      </script>
-
-      <!--Language PieChart of User-->
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        var ctx = document.getElementById('langChart').getContext('2d');
-        var lang_counts = {{ lang_counts | tojson }};
-        
-        var labels = lang_counts.map(function(item) {
-            return item[0] + ": " + item[1];
-        });
-        var data = lang_counts.map(function(item) {
-            return item[1];
-        });
-        var totFreq = lang_counts.reduce(function(total, item) {
-          return total + item[1];
-        }, 0);
-        var percentage = data.map(function(value) {
-          return ((value * 100) / totFreq).toFixed(1);
-        });
-        console.log(data)
-
-        var pieChart = new Chart(ctx, {
+  
+        <!--Tags, problem-rating, level chart of user-->
+        <div style="padding-top: 2rem;">
+          
+          <div class="canvas-div-large">
+            <div class="canvas-div-chart"> Tags of {{userhandle}} </div>
+            <canvas id="donutChart" style="height: 40rem; width: 40rem;"></canvas>
+          </div>
+  
+          <br>
+  
+          <div class="canvas-div-large">
+            <div class="canvas-div-chart"> Problem ratings of {{userhandle}} </div>
+            <canvas id="levelChart" style="height: 15rem; width: 40rem;"></canvas>
+          </div>
+  
+          <br>
+  
+          <div class="canvas-div-large">
+            <div class="canvas-div-chart"> Levels of {{userhandle}} </div>
+            <canvas id="ratingChart" style="height:15rem; width: 40rem"></canvas>
+          </div>
+        </div>
+  
+        <!--stats report of user-->
+        <div style="padding-top: 2rem;">
+          <div class="canvas-verdict-lang">
+            <div class="canvas-div canvas-div-stats">
+              <div class="canvas-div-text" style="background: #63809B;"> 
+                <span>Some stats of</span>
+                <span class="user-handle">{{userhandle}} </span>
+              </div>
+              <div class="canvas-div-text canvas-div-text-hover">
+                <span>Solved :</span>
+                <span class="user-handle">{{stats[1]}}</span>
+              </div>
+              <div class="canvas-div-text canvas-div-text-hover">
+                <span>Average attempts :</span>
+                <span class="user-handle">{{stats[2]}}</span>
+              </div>
+            </div>
+            <div style="width:1rem"> </div>
+            <div class="canvas-div canvas-div-stats">
+              <div class="canvas-div-text" style="background: #63809B;">
+                <span>Contests of</span>
+                <span class="user-handle">{{userhandle}}</span>
+              </div>
+              <div class="canvas-div-text canvas-div-text-hover">
+                <span>Number of contests:</span>
+                <span class="user-handle">{{info[0]}}</span>
+              </div>
+              <div class="canvas-div-text canvas-div-text-hover">
+                <span>Best Rank:</span>
+                <span class="user-handle">{{info[1]}}</span>
+              </div>
+              <div class="canvas-div-text canvas-div-text-hover">
+                <span>Worst Rank:</span>
+                <span class="user-handle">{{info[2]}}</span>
+              </div>
+              <div class="canvas-div-text canvas-div-text-hover">
+                <span>Max Up:</span>
+                <span class="user-handle">{{info[3]}}</span>
+              </div>
+              <div class="canvas-div-text canvas-div-text-hover">
+                <span>Max Down:</span>
+                <span class="user-handle">{{info[4]}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!--Verdict PieChart of User-->
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+          var verdict_counts = {{ verdict_counts | tojson }};
+          
+          var labels = Object.keys(verdict_counts);
+          var data = Object.values(verdict_counts);
+          <!--
+          var totSum = data.reduce((acc, curr) => acc + curr, 0);
+          console.log(totSum)
+          var dtau = data.map(value => `${((value * 100) / totSum).toFixed(1)}%`);
+          var duta = data.map((value, index) => `${data[index]}: ${dtau[index]}`);
+          console.log(dtau);
+          console.log(data);
+          console.log(duta);
+          -->
+  
+          var ctx = document.getElementById('verdictChart').getContext('2d');
+          var pieChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: labels,
-                datasets: [{
-                  label: '%',
-                  data: percentage,
-                    backgroundColor: [
-                      'rgb(0, 128, 128)',
-                      'rgb(80, 200, 120)',
-                      'rgb(50, 205, 50)',
-                      'rgb(0, 128, 0)',
-                      'rgb(255, 215, 0)',
-                      'rgb(218, 165, 32)',
-                      'rgb(236, 88, 0)',
-                      'rgb(139, 64, 0)',
-                      'rgb(138, 154, 91)',
-                      'rgb(54, 69, 79)',
-                      'rgb(69, 75, 27)',
-                      'rgb(9, 121, 105)',
-                      'rgb(2, 48, 32)',
-                      'rgb(25, 25, 112)',
-                      'rgb(255, 49, 49)',
-                      'rgb(159, 43, 104)',
-                      'rgb(227, 11, 92)',
-                      'rgb(127, 0, 255)',
-                      'rgb(64, 224, 208)'
-                    ],
-                    borderWidth: 1,
-                    hoverOffset: 4
-                }]
+              labels: labels,
+              datasets: [{
+                label: '',
+                data: data,
+                backgroundColor: [
+                  'rgb(0, 128, 0)',
+                  'rgb(178, 190, 181)',
+                  'rgb(255, 191, 0)',
+                  'rgb(242, 140, 40)',
+                  'rgb(0, 71, 171)',
+                  'rgb(210, 43, 43)'
+                ],
+                borderWidth: 1,
+                hoverOffset: 4
+              }]
             },
             options: {
-              tooltips: {
-                  callbacks: {
-                      label: function(tooltipItem, data) {
-                          var datasetLabel = data.labels[tooltipItem.index];
-                          return datasetLabel;
-                      }
-                  }
-              },
               responsive: false,
               maintainAspectRatio: true
             }
-        });
-        });
-      </script>
-
-      <!--Tag Doughnut Chart of User-->
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        var ctx = document.getElementById('donutChart').getContext('2d');
-        var sortedTagFrequencies = {{ tag_frequencies | tojson }};
-        
-        var labels = sortedTagFrequencies.map(function(item) {
-            return item[0] + ": " + item[1];
-        });
-        var data = sortedTagFrequencies.map(function(item) {
-            return item[1];
-        });
-        var totFreq = sortedTagFrequencies.reduce(function(total, item) {
-          return total + item[1];
-        }, 0);
-        var percentage = data.map(function(value) {
-          return ((value * 100) / totFreq).toFixed(1);
-        });
-
-        var donutChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: labels,
-                datasets: [{
-                  label: '%',
-                  data: percentage,
-                    backgroundColor: [
-                        'rgb(255, 49, 49)',
-                        'rgb(159, 43, 104)',
-                        'rgb(227, 11, 92)',
-                        'rgb(127, 0, 255)',
-                        'rgb(64, 224, 208)',
+          });
+          });
+        </script>
+  
+        <!--Language PieChart of User-->
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+          var ctx = document.getElementById('langChart').getContext('2d');
+          var lang_counts = {{ lang_counts | tojson }};
+          
+          var labels = lang_counts.map(function(item) {
+              return item[0] + ": " + item[1];
+          });
+          var data = lang_counts.map(function(item) {
+              return item[1];
+          });
+          var totFreq = lang_counts.reduce(function(total, item) {
+            return total + item[1];
+          }, 0);
+          var percentage = data.map(function(value) {
+            return ((value * 100) / totFreq).toFixed(1);
+          });
+          console.log(data)
+  
+          var pieChart = new Chart(ctx, {
+              type: 'pie',
+              data: {
+                  labels: labels,
+                  datasets: [{
+                    label: '%',
+                    data: percentage,
+                      backgroundColor: [
                         'rgb(0, 128, 128)',
                         'rgb(80, 200, 120)',
                         'rgb(50, 205, 50)',
@@ -259,114 +274,212 @@
                         'rgb(69, 75, 27)',
                         'rgb(9, 121, 105)',
                         'rgb(2, 48, 32)',
-                        'rgb(25, 25, 112)'
-                    ],
-                    borderWidth: 1,
-                    hoverOffset: 4
-                }]
-            },
-            options: {
-              tooltips: {
-                  callbacks: {
-                      label: function(tooltipItem, data) {
-                          var datasetLabel = data.labels[tooltipItem.index];
-                          return datasetLabel;
-                      }
-                  }
+                        'rgb(25, 25, 112)',
+                        'rgb(255, 49, 49)',
+                        'rgb(159, 43, 104)',
+                        'rgb(227, 11, 92)',
+                        'rgb(127, 0, 255)',
+                        'rgb(64, 224, 208)'
+                      ],
+                      borderWidth: 1,
+                      hoverOffset: 4
+                  }]
               },
-              responsive: false,
-              maintainAspectRatio: true
-            }
-        });
-        });
-      </script>
-
-      <!--Rating BarChart of User-->
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        var levelLabels = [];
-        var levelData = [];
-        level_frequencies = {{level_frequencies | tojson}}
-        // Assuming level_frequencies is already defined
-        level_frequencies.forEach(function(item) {
-            //console.log(item);
-            levelLabels.push(item[0]); // Level
-            levelData.push(item[1]); // Frequency
-        });
-
-        var barCtx = document.getElementById('ratingChart').getContext('2d');
-        var barChart = new Chart(barCtx, {
-            type: 'bar',
-            data: {
-                labels: levelLabels,
-                datasets: [{
-                    label: 'Solved',
-                    data: levelData,
-                    backgroundColor: 'rgb(237, 234, 222)',
-                    borderWidth: 1,
-                    hoverOffset: 4
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
+              options: {
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var datasetLabel = data.labels[tooltipItem.index];
+                            return datasetLabel;
                         }
-                    }]
-                }
-            }
-        });
-        });
-      </script>
-
-      <!--Level BarChart of User-->
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        var ratingLabels = [];
-        var ratingData = [];
-        rating_frequencies = {{rating_frequencies | tojson}}
-        // Assuming rating_frequencies is already defined
-        rating_frequencies.forEach(function(item) {
-            //console.log(item);
-            ratingLabels.push(item[0]); // Level
-            ratingData.push(item[1]); // Frequency
-        });
-
-        var barCtx1 = document.getElementById('levelChart').getContext('2d');
-        var barChart = new Chart(barCtx1, {
-            type: 'bar',
-            data: {
-                labels: ratingLabels,
-                datasets: [{
-                    label: 'Solved',
-                    data: ratingData,
-                    backgroundColor: 'rgb(237, 234, 222)',
-                    borderWidth: 1,
-                    hoverOffset: 4
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
+                    }
+                },
+                responsive: false,
+                maintainAspectRatio: true
+              }
+          });
+          });
+        </script>
+  
+        <!--Tag Doughnut Chart of User-->
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+          var ctx = document.getElementById('donutChart').getContext('2d');
+          var sortedTagFrequencies = {{ tag_frequencies | tojson }};
+          
+          var labels = sortedTagFrequencies.map(function(item) {
+              return item[0] + ": " + item[1];
+          });
+          var data = sortedTagFrequencies.map(function(item) {
+              return item[1];
+          });
+          var totFreq = sortedTagFrequencies.reduce(function(total, item) {
+            return total + item[1];
+          }, 0);
+          var percentage = data.map(function(value) {
+            return ((value * 100) / totFreq).toFixed(1);
+          });
+  
+          var donutChart = new Chart(ctx, {
+              type: 'doughnut',
+              data: {
+                  labels: labels,
+                  datasets: [{
+                    label: '%',
+                    data: percentage,
+                      backgroundColor: [
+                          'rgb(255, 49, 49)',
+                          'rgb(159, 43, 104)',
+                          'rgb(227, 11, 92)',
+                          'rgb(127, 0, 255)',
+                          'rgb(64, 224, 208)',
+                          'rgb(0, 128, 128)',
+                          'rgb(80, 200, 120)',
+                          'rgb(50, 205, 50)',
+                          'rgb(0, 128, 0)',
+                          'rgb(255, 215, 0)',
+                          'rgb(218, 165, 32)',
+                          'rgb(236, 88, 0)',
+                          'rgb(139, 64, 0)',
+                          'rgb(138, 154, 91)',
+                          'rgb(54, 69, 79)',
+                          'rgb(69, 75, 27)',
+                          'rgb(9, 121, 105)',
+                          'rgb(2, 48, 32)',
+                          'rgb(25, 25, 112)'
+                      ],
+                      borderWidth: 1,
+                      hoverOffset: 4
+                  }]
+              },
+              options: {
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var datasetLabel = data.labels[tooltipItem.index];
+                            return datasetLabel;
                         }
-                    }]
-                }
-            }
-        });
-        });
+                    }
+                },
+                responsive: false,
+                maintainAspectRatio: true
+              }
+          });
+          });
+        </script>
+  
+        <!--Rating BarChart of User-->
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+          var levelLabels = [];
+          var levelData = [];
+          level_frequencies = {{level_frequencies | tojson}}
+          // Assuming level_frequencies is already defined
+          level_frequencies.forEach(function(item) {
+              //console.log(item);
+              levelLabels.push(item[0]); // Level
+              levelData.push(item[1]); // Frequency
+          });
+  
+          var barCtx = document.getElementById('ratingChart').getContext('2d');
+          var barChart = new Chart(barCtx, {
+              type: 'bar',
+              data: {
+                  labels: levelLabels,
+                  datasets: [{
+                      label: 'Solved',
+                      data: levelData,
+                      backgroundColor: 'rgb(237, 234, 222)',
+                      borderWidth: 1,
+                      hoverOffset: 4
+                  }]
+              },
+              options: {
+                  scales: {
+                      yAxes: [{
+                          ticks: {
+                              beginAtZero: true
+                          }
+                      }]
+                  }
+              }
+          });
+          });
+        </script>
+  
+        <!--Level BarChart of User-->
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+          var ratingLabels = [];
+          var ratingData = [];
+          rating_frequencies = {{rating_frequencies | tojson}}
+          // Assuming rating_frequencies is already defined
+          rating_frequencies.forEach(function(item) {
+              //console.log(item);
+              ratingLabels.push(item[0]); // Level
+              ratingData.push(item[1]); // Frequency
+          });
+  
+          var barCtx1 = document.getElementById('levelChart').getContext('2d');
+          var barChart = new Chart(barCtx1, {
+              type: 'bar',
+              data: {
+                  labels: ratingLabels,
+                  datasets: [{
+                      label: 'Solved',
+                      data: ratingData,
+                      backgroundColor: 'rgb(237, 234, 222)',
+                      borderWidth: 1,
+                      hoverOffset: 4
+                  }]
+              },
+              options: {
+                  scales: {
+                      yAxes: [{
+                          ticks: {
+                              beginAtZero: true
+                          }
+                      }]
+                  }
+              }
+          });
+          });
+  
+        </script>
+        {% else %}
+          <div style="height: 7rem"></div>
+        {% endif %}
+      </div>
+    </header>
+    
+  </main>
+    
+  <div class="visit-count">Visit Count: {{visit_count}}</div>
 
-      </script>
-      {% else %}
-        <div style="height: 7rem"></div>
-      {% endif %}
+  <!-- ======= Footer ======= -->
+  <footer id="footer" style="padding-top: 0;">
+    <header id="header" class="d-flex align-items-center" style="padding-top: 0; padding-bottom: 1rem;">
+      <div class="container d-flex flex-column align-items-center">
+        <div class="social-links text-center">
+          <a href="https://github.com/guru-divine" target="__blank" class="github"><i class="bi bi-github"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=100023492681334" target="__blank" class="facebook"><i class="bi bi-facebook"></i></a>
+          <a href="https://www.instagram.com/the.free_guy/" target="__blank" class="instagram"><i class="bi bi-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/divya-raj-iitkgp/" target="__blank" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          <a href="#" target="__blank" class="discord"><i class="bi bi-discord"></i></a>
+        </div>
+      </div>
+    </header>
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>DCode</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        Designed by <a href="https://github.com/guru-divine" target="__blank">Divya Raj</a>
+      </div>
     </div>
-  </header>
-  
-</main>
-  
-  
+  </footer><!-- End #footer -->
 
-{% endblock form %}
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+</body>
+
+</html>
