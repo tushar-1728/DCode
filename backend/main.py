@@ -278,7 +278,7 @@ def codeforces():
         prob_rating = 1500
 
     with open(f'cf-rating-problems/{prob_rating}.json', 'r') as f:
-        problems = json.load(f)[:100]  # Load the first hundred problems
+        problems = json.load(f)
     
     prob_rating = int(prob_rating)
 

@@ -1246,29 +1246,5 @@
         "math",
         "number theory"
     ]
-},
-{
-    "contestId": 576,
-    "index": "E",
-    "name": "Painting Edges",
-    "type": "PROGRAMMING",
-    "points": 2750.0,
-    "rating": 3300,
-    "tags": [
-        "binary search",
-        "data structures"
-    ]
-},
-{
-    "contestId": 526,
-    "index": "G",
-    "name": "Spiders Evil Plan",
-    "type": "PROGRAMMING",
-    "points": 3000.0,
-    "rating": 3300,
-    "tags": [
-        "greedy",
-        "trees"
-    ]
 }
 ]
