@@ -6,6 +6,7 @@ from collections import Counter
 
 import os
 import json, requests
+import global_maps
 
 
 # Load environment variables from .env file
@@ -65,24 +66,28 @@ def get_atcoder_handle_rank_color(rating):
 
     return rank, color
     
-def get_user_verdict(probs, problems):
+def get_user_verdict(probs, problems, prob_rating):
     user_verdicts = {}
-    key_counter = 1
     correct_cnt = 0
+    key_counter = 1
+    map_name = f"mapOfProbRating{prob_rating}"
+    prob_rating_map = getattr(global_maps, map_name, None)
 
-    for problem in problems:
-        verdict = "NA"
-        for prob in probs:
-            if "contestId" in prob["problem"] and prob["problem"]["contestId"] == problem["contestId"] and prob["problem"]["index"] == problem["index"]:
+    if prob_rating_map is None:
+        raise ValueError(f"Global dictionary {map_name} does not exist. Check if it was correctly initialized.")
+
+    for prob in probs:
+        if "contestId" in prob["problem"]:
+            contestIdFull = str(prob["problem"]["contestId"]) + prob["problem"]["index"]
+            if contestIdFull in prob_rating_map:
+                idx = prob_rating_map[contestIdFull]
+                if idx in user_verdicts and user_verdicts[idx] == "AC":
+                    continue
                 if prob["verdict"] == "OK":
-                    verdict = "AC"
+                    user_verdicts[idx] = "AC"
                     correct_cnt += 1
-                    break
                 else:
-                    verdict = "WA"
-
-        user_verdicts[key_counter] = verdict
-        key_counter += 1
+                    user_verdicts[idx] = "WA"
 
     return user_verdicts, correct_cnt
 
@@ -260,10 +265,10 @@ def codeforces():
                 prob_rating = list_rating
 
             with open(f'cf-rating-problems/{list_rating}.json', 'r') as f:
-                problems = json.load(f)[:100]  # Load the first hundred problems
+                problems = json.load(f)
 
             correct_cnt = 0
-            user_verdicts, correct_cnt = get_user_verdict(probs["result"], problems)
+            user_verdicts, correct_cnt = get_user_verdict(probs["result"], problems, list_rating)
 
             prob_rating = int(prob_rating)
             slide_num = get_slide_num(prob_rating)
