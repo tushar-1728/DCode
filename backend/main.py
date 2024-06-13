@@ -66,10 +66,9 @@ def get_atcoder_handle_rank_color(rating):
 
     return rank, color
     
-def get_user_verdict(probs, problems, prob_rating):
+def get_user_verdict(probs, prob_rating):
     user_verdicts = {}
     correct_cnt = 0
-    key_counter = 1
     map_name = f"mapOfProbRating{prob_rating}"
     prob_rating_map = getattr(global_maps, map_name, None)
 
@@ -91,24 +90,24 @@ def get_user_verdict(probs, problems, prob_rating):
 
     return user_verdicts, correct_cnt
 
-def get_user_verdict_atcoder(probs, problems):
+def get_user_verdict_atcoder(probs, prob_rating):
     user_verdicts = {}
-    key_counter = 1
     correct_cnt = 0
+    map_name = f"mapOfAtcoderProbRating{prob_rating}"
+    prob_rating_map = getattr(global_maps, map_name, None)
 
-    for problem in problems:
-        verdict = "NA"
-        for prob in probs:
-            if "problem_id" and prob["problem_id"] == problem["id"]:
+    for prob in probs:
+        if "problem_id":
+            contestIdFull = prob["problem_id"]
+            if contestIdFull in prob_rating_map:
+                idx = prob_rating_map[contestIdFull]
+                if idx in user_verdicts and user_verdicts[idx] == "AC":
+                    continue
                 if prob["result"] == "AC":
-                    verdict = "AC"
+                    user_verdicts[idx] = "AC"
                     correct_cnt += 1
-                    break
                 else:
-                    verdict = "WA"
-
-        user_verdicts[key_counter] = verdict
-        key_counter += 1
+                    user_verdicts[idx] = "WA"
 
     return user_verdicts, correct_cnt
 
@@ -268,7 +267,7 @@ def codeforces():
                 problems = json.load(f)
 
             correct_cnt = 0
-            user_verdicts, correct_cnt = get_user_verdict(probs["result"], problems, list_rating)
+            user_verdicts, correct_cnt = get_user_verdict(probs["result"], list_rating)
 
             prob_rating = int(prob_rating)
             slide_num = get_slide_num(prob_rating)
@@ -333,10 +332,10 @@ def atcoder():
             slide_num = get_slide_num_atcoder(prob_rating)
 
             with open(f'atcoder-rating-problems/{user_rating}.json', 'r') as f:
-                problems = json.load(f)[:100]  # Load the first hundred problems
+                problems = json.load(f)
 
             correct_cnt = 0
-            user_verdicts, correct_cnt = get_user_verdict_atcoder(probs, problems)
+            user_verdicts, correct_cnt = get_user_verdict_atcoder(probs, prob_rating)
 
             return render_template("atcoder.html", userhandle=userhandle, prob_rating=prob_rating, rank=rank, 
                                    ratingColor=ratingColor, visit_count=visit_count, max_rating=max_rating, rating=rating, problems=problems,
@@ -351,7 +350,7 @@ def atcoder():
     slide_num = get_slide_num_atcoder(prob_rating)
     
     with open(f'atcoder-rating-problems/{user_rating}.json', 'r') as f:
-        problems = json.load(f)[:100]  # Load the first hundred problems
+        problems = json.load(f)
     return render_template("atcoder.html", userhandle='', prob_rating=prob_rating, problems=problems, user_verdicts={}, visit_count=visit_count, correct_cnt=0, slide_num=slide_num)
 
 
