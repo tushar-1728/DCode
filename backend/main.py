@@ -167,7 +167,7 @@ def get_stats(probs):
     return tag_counts, sorted_level_frequencies, sorted_problem_rating_frequencies, stats, lang_counts, verdict_frequency
 
 def get_user_info(user_infos):
-    info = [0] * 5 # #contests, #best_rank, #worst_rank, max_up, max_down
+    info = [0] * 7 # #contests, #best_rank, #worst_rank, max_up, max_down, max_rating, current_rating
     info[1] = info[4] = 100000
     info[3] = -10000
     for user_info in user_infos:
@@ -176,6 +176,8 @@ def get_user_info(user_infos):
         info[2] = max(user_info["rank"], info[2])
         info[3] = max(user_info["newRating"]-user_info["oldRating"], info[3])
         info[4] = min(user_info["newRating"]-user_info["oldRating"], info[4])
+        info[5] = max(info[5], user_info["newRating"])
+        info[6] = user_info["newRating"]
     return info
 
 def find_max_and_cur_rating_Atcoder(data):
@@ -337,7 +339,7 @@ def atcoder():
             return render_template("atcoder.html", userhandle=userhandle, prob_rating=prob_rating, rank=rank, 
                                    ratingColor=ratingColor, visit_count=visit_count, max_rating=max_rating, rating=rating, problems=problems,
                                    slide_num=slide_num, user_verdicts=user_verdicts, correct_cnt=correct_cnt)
-    user_rating = 200
+    user_rating = 600
     if prob_rating:
         user_rating = prob_rating
     else:
@@ -361,7 +363,7 @@ def codechef():
     return render_template("codechef.html", visit_count=visit_count)
 
 
-@app.route("/cfvisualizer", methods=['POST', 'GET'])
+@app.route("/codeforces-visualizer", methods=['POST', 'GET'])
 def cfvisualizer():
     visit_count = get_visit_count()
     visit_count += 1
@@ -393,9 +395,9 @@ def cfvisualizer():
             # for lang, count in lang_counts:
             #     print(f"Language: {lang}, Count: {count}")
 
-            return render_template("cfvisualizer.html", userhandle=userhandle, lang_counts=lang_counts, verdict_counts=verdict_counts, stats=stats, info=info, tag_frequencies=tag_frequencies, level_frequencies=level_frequencies, rating_frequencies=rating_frequencies, visit_count=visit_count)
+            return render_template("codeforces-visualizer.html", userhandle=userhandle, lang_counts=lang_counts, verdict_counts=verdict_counts, stats=stats, info=info, tag_frequencies=tag_frequencies, level_frequencies=level_frequencies, rating_frequencies=rating_frequencies, visit_count=visit_count)
 
-    return render_template("cfvisualizer.html", userhandle='', visit_count=visit_count)
+    return render_template("codeforces-visualizer.html", userhandle='', visit_count=visit_count)
 
 @app.route('/your-flask-endpoint', methods=['POST'])
 def receive_selected_tags():

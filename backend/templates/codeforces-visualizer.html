@@ -52,9 +52,21 @@
       if (window.innerWidth < 700) {
         // Hide content and show warning message
         document.body.innerHTML = `
-          <div class="desktop-warning">
-            <h1>Desktop View Required</h1>
-            <p>This page is best viewed on a desktop. Please switch to a desktop device to access the content.</p>
+            <div class="desktop-warning">
+              <div id="topbar" class="d-flex align-items-center fixed-top">
+              <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
+                <div class="align-items-center d-md-flex">
+                  <a href="/" style="color: white; font-size: larger";>
+                    <b>&lt;/&gt;</b> DCode
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div style="height:2rem"></div>
+            <div>
+              <h1>Desktop View Required</h1>
+              <p>This page is best viewed on a desktop. Please switch to a desktop device to access the content.</p>
+            </div>
           </div>
         `;
       }
@@ -94,7 +106,7 @@
     <header id="header" class="d-flex align-items-center">
       <div class="container d-flex flex-column align-items-center">
         <div class="subscribe">
-          <form action="/cfvisualizer" method="post" role="form">
+          <form action="/codeforces-visualizer" method="post" role="form">
             <div class="subscribe-form" style="right:0">
               <input type="text" name="userhandle" placeholder="CF Handle" value="{{ userhandle }}" style="border:none; outline: none; background: rgb(198, 198, 198); padding-left:1rem;" required>
               <input type="submit" value="🔍">
@@ -109,12 +121,12 @@
           <div class="canvas-verdict-lang">
             <div class="canvas-div">
               <div class="canvas-div-chart"> Verdicts of {{userhandle}} </div>
-              <div id="verdictChart"></div>
+              <div id="verdictChart" style="width: 17rem;"></div>
             </div>
-            <div style="width:2rem"> </div>
+            <div style="width:1.8rem"> </div>
             <div class="canvas-div">
               <div class="canvas-div-chart"> Languages of {{userhandle}} </div>
-              <div id="langChart"></div>
+              <div id="langChart" style="width: 17rem;"></div>
             </div>
           </div>
         </div>
@@ -146,7 +158,7 @@
         <div style="padding-top: 2rem;">
           <div class="canvas-verdict-lang">
             <div class="canvas-div canvas-div-stats">
-              <div class="canvas-div-text" style="background: #63809B;"> 
+              <div class="canvas-div-text" style="background: #63809B; border-top-left-radius: 8px; border-top-right-radius: 8px;"> 
                 <span>Some stats of</span>
                 <span class="user-handle">{{userhandle}} </span>
               </div>
@@ -158,10 +170,18 @@
                 <span>Average attempts :</span>
                 <span class="user-handle">{{stats[2]}}</span>
               </div>
+              <div class="canvas-div-text canvas-div-text-hover">
+                <span>Max Rating :</span>
+                <span class="user-handle">{{info[5]}}</span>
+              </div>
+              <div class="canvas-div-text canvas-div-text-hover">
+                <span>Current Rating :</span>
+                <span class="user-handle">{{info[6]}}</span>
+              </div>
             </div>
             <div style="width:0.5rem"> </div>
             <div class="canvas-div canvas-div-stats">
-              <div class="canvas-div-text" style="background: #63809B;">
+              <div class="canvas-div-text" style="background: #63809B; border-top-left-radius: 8px; border-top-right-radius: 8px;">
                 <span>Contests of</span>
                 <span class="user-handle">{{userhandle}}</span>
               </div>
