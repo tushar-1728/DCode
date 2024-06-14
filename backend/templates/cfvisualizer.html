@@ -22,6 +22,7 @@
   <link href="static/assets/css/style.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.27.3"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
   <style>
     /* Hide main content on small screens */
@@ -95,7 +96,7 @@
         <div class="subscribe">
           <form action="/cfvisualizer" method="post" role="form">
             <div class="subscribe-form" style="right:0">
-              <input type="text" name="userhandle" placeholder="CF Handle" value="{{ userhandle }}" style="border:none; outline: none; background: rgb(198, 198, 198);" required>
+              <input type="text" name="userhandle" placeholder="CF Handle" value="{{ userhandle }}" style="border:none; outline: none; background: rgb(198, 198, 198); padding-left:1rem;" required>
               <input type="submit" value="🔍">
             </div>
           </form>
@@ -103,17 +104,17 @@
   
   
         {% if userhandle != '' %}
-        <!--verdict and language chart-->
+        <!--verdict and language chart--> 
         <div style="padding-top: 2rem;">
           <div class="canvas-verdict-lang">
             <div class="canvas-div">
               <div class="canvas-div-chart"> Verdicts of {{userhandle}} </div>
-              <canvas id="verdictChart"></canvas>
+              <div id="verdictChart"></div>
             </div>
             <div style="width:2rem"> </div>
             <div class="canvas-div">
               <div class="canvas-div-chart"> Languages of {{userhandle}} </div>
-              <canvas id="langChart"></canvas>
+              <div id="langChart"></div>
             </div>
           </div>
         </div>
@@ -123,7 +124,7 @@
           
           <div class="canvas-div-large">
             <div class="canvas-div-chart"> Tags of {{userhandle}} </div>
-            <canvas id="donutChart" style="height: 40rem; width: 40rem;"></canvas>
+            <div id="tagChart" style="height: 27rem; width: 40rem;"></div>
           </div>
   
           <br>
@@ -158,7 +159,7 @@
                 <span class="user-handle">{{stats[2]}}</span>
               </div>
             </div>
-            <div style="width:1rem"> </div>
+            <div style="width:0.5rem"> </div>
             <div class="canvas-div canvas-div-stats">
               <div class="canvas-div-text" style="background: #63809B;">
                 <span>Contests of</span>
@@ -188,183 +189,177 @@
           </div>
         </div>
   
-        <!--Verdict PieChart of User-->
-        <script>
+        <!--Verdict PieChart of user-->
+        <script type="text/javascript">
           document.addEventListener('DOMContentLoaded', function() {
-          var verdict_counts = {{ verdict_counts | tojson }};
-          
-          var labels = Object.keys(verdict_counts);
-          var data = Object.values(verdict_counts);
-          <!--
-          var totSum = data.reduce((acc, curr) => acc + curr, 0);
-          console.log(totSum)
-          var dtau = data.map(value => `${((value * 100) / totSum).toFixed(1)}%`);
-          var duta = data.map((value, index) => `${data[index]}: ${dtau[index]}`);
-          console.log(dtau);
-          console.log(data);
-          console.log(duta);
-          -->
-  
-          var ctx = document.getElementById('verdictChart').getContext('2d');
-          var pieChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-              labels: labels,
-              datasets: [{
-                label: '',
-                data: data,
-                backgroundColor: [
-                  'rgb(0, 128, 0)',
-                  'rgb(178, 190, 181)',
-                  'rgb(255, 191, 0)',
-                  'rgb(242, 140, 40)',
-                  'rgb(0, 71, 171)',
-                  'rgb(210, 43, 43)'
-                ],
-                borderWidth: 1,
-                hoverOffset: 4
-              }]
-            },
-            options: {
-              responsive: false,
-              maintainAspectRatio: true
+            google.charts.load('current', {'packages':['corechart']});
+    
+            google.charts.setOnLoadCallback(drawChart);
+    
+            function drawChart() {
+              var verdict_counts = {{ verdict_counts | tojson }}
+    
+              // Convert data to the format required by Google Charts
+              var dataArray = [['Verdict', 'Count']];
+              for (var key in verdict_counts) {
+                if (verdict_counts.hasOwnProperty(key)) {
+                  dataArray.push([key, verdict_counts[key]]);
+                }
+              }
+    
+              var data = google.visualization.arrayToDataTable(dataArray);
+    
+              // Set chart options
+              var options = {
+                backgroundColor: 'transparent',
+                pieSliceText: 'label',
+                is3D: true,
+                legend: 'none',
+                chartArea: {width: '90%', height: '100%'},
+                colors: [
+                  'rgb(0, 128, 0)',   // AC
+                  'rgb(178, 190, 181)', // WA
+                  'rgb(255, 191, 0)', // TLE
+                  'rgb(242, 140, 40)', // MLE
+                  'rgb(0, 71, 171)',  // CE
+                  'rgb(210, 43, 43)'  // RE
+                ]
+              };
+    
+              // Instantiate and draw the chart
+              var chart = new google.visualization.PieChart(document.getElementById('verdictChart'));
+              chart.draw(data, options);
             }
           });
-          });
         </script>
-  
+
         <!--Language PieChart of User-->
-        <script>
+        <script type="text/javascript">
           document.addEventListener('DOMContentLoaded', function() {
-          var ctx = document.getElementById('langChart').getContext('2d');
-          var lang_counts = {{ lang_counts | tojson }};
-          
-          var labels = lang_counts.map(function(item) {
-              return item[0] + ": " + item[1];
-          });
-          var data = lang_counts.map(function(item) {
-              return item[1];
-          });
-          var totFreq = lang_counts.reduce(function(total, item) {
-            return total + item[1];
-          }, 0);
-          var percentage = data.map(function(value) {
-            return ((value * 100) / totFreq).toFixed(1);
-          });
-          console.log(data)
-  
-          var pieChart = new Chart(ctx, {
-              type: 'pie',
-              data: {
-                  labels: labels,
-                  datasets: [{
-                    label: '%',
-                    data: percentage,
-                      backgroundColor: [
-                        'rgb(0, 128, 128)',
-                        'rgb(80, 200, 120)',
-                        'rgb(50, 205, 50)',
-                        'rgb(0, 128, 0)',
-                        'rgb(255, 215, 0)',
-                        'rgb(218, 165, 32)',
-                        'rgb(236, 88, 0)',
-                        'rgb(139, 64, 0)',
-                        'rgb(138, 154, 91)',
-                        'rgb(54, 69, 79)',
-                        'rgb(69, 75, 27)',
-                        'rgb(9, 121, 105)',
-                        'rgb(2, 48, 32)',
-                        'rgb(25, 25, 112)',
-                        'rgb(255, 49, 49)',
-                        'rgb(159, 43, 104)',
-                        'rgb(227, 11, 92)',
-                        'rgb(127, 0, 255)',
-                        'rgb(64, 224, 208)'
-                      ],
-                      borderWidth: 1,
-                      hoverOffset: 4
-                  }]
-              },
-              options: {
-                tooltips: {
-                    callbacks: {
-                        label: function(tooltipItem, data) {
-                            var datasetLabel = data.labels[tooltipItem.index];
-                            return datasetLabel;
-                        }
-                    }
-                },
-                responsive: false,
-                maintainAspectRatio: true
+            google.charts.load('current', {'packages':['corechart']});
+    
+            google.charts.setOnLoadCallback(drawChart1);
+    
+            function drawChart1() {
+              var lang_counts = {{ lang_counts | tojson }}
+              var sortedLang = Object.entries(lang_counts).sort(([,a], [,b]) => b - a);
+              lang_counts = Object.fromEntries(sortedLang);
+    
+              // Convert data to the format required by Google Charts
+              var dataArray = [['Lang', 'Count']];
+              for (var key in lang_counts) {
+                if (lang_counts.hasOwnProperty(key)) {
+                  dataArray.push([key, lang_counts[key]]);
+                }
               }
-          });
+    
+              var data = google.visualization.arrayToDataTable(dataArray);
+
+              // Set chart options
+              var options = {
+                backgroundColor: 'transparent',
+                pieSliceText: 'label',
+                is3D: true,
+                legend: 'none',
+                chartArea: {width: '90%', height: '100%'},
+                colors: [
+                  'rgb(0, 128, 128)',
+                  'rgb(80, 200, 120)',
+                  'rgb(50, 205, 50)',
+                  'rgb(0, 128, 0)',
+                  'rgb(255, 215, 0)',
+                  'rgb(218, 165, 32)',
+                  'rgb(236, 88, 0)',
+                  'rgb(139, 64, 0)',
+                  'rgb(138, 154, 91)',
+                  'rgb(54, 69, 79)',
+                  'rgb(69, 75, 27)',
+                  'rgb(9, 121, 105)',
+                  'rgb(2, 48, 32)',
+                  'rgb(25, 25, 112)',
+                  'rgb(255, 49, 49)',
+                  'rgb(159, 43, 104)',
+                  'rgb(227, 11, 92)',
+                  'rgb(127, 0, 255)',
+                  'rgb(64, 224, 208)'
+                ]
+              };
+    
+              // Instantiate and draw the chart
+              var chart = new google.visualization.PieChart(document.getElementById('langChart'));
+              chart.draw(data, options);
+            }
           });
         </script>
+  
   
         <!--Tag Doughnut Chart of User-->
-        <script>
+        <script type="text/javascript">
           document.addEventListener('DOMContentLoaded', function() {
-          var ctx = document.getElementById('donutChart').getContext('2d');
-          var sortedTagFrequencies = {{ tag_frequencies | tojson }};
-          
-          var labels = sortedTagFrequencies.map(function(item) {
-              return item[0] + ": " + item[1];
-          });
-          var data = sortedTagFrequencies.map(function(item) {
-              return item[1];
-          });
-          var totFreq = sortedTagFrequencies.reduce(function(total, item) {
-            return total + item[1];
-          }, 0);
-          var percentage = data.map(function(value) {
-            return ((value * 100) / totFreq).toFixed(1);
-          });
-  
-          var donutChart = new Chart(ctx, {
-              type: 'doughnut',
-              data: {
-                  labels: labels,
-                  datasets: [{
-                    label: '%',
-                    data: percentage,
-                      backgroundColor: [
-                          'rgb(255, 49, 49)',
-                          'rgb(159, 43, 104)',
-                          'rgb(227, 11, 92)',
-                          'rgb(127, 0, 255)',
-                          'rgb(64, 224, 208)',
-                          'rgb(0, 128, 128)',
-                          'rgb(80, 200, 120)',
-                          'rgb(50, 205, 50)',
-                          'rgb(0, 128, 0)',
-                          'rgb(255, 215, 0)',
-                          'rgb(218, 165, 32)',
-                          'rgb(236, 88, 0)',
-                          'rgb(139, 64, 0)',
-                          'rgb(138, 154, 91)',
-                          'rgb(54, 69, 79)',
-                          'rgb(69, 75, 27)',
-                          'rgb(9, 121, 105)',
-                          'rgb(2, 48, 32)',
-                          'rgb(25, 25, 112)'
-                      ],
-                      borderWidth: 1,
-                      hoverOffset: 4
-                  }]
-              },
-              options: {
-                tooltips: {
-                    callbacks: {
-                        label: function(tooltipItem, data) {
-                            var datasetLabel = data.labels[tooltipItem.index];
-                            return datasetLabel;
-                        }
-                    }
-                },
-                responsive: false,
-                maintainAspectRatio: true
+            google.charts.load('current', {'packages':['corechart']});
+    
+            google.charts.setOnLoadCallback(drawChart1);
+    
+            function drawChart1() {
+              var tag_frequencies = {{ tag_frequencies | tojson }}
+              var sortedArray = Object.entries(tag_frequencies).sort(([,a], [,b]) => b - a);
+              var sortedTagFrequencies = Object.fromEntries(sortedArray);
+    
+              // Convert data to the format required by Google Charts
+              var dataArray = [['Lang', 'Count']];
+              for (var key in sortedTagFrequencies) {
+                if (sortedTagFrequencies.hasOwnProperty(key)) {
+                  dataArray.push([key, sortedTagFrequencies[key]]);
+                }
               }
-          });
+    
+              var data = google.visualization.arrayToDataTable(dataArray);
+
+              // Set chart options
+              var options = {
+                backgroundColor: 'transparent',
+                pieHole: 0.4,
+                pieSliceText: 'none',
+                chartArea: {
+                  width: '85%',  // Increase the width of the chart area
+                  height: '85%', // Increase the height of the chart area
+                  left: '7.5%',  // Center the chart area horizontally
+                  top: '7.5%'    // Center the chart area vertically
+                },
+                legend: {
+                  position: 'right',
+                  textStyle: {
+                    fontSize: 12,
+                    color: 'white'
+                  }
+                },
+                colors: [
+                  'rgb(255, 49, 49)',
+                  'rgb(159, 43, 104)',
+                  'rgb(227, 11, 92)',
+                  'rgb(127, 0, 255)',
+                  'rgb(64, 224, 208)',
+                  'rgb(0, 128, 128)',
+                  'rgb(80, 200, 120)',
+                  'rgb(50, 205, 50)',
+                  'rgb(0, 128, 0)',
+                  'rgb(255, 215, 0)',
+                  'rgb(218, 165, 32)',
+                  'rgb(236, 88, 0)',
+                  'rgb(139, 64, 0)',
+                  'rgb(138, 154, 91)',
+                  'rgb(54, 69, 79)',
+                  'rgb(69, 75, 27)',
+                  'rgb(9, 121, 105)',
+                  'rgb(2, 48, 32)',
+                  'rgb(25, 25, 112)'
+                ]
+              };
+    
+              // Instantiate and draw the chart
+              var chart = new google.visualization.PieChart(document.getElementById('tagChart'));
+              chart.draw(data, options);
+            }
           });
         </script>
   
@@ -447,7 +442,7 @@
   
         </script>
         {% else %}
-          <div style="height: 7rem"></div>
+          <div style="height: 70vh"></div>
         {% endif %}
       </div>
     </header>

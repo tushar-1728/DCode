@@ -158,16 +158,13 @@ def get_stats(probs):
 
     # Count the frequencies of each tag
     lang_counts = Counter(language_frequency)
-    lang_counts = sorted(lang_counts.items(), key=lambda x: x[1], reverse=True)
     tag_counts = Counter(tag_frequencies)
     level_counts = Counter(level_frequencies)
     problem_rating_counts = Counter(problem_rating_frequencies)
-    # Sort the tag frequencies in decreasing order
-    sorted_tag_frequencies = sorted(tag_counts.items(), key=lambda x: x[1], reverse=True)
     sorted_level_frequencies = sorted(level_counts.items(), key=lambda x: x[0])
     sorted_problem_rating_frequencies = sorted(problem_rating_counts.items(), key=lambda x: x[0])
 
-    return sorted_tag_frequencies, sorted_level_frequencies, sorted_problem_rating_frequencies, stats, lang_counts, verdict_frequency
+    return tag_counts, sorted_level_frequencies, sorted_problem_rating_frequencies, stats, lang_counts, verdict_frequency
 
 def get_user_info(user_infos):
     info = [0] * 5 # #contests, #best_rank, #worst_rank, max_up, max_down
