@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Codeforces - DCode</title>
+  <title>AtCoder - DCode</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -106,9 +106,9 @@
     <header id="header" class="d-flex align-items-center">
       <div class="container d-flex flex-column align-items-center">
         <div class="subscribe">
-          <form action="/codeforces-visualizer" method="post" role="form">
+          <form action="/atcoder-visualizer" method="post" role="form">
             <div class="subscribe-form" style="right:0">
-              <input type="text" name="userhandle" placeholder="CF Handle" value="{{ userhandle }}" style="border:none; outline: none; background: rgb(198, 198, 198); padding-left:1rem;" required>
+              <input type="text" name="userhandle" placeholder="AtCoder Handle" value="{{ userhandle }}" style="border:none; outline: none; background: rgb(198, 198, 198); padding-left:1rem;" required>
               <input type="submit" value="🔍">
             </div>
           </form>
@@ -133,24 +133,10 @@
   
         <!--Tags, problem-rating, level chart of user-->
         <div style="padding-top: 2rem;">
-          
-          <div class="canvas-div-large">
-            <div class="canvas-div-chart"> Tags of {{userhandle}} </div>
-            <div id="tagChart" style="height: 27rem; width: 40rem;"></div>
-          </div>
-  
-          <br>
-  
-          <div class="canvas-div-large">
-            <div class="canvas-div-chart"> Problem ratings of {{userhandle}} </div>
-            <canvas id="levelChart" style="height: 15rem; width: 40rem;"></canvas>
-          </div>
-  
-          <br>
   
           <div class="canvas-div-large">
             <div class="canvas-div-chart"> Levels of {{userhandle}} </div>
-            <canvas id="ratingChart" style="height:15rem; width: 40rem"></canvas>
+            <canvas id="levelChart" style="height:15rem; width: 40rem"></canvas>
           </div>
         </div>
   
@@ -313,121 +299,12 @@
         </script>
   
   
-        <!--Tag Doughnut Chart of User-->
-        <script type="text/javascript">
-          document.addEventListener('DOMContentLoaded', function() {
-            google.charts.load('current', {'packages':['corechart']});
-    
-            google.charts.setOnLoadCallback(drawChart1);
-    
-            function drawChart1() {
-              var tag_frequencies = {{ tag_frequencies | tojson }}
-              var sortedArray = Object.entries(tag_frequencies).sort(([,a], [,b]) => b - a);
-              var sortedTagFrequencies = Object.fromEntries(sortedArray);
-    
-              // Convert data to the format required by Google Charts
-              var dataArray = [['Lang', 'Count']];
-              for (var key in sortedTagFrequencies) {
-                if (sortedTagFrequencies.hasOwnProperty(key)) {
-                  dataArray.push([key, sortedTagFrequencies[key]]);
-                }
-              }
-    
-              var data = google.visualization.arrayToDataTable(dataArray);
-
-              // Set chart options
-              var options = {
-                backgroundColor: 'transparent',
-                pieHole: 0.4,
-                pieSliceText: 'none',
-                chartArea: {
-                  width: '85%',  // Increase the width of the chart area
-                  height: '85%', // Increase the height of the chart area
-                  left: '7.5%',  // Center the chart area horizontally
-                  top: '7.5%'    // Center the chart area vertically
-                },
-                legend: {
-                  position: 'right',
-                  textStyle: {
-                    fontSize: 12,
-                    color: 'white'
-                  }
-                },
-                colors: [
-                  'rgb(255, 49, 49)',
-                  'rgb(159, 43, 104)',
-                  'rgb(227, 11, 92)',
-                  'rgb(127, 0, 255)',
-                  'rgb(64, 224, 208)',
-                  'rgb(0, 128, 128)',
-                  'rgb(80, 200, 120)',
-                  'rgb(50, 205, 50)',
-                  'rgb(0, 128, 0)',
-                  'rgb(255, 215, 0)',
-                  'rgb(218, 165, 32)',
-                  'rgb(236, 88, 0)',
-                  'rgb(139, 64, 0)',
-                  'rgb(138, 154, 91)',
-                  'rgb(54, 69, 79)',
-                  'rgb(69, 75, 27)',
-                  'rgb(9, 121, 105)',
-                  'rgb(2, 48, 32)',
-                  'rgb(25, 25, 112)'
-                ]
-              };
-    
-              // Instantiate and draw the chart
-              var chart = new google.visualization.PieChart(document.getElementById('tagChart'));
-              chart.draw(data, options);
-            }
-          });
-        </script>
-  
-        <!--Rating BarChart of User-->
-        <script>
-          document.addEventListener('DOMContentLoaded', function() {
-          var levelLabels = [];
-          var levelData = [];
-          level_frequencies = {{level_frequencies | tojson}}
-          // Assuming level_frequencies is already defined
-          level_frequencies.forEach(function(item) {
-              //console.log(item);
-              levelLabels.push(item[0]); // Level
-              levelData.push(item[1]); // Frequency
-          });
-  
-          var barCtx = document.getElementById('ratingChart').getContext('2d');
-          var barChart = new Chart(barCtx, {
-              type: 'bar',
-              data: {
-                  labels: levelLabels,
-                  datasets: [{
-                      label: 'Solved',
-                      data: levelData,
-                      backgroundColor: 'rgb(237, 234, 222)',
-                      borderWidth: 1,
-                      hoverOffset: 4
-                  }]
-              },
-              options: {
-                  scales: {
-                      yAxes: [{
-                          ticks: {
-                              beginAtZero: true
-                          }
-                      }]
-                  }
-              }
-          });
-          });
-        </script>
-  
         <!--Level BarChart of User-->
         <script>
           document.addEventListener('DOMContentLoaded', function() {
           var ratingLabels = [];
           var ratingData = [];
-          rating_frequencies = {{rating_frequencies | tojson}}
+          rating_frequencies = {{level_frequencies | tojson}}
           // Assuming rating_frequencies is already defined
           rating_frequencies.forEach(function(item) {
               //console.log(item);

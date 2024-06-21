@@ -1,6 +1,6 @@
 from flask import Flask, request, redirect, render_template, render_template_string, jsonify
 from flask.helpers import url_for
-from config import API_CODEFORCES_USER_INFO, API_CODEFORCES_USER_PROBLEM_STATUS, API_ATCODER_USER_INFO, API_CODEFORCES_USER_CONTEST_INFO, API_ATCODER_USER_STATUS
+from config import API_CODEFORCES_USER_INFO, API_CODEFORCES_USER_PROBLEM_STATUS, API_ATCODER_USER_CONTEST_INFO, API_CODEFORCES_USER_CONTEST_INFO, API_ATCODER_USER_PROBLEM_STATUS
 from dotenv import load_dotenv
 from collections import Counter
 
@@ -111,7 +111,7 @@ def get_user_verdict_atcoder(probs, prob_rating):
 
     return user_verdicts, correct_cnt
 
-def get_stats(probs):
+def get_stats_codeforces(probs):
     visited = set()
     tag_frequencies = []
     level_frequencies = []
@@ -166,7 +166,65 @@ def get_stats(probs):
 
     return tag_counts, sorted_level_frequencies, sorted_problem_rating_frequencies, stats, lang_counts, verdict_frequency
 
-def get_user_info(user_infos):
+def get_stats_atcoder(probs):
+    visited = set()
+    level_frequencies = []
+    language_frequency = []
+    verdict_frequency = {'AC': 0, 'WA': 0, 'TLE': 0, 'MLE': 0, 'CE': 0, 'RE': 0}
+    stats = [0] * 4 #tried, solved, avg attempts, solved with one submission
+
+    for prob in probs:
+        if "contest_id" not in prob:
+            continue
+        stats[2] += 1
+        if prob["result"] == "AC":
+            problem_id = prob["problem_id"]
+            index = problem_id[-1].upper()
+            verdict_frequency["AC"] += 1
+            if (problem_id) not in visited:
+                visited.add((problem_id))
+                stats[1] += 1
+                if index[0]>='A' and index[0]<='Z':
+                    level_frequencies.extend(index[0])
+                language_frequency.append(prob["language"])
+        elif prob["result"] == "WA":
+            verdict_frequency["WA"] += 1
+        elif prob["result"] == "TLE":
+            verdict_frequency["TLE"] += 1
+        elif prob["result"] == "MLE":
+            verdict_frequency["MLE"] += 1
+        elif prob["result"] == "CE":
+            verdict_frequency["CE"] += 1
+        elif prob["result"] == "RE":
+            verdict_frequency["RE"] += 1
+
+    stats[2] /= stats[1]
+    # print(type(stats[2]))
+    stats[2] = float(f"{stats[2]:.2f}")
+
+    lang_counts = Counter(language_frequency)
+    level_counts = Counter(level_frequencies)
+    sorted_level_frequencies = sorted(level_counts.items(), key=lambda x: x[0])
+
+    return sorted_level_frequencies, stats, lang_counts, verdict_frequency
+
+def get_user_info_atcoder(user_infos):
+    info = [0] * 7 # #contests, #best_rank, #worst_rank, max_up, max_down, max_rating, current_rating
+    info[1] = info[4] = 100000
+    info[3] = -10000
+    for user_info in user_infos:
+        if user_info["IsRated"] == True:
+            info[0] = info[0]+1
+            info[1] = min(user_info["Place"], info[1])
+            info[2] = max(user_info["Place"], info[2])
+            info[3] = max(user_info["NewRating"]-user_info["OldRating"], info[3])
+            info[4] = min(user_info["NewRating"]-user_info["OldRating"], info[4])
+            info[5] = max(info[5], user_info["NewRating"])
+            info[6] = user_info["NewRating"]
+    return info
+
+
+def get_user_info_codeforces(user_infos):
     info = [0] * 7 # #contests, #best_rank, #worst_rank, max_up, max_down, max_rating, current_rating
     info[1] = info[4] = 100000
     info[3] = -10000
@@ -302,22 +360,19 @@ def atcoder():
 
     userhandle = request.form.get('userhandle', '')  # Get userhandle from form data
     prob_rating = request.form.get('rating')
-    # with open(f'atcoder-rating-problems/{user_rating}.json', 'r') as f:
-    #     problems = json.load(f)[:100]  # Load the first hundred problems
 
     if request.method == "POST" and userhandle:
-        url = API_ATCODER_USER_INFO.format(userhandle)
+        url = API_ATCODER_USER_CONTEST_INFO.format(userhandle)
         response = requests.get(url)
   
         # Check if API response is successful
         if response.status_code == 200:
-            # Parse JSON response
             data = response.json()
 
             max_rating, rating = find_max_and_cur_rating_Atcoder(data)
             # print("HEllo")
 
-            url = API_ATCODER_USER_STATUS.format(userhandle, 0)
+            url = API_ATCODER_USER_PROBLEM_STATUS.format(userhandle, 0)
             response = requests.get(url)
             probs = response.json()
 
@@ -384,13 +439,13 @@ def cfvisualizer():
             response = requests.get(url)
             probs = response.json()
             
-            tag_frequencies, level_frequencies, rating_frequencies, stats, lang_counts, verdict_counts = get_stats(probs)
+            tag_frequencies, level_frequencies, rating_frequencies, stats, lang_counts, verdict_counts = get_stats_codeforces(probs)
 
             url = API_CODEFORCES_USER_CONTEST_INFO.format(userhandle)
             response = requests.get(url)
             user_infos = response.json()
 
-            info = get_user_info(user_infos["result"])
+            info = get_user_info_codeforces(user_infos["result"])
 
             # for lang, count in lang_counts:
             #     print(f"Language: {lang}, Count: {count}")
@@ -398,6 +453,34 @@ def cfvisualizer():
             return render_template("codeforces-visualizer.html", userhandle=userhandle, lang_counts=lang_counts, verdict_counts=verdict_counts, stats=stats, info=info, tag_frequencies=tag_frequencies, level_frequencies=level_frequencies, rating_frequencies=rating_frequencies, visit_count=visit_count)
 
     return render_template("codeforces-visualizer.html", userhandle='', visit_count=visit_count)
+
+@app.route("/atcoder-visualizer", methods=['POST', 'GET'])
+def atcvisualizer():
+    visit_count = get_visit_count()
+    visit_count += 1
+    # Update the visit count in the persistent storage
+    update_visit_count(visit_count)
+
+    userhandle = request.form.get('userhandle', '')  # Get userhandle from form data
+
+    if request.method == "POST" and userhandle:
+        url = API_ATCODER_USER_CONTEST_INFO.format(userhandle)
+        response = requests.get(url)
+        user_infos = response.json()
+        
+        # Check if API response is successful
+        if response.status_code == 200:
+            url = API_ATCODER_USER_PROBLEM_STATUS.format(userhandle, 0)
+            response = requests.get(url)
+            probs = response.json()
+            
+            level_frequencies, stats, lang_counts, verdict_counts = get_stats_atcoder(probs)
+
+            info = get_user_info_atcoder(user_infos)
+
+            return render_template("atcoder-visualizer.html", userhandle=userhandle, lang_counts=lang_counts, verdict_counts=verdict_counts, stats=stats, info=info, level_frequencies=level_frequencies, visit_count=visit_count)
+
+    return render_template("atcoder-visualizer.html", userhandle='', visit_count=visit_count)
 
 @app.route('/your-flask-endpoint', methods=['POST'])
 def receive_selected_tags():
