@@ -4,7 +4,7 @@ from config import API_CODEFORCES_USER_INFO, API_CODEFORCES_USER_PROBLEM_STATUS,
 from dotenv import load_dotenv
 from collections import Counter
 
-import os
+import os, time
 import json, requests
 import global_maps
 
@@ -90,24 +90,40 @@ def get_user_verdict(probs, prob_rating):
 
     return user_verdicts, correct_cnt
 
-def get_user_verdict_atcoder(probs, prob_rating):
+def get_user_verdict_atcoder(probs, prob_rating, userhandle):
     user_verdicts = {}
     correct_cnt = 0
     map_name = f"mapOfAtcoderProbRating{prob_rating}"
     prob_rating_map = getattr(global_maps, map_name, None)
 
-    for prob in probs:
-        if "problem_id":
-            contestIdFull = prob["problem_id"]
-            if contestIdFull in prob_rating_map:
-                idx = prob_rating_map[contestIdFull]
-                if idx in user_verdicts and user_verdicts[idx] == "AC":
-                    continue
-                if prob["result"] == "AC":
-                    user_verdicts[idx] = "AC"
-                    correct_cnt += 1
-                else:
-                    user_verdicts[idx] = "WA"
+    url = API_ATCODER_USER_PROBLEM_STATUS.format(userhandle, 0)
+    response = requests.get(url)
+    probs = response.json()
+
+    while response.status_code == 200:
+        probs = response.json()
+        cnt = 0
+        for prob in probs:
+            cnt = cnt+1
+            if "problem_id":
+                contestIdFull = prob["problem_id"]
+                if contestIdFull in prob_rating_map:
+                    idx = prob_rating_map[contestIdFull]
+                    if idx in user_verdicts and user_verdicts[idx] == "AC":
+                        continue
+                    if prob["result"] == "AC":
+                        user_verdicts[idx] = "AC"
+                        correct_cnt += 1
+                    else:
+                        user_verdicts[idx] = "WA"
+        curTime = probs[-1]["epoch_second"]
+        print(curTime)
+        # time.sleep(1)
+        if cnt<500:
+            break
+        
+        url = API_ATCODER_USER_PROBLEM_STATUS.format(userhandle, curTime+1)
+        response = requests.get(url)
 
     return user_verdicts, correct_cnt
 
@@ -389,7 +405,7 @@ def atcoder():
                 problems = json.load(f)
 
             correct_cnt = 0
-            user_verdicts, correct_cnt = get_user_verdict_atcoder(probs, prob_rating)
+            user_verdicts, correct_cnt = get_user_verdict_atcoder(probs, prob_rating, userhandle)
 
             return render_template("atcoder.html", userhandle=userhandle, prob_rating=prob_rating, rank=rank, 
                                    ratingColor=ratingColor, visit_count=visit_count, max_rating=max_rating, rating=rating, problems=problems,
