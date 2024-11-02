@@ -1,3 +1,4 @@
 .bashrc
 .env
 visit_count.txt
+/__pycache__
