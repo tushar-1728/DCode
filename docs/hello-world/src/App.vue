@@ -1,26 +1,24 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <!-- <HomePageLayout/> -->
+  <CodeforcesLayout/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import CodeforcesLayout from './components/CodeforcesLayout.vue';
+
+// import HomePageLayout from './components/HomePageLayout.vue';
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    // HomePageLayout,
+    CodeforcesLayout
+
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+/* Your styles here */
 </style>
