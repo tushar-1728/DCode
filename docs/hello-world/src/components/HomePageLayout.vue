@@ -70,12 +70,12 @@ export default {
     data() {
         return {
             platforms: [
-                { name: "Codeforces", link: "/codeforces", image: "https://codeforces.com/codeforces.org/s/41923/images/codeforces-sponsored-by-ton.png" },
+                { name: "Codeforces", link: "/codeforces", image: "assets/img/code-forces.svg" },
                 { name: "AtCoder", link: "/atcoder", image: "https://img.atcoder.jp/assets/logo.png" },
                 { name: "CodeChef", link: "/codechef", image: "https://cdn.codechef.com/images/cc-logo.svg" },
             ],
             visualizers: [
-                { name: "Codeforces", link: "/codeforces-visualizer", image: "https://codeforces.com/codeforces.org/s/41923/images/codeforces-sponsored-by-ton.png" },
+                { name: "Codeforces", link: "/codeforces-visualizer", image: "assets/img/code-forces.svg" },
                 { name: "AtCoder", link: "/atcoder-visualizer", image: "https://img.atcoder.jp/assets/logo.png" },
                 { name: "CodeChef", link: "/codechef", image: "https://cdn.codechef.com/images/cc-logo.svg" },
             ],

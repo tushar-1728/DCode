@@ -1,5 +1,4 @@
-from flask import Flask, request, redirect, render_template, render_template_string, jsonify
-from flask.helpers import url_for
+from flask import Flask, request, render_template, jsonify
 from config import API_CODEFORCES_USER_INFO, API_CODEFORCES_USER_PROBLEM_STATUS, API_ATCODER_USER_CONTEST_INFO, API_CODEFORCES_USER_CONTEST_INFO, API_ATCODER_USER_PROBLEM_STATUS
 from dotenv import load_dotenv
 from collections import Counter
