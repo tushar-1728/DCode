@@ -70,14 +70,14 @@ export default {
     data() {
         return {
             platforms: [
-                { name: "Codeforces", link: "/codeforces", image: "assets/img/code-forces.svg" },
-                { name: "AtCoder", link: "/atcoder", image: "https://img.atcoder.jp/assets/logo.png" },
-                { name: "CodeChef", link: "/codechef", image: "https://cdn.codechef.com/images/cc-logo.svg" },
+                { name: "Codeforces", link: "codeforces", image: "assets/img/code-forces.svg" },
+                { name: "AtCoder", link: "atcoder", image: "assets/img/atcoder.png" },
+                { name: "CodeChef", link: "codechef", image: "assets/img/codechef.svg" },
             ],
             visualizers: [
-                { name: "Codeforces", link: "/codeforces-visualizer", image: "assets/img/code-forces.svg" },
-                { name: "AtCoder", link: "/atcoder-visualizer", image: "https://img.atcoder.jp/assets/logo.png" },
-                { name: "CodeChef", link: "/codechef", image: "https://cdn.codechef.com/images/cc-logo.svg" },
+                { name: "Codeforces", link: "codeforces-visualizer", image: "assets/img/code-forces.svg" },
+                { name: "AtCoder", link: "atcoder-visualizer", image: "assets/img/atcoder.png" },
+                { name: "CodeChef", link: "codechef-visualizer", image: "assets/img/codechef.svg" },
             ],
         };
     },

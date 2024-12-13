@@ -3,7 +3,7 @@
   <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
       <div class="align-items-center d-md-flex">
-        <a href="/" style="color: white; font-size: larger">
+        <a href="../" style="color: white; font-size: larger">
           <b>&lt;/&gt;</b> DCode
         </a>
       </div>

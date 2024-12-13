@@ -5,21 +5,17 @@
         <header id="header">
           <!-- Logo Section -->
           <div class="center-logo">
-            <img alt="Codeforces Logo"
-              src="assets/img/code-forces-logo.svg"
-              width="350px" />
+            <img alt="Codeforces Logo" src="assets/img/code-forces-logo.svg" width="350px" />
           </div>
-
           <br />
-
           <div class="container d-flex flex-column align-items-center">
             <!-- Form Section -->
             <form @submit.prevent="submitForm">
               <div class="subscribe" style="justify-content: flex-end;">
                 <div class="subscribe-form">
                   <input v-model="userHandle" placeholder="CF Handle"
-                    style="border: none; outline: none; background: none; padding-left:1rem;" type="text" />
-                  <button type="submit">🔍</button>
+                    style="border: none; outline: none; background: none;" type="text"/>
+                  <input type="submit" value="🔍"/>
                 </div>
               </div>
 
@@ -27,9 +23,9 @@
               <div class="subscribe">
                 <button @click.prevent="prevSlide">Prev</button>
                 <div class="slider-container">
-                  <div :style="{ transform: `translateX(-${currentSlide * slideWidth}px)` }" class="slides">
+                  <div :style="{ transform: `translateX(-${currentSlide * slideWidth}px)` }" class="slides" ref="slides">
                     <!-- Rating Groups -->
-                    <div v-for="(ratings, index) in ratingGroups" :key="index" class="slide">
+                    <div v-for="(ratings, index) in ratingGroups" :key="index" class="slide" ref="slide">
                       <button v-for="rating in ratings" :key="rating"
                         :class="{ 'rating-btn': true, selected: probRating === rating }"
                         @click.prevent="selectRating(rating)">
@@ -56,40 +52,40 @@
             </div>
 
             <!-- Tag Buttons -->
-            <div class="table-container">
-              <div class="text-sm flex flex-wrap m-3">
+            <div class="table-container" style="margin-bottom: 1rem; padding:0;">
+              <div class="text-sm flex flex-wrap justify-items-start m-3 content-center">
                 <button v-for="tag in tags" :key="tag" :class="{ selected: selectedTags.includes(tag) }" class="tag-btn"
                   @click="toggleTag(tag)">
                   {{ tag }}
                 </button>
               </div>
-              <button @click="submitTags">Search</button>
+              <div class="submit-tag">
+                <button class="submit-tag-btn" @click="submitTags">Search</button>
+              </div>
             </div>
 
             <!-- Problems Table -->
             <div class="table-container">
-              <div class="table-head">
+              <div class="table-head" style="margin-bottom: 1rem; border-radius: 0.5rem;">
                 <div class="table-cell">Index</div>
                 <div class="table-cell">Problem</div>
                 <div class="table-cell">Rating</div>
                 <div class="table-cell">Status</div>
               </div>
 
-              <div v-for="(problem, index) in problems" :key="index" class="table-body">
+              <div v-for="(problem, index) in problems" :key="index">
                 <a :href="`https://codeforces.com/contest/${problem.contestId}/problem/${problem.index}`"
                   target="__blank">
-                  <div :style="{ color: getProblemColor(index) }" class="table-cell">{{ index + 1 }}</div>
-                  <div :style="{ color: getProblemColor(index) }" class="table-cell">{{ problem.name }}
-                  </div>
-                  <div :style="{ color: getProblemColor(index) }" class="table-cell">{{ problem.rating }}
-                  </div>
-                  <div :style="{ color: getProblemColor(index) }" class="table-cell">{{
-                    getVerdict(index)
-                    }}
+                  <div class="table-body" style="margin-bottom: 0.5rem; border-radius: 0.5rem;">
+                    <div :style="{ color: getProblemColor(index) }" class="table-cell">{{ index }}</div>
+                    <div :style="{ color: getProblemColor(index) }" class="table-cell">{{ problem.name }}</div>
+                    <div :style="{ color: getProblemColor(index) }" class="table-cell">{{ problem.rating }}</div>
+                    <div :style="{ color: getProblemColor(index) }" class="table-cell">{{ getVerdict(index) }}</div>
                   </div>
                 </a>
               </div>
             </div>
+            <!-- Problems Table Ends -->
           </div>
         </header>
       </main>
@@ -99,7 +95,7 @@
 
 <script>
 import BaseLayout from './BaseLayout.vue';
-import tagData from '@/assets/tags.json';
+import tagData from '@/assets/cf-problem-tags/tags.json';
 
 export default {
   name: "CodeforcesPage",
@@ -109,14 +105,13 @@ export default {
   data() {
     return {
       userHandle: "",
-      probRating: "",
+      probRating: "1500",
       ratingGroups: [
         Array.from({ length: 10 }, (_, i) => 800 + i * 100),
         Array.from({ length: 10 }, (_, i) => 1800 + i * 100),
         Array.from({ length: 8 }, (_, i) => 2800 + i * 100),
       ],
       currentSlide: 0,
-      // tags: ["tag1", "tag2", "tag3"], // Example tags
       tags: tagData.tags,
       selectedTags: [],
       problems: [],
@@ -127,8 +122,13 @@ export default {
       correctCount: 50,
     };
   },
+  watch: {
+    probRating: 'fetchProblems'
+  },
   computed: {
     slideWidth() {
+      const slideWidth = this.$refs.slide;
+      console.log(slideWidth);
       return 200; // Adjust based on slide width
     },
   },
@@ -159,22 +159,48 @@ export default {
     },
     submitTags() {
       // Submit selected tags to server or handle logic
+      console.log('Tags sent to handle logic.');
     },
     getProblemColor(index) {
-      return this.user_verdicts[index] === "AC" ? "#0FFF50" : this.user_verdicts[index] === "WA" ? "#F88379" : "white";
+      index + 0
+      // return this.user_verdicts[index] === "AC" ? "#0FFF50" : this.user_verdicts[index] === "WA" ? "#F88379" : "white";
+      return "white"
     },
     getVerdict(index) {
-      return this.user_verdicts[index] || "-";
+      // return this.user_verdicts[index] || "-";
+      index + 0
+      return "-"
     },
+    async fetchProblems() {
+      try {
+        if (this.probRating <= 1700)
+          this.currentSlide = 0
+        else if (this.probRating <= 2700)
+          this.currentSlide = 1
+        else
+          this.currentSlide = 2
+        this.problems = (await import(`@/assets/cf-rating-problems/${this.probRating}.json`))["default"];
+      } catch (error) {
+        console.error('Error fetching tags:', error);
+      }
+    }
   },
   mounted() {
-    setInterval(() => {
-      window.location.reload();
-    }, 300000); // Refresh every 5 minutes
+    this.fetchProblems();
+    const slideWidth = this.$refs.slide.offsetWidth;
+    console.log(slideWidth);
+    // setInterval(() => {
+    //   window.location.reload();
+    // }, 300000); // Refresh every 5 minutes
   },
 };
 </script>
 
 <style scoped>
 /* Your styles here */
+.rating-btn.selected {
+  background-color: #63809B;
+  /* Change this to your desired highlight color */
+  color: white;
+}
 </style>

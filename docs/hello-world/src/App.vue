@@ -1,20 +1,15 @@
 <template>
-  <CodeforcesLayout/>
+  <div id="app">
+    <nav>
+      <router-link to="/">HomePageLayout</router-link>
+      <router-link to="/codeforces">CodeforcesLayout</router-link>
+    </nav>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-import CodeforcesLayout from './components/CodeforcesLayout.vue';
-
 export default {
-  name: 'App',
-  components: {
-    // HomePageLayout,
-    CodeforcesLayout
-
-  }
-}
+  name: 'App'
+};
 </script>
-
-<style>
-/* Your styles here */
-</style>
