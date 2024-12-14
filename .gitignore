@@ -1,5 +1,6 @@
-Maundy/
 lib/
+lib64/
+share/
 .idea/
 bin/
 *.cfg

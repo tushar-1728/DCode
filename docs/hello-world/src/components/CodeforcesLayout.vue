@@ -23,7 +23,7 @@
               <div class="subscribe">
                 <button @click.prevent="prevSlide">Prev</button>
                 <div class="slider-container">
-                  <div :style="{ transform: `translateX(-${currentSlide * slideWidth}px)` }" class="slides" ref="slides">
+                  <div :style="{ transform: scrollStyle }" class="slides" ref="slides">
                     <!-- Rating Groups -->
                     <div v-for="(ratings, index) in ratingGroups" :key="index" class="slide" ref="slide">
                       <button v-for="rating in ratings" :key="rating"
@@ -120,17 +120,14 @@ export default {
       rating: 0,
       maxRating: 0,
       correctCount: 50,
+      scrollStyle: ""
     };
   },
   watch: {
-    probRating: 'fetchProblems'
+    probRating: 'fetchProblems',
+    currentSlide: 'updateSlideWidth'
   },
   computed: {
-    slideWidth() {
-      const slideWidth = this.$refs.slide;
-      console.log(slideWidth);
-      return 200; // Adjust based on slide width
-    },
   },
   methods: {
     submitForm() {
@@ -149,8 +146,12 @@ export default {
         this.currentSlide++;
       }
     },
+    updateSlideWidth() {
+      let slideWidth = this.$refs.slide[this.currentSlide].offsetWidth;
+      this.scrollStyle = `translateX(-${this.currentSlide * slideWidth}px)`;
+    },
     toggleTag(tag) {
-      const index = this.selectedTags.indexOf(tag);
+      let index = this.selectedTags.indexOf(tag);
       if (index > -1) {
         this.selectedTags.splice(index, 1);
       } else {
@@ -187,11 +188,7 @@ export default {
   },
   mounted() {
     this.fetchProblems();
-    const slideWidth = this.$refs.slide.offsetWidth;
-    console.log(slideWidth);
-    // setInterval(() => {
-    //   window.location.reload();
-    // }, 300000); // Refresh every 5 minutes
+    window.addEventListener('resize', this.updateSlideWidth);
   },
 };
 </script>
